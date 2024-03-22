@@ -16,10 +16,17 @@ public class SpellsManager : MonoBehaviour
 	private List<Button> spellButtons = new List<Button>();
 	private List<Button> inventoryButtons = new List<Button>();
 
+	private ItemMapper itemMapper; // Reference to the ItemMapper script
+
 
 	void Start()
 	{
 		panel.SetActive(false);
+		itemMapper = FindObjectOfType<ItemMapper>(); // Find ItemMapper in the scene
+		if (itemMapper == null)
+		{
+			Debug.LogError("ItemMapper script not found in the scene.");
+		}
 	}
 
 	void Update()
@@ -76,57 +83,38 @@ public class SpellsManager : MonoBehaviour
 
 		foreach (var item in items)
 		{
-			var itemIcon = item switch
-			{
-				"News1" => inventoryManager.news1.itemIcon,
-				"News2" => inventoryManager.news2.itemIcon,
-				"News3" => inventoryManager.news3.itemIcon,
-				_ => null
-			};
-			if (itemIcon == null)
-			{
-				Debug.Log("Error: Unrecognized item name: " + item);
-			}
-
-			var itemPrefab = item switch
-			{
-				"News1" => inventoryManager.news1.itemButtonPrefab,
-				"News2" => inventoryManager.news2.itemButtonPrefab,
-				"News3" => inventoryManager.news3.itemButtonPrefab,
-				_ => null
-			};
-			if (itemPrefab == null)
-			{
-				Debug.Log("Error: Unrecognized item name: " + item);
-			}
-
-			var itemInfo = item switch
-			{
-				"News1" => inventoryManager.news1.itemInfo,
-				"News2" => inventoryManager.news2.itemInfo,
-				"News3" => inventoryManager.news3.itemInfo,
-				_ => null
-			};
-			if (itemInfo == null)
-			{
-				Debug.Log("Error: Unrecognized item name: " + item);
-			}
-
-			// Create a new button
-			Button inventoryButton = Instantiate(itemPrefab, inventoryPanel.transform);
-			Image buttonImage = inventoryButton.GetComponent<Image>();
-            if (buttonImage != null)
+			bool isEquip = itemMapper.InventoryType(item);
+			if (!isEquip)
             {
-                buttonImage.sprite = itemIcon;
-            }
-            else
-            {
-                Debug.LogError("Image component not found on the Button.");
-            }
+				Sprite itemIcon = itemMapper.GetItemIcon(item);
+				Button itemPrefab = itemMapper.GetItemButtonPrefab(item);
+				string itemInfo = itemMapper.GetItemInfo(item);
 
-            inventoryButtons.Add(inventoryButton);
+				if (itemIcon == null || itemPrefab == null || itemInfo == null)
+				{
+					Debug.LogError("Error: Failed to retrieve item details for: " + item);
+					continue;
+				}
 
-			inventoryButton.onClick.AddListener(() => ShowItemsDetailsPanel(item, itemIcon, itemInfo));
+				Button inventoryButton = Instantiate(itemPrefab.GetComponent<Button>(), inventoryPanel.transform);
+				Image buttonImage = inventoryButton.GetComponent<Image>();
+				if (buttonImage != null)
+				{
+					buttonImage.sprite = itemIcon;
+				}
+				else
+				{
+					Debug.LogError("Image component not found on the Button.");
+				}
+
+				inventoryButtons.Add(inventoryButton);
+
+				inventoryButton.onClick.AddListener(() => ShowItemsDetailsPanel(item, itemIcon, itemInfo));
+			}
+            //else
+            //{
+
+            //}
 		}
 	}
 
