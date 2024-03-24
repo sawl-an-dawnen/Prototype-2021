@@ -29,11 +29,11 @@ public class EquipmentSlot : MonoBehaviour, IPointerClickHandler
         spellsManager = GameObject.Find("SpellsManager").GetComponent<SpellsManager>();
     }
 
-    public void AddEquipment(string equipName, Sprite equipSprite, EquipmentType equipType)
+    public void AddEquipment(InventoryItem inventory)
     {
-        this.equipType = equipType;
-        this.equipName = equipName;
-        this.equipSprite = equipSprite;
+        this.equipType = inventory.equipType;
+        this.equipName = inventory.equipName;
+        this.equipSprite = inventory.equipIcon;
         isFull = true;
         equipImage.sprite = equipSprite;
     }

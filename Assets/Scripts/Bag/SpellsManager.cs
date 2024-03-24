@@ -86,24 +86,16 @@ public class SpellsManager : MonoBehaviour
 
 		foreach (var item in items)
 		{
-			bool isEquip = itemMapper.InventoryType(item);
-			if (!isEquip)
+			InventoryItem inventory = itemMapper.GetInventory(item);
+
+			// Not equipment:
+			if (!inventory.isEquip)
             {
-				Sprite itemIcon = itemMapper.GetIcon(item);
-				Button itemPrefab = itemMapper.GetButtonPrefab(item);
-				string itemInfo = itemMapper.GetInfo(item);
-
-				if (itemIcon == null || itemPrefab == null || itemInfo == null)
-				{
-					Debug.LogError("Error: Failed to retrieve item details for: " + item);
-					continue;
-				}
-
-				Button inventoryButton = Instantiate(itemPrefab.GetComponent<Button>(), inventoryPanel.transform);
+				Button inventoryButton = Instantiate(inventory.itemButtonPrefab.GetComponent<Button>(), inventoryPanel.transform);
 				Image buttonImage = inventoryButton.GetComponent<Image>();
 				if (buttonImage != null)
 				{
-					buttonImage.sprite = itemIcon;
+					buttonImage.sprite = inventory.itemIcon;
 				}
 				else
 				{
@@ -111,29 +103,25 @@ public class SpellsManager : MonoBehaviour
 				}
 
 				inventoryButtons.Add(inventoryButton);
-
-				inventoryButton.onClick.AddListener(() => ShowItemsDetailsPanel(item, itemIcon, itemInfo));
+				inventoryButton.onClick.AddListener(() => ShowItemsDetailsPanel(inventory));
 			}
-            else
-            {
-				// If inventory type is equipment:
-				bool equipped = itemMapper.GetEquipped(item);
-				Sprite equipIcon = itemMapper.GetIcon(item);
-				Button itemPrefab = itemMapper.GetButtonPrefab(item);
-				EquipmentType equipType = itemMapper.GetEquipType(item);
-				int equipAttack = itemMapper.GetEquipAttack(item);
-				int equipDefense = itemMapper.GetEquipDefense(item);
+			// Equipment:
+			else
+			{
+				//bool equipped = itemMapper.GetEquipped(item);
+				//Sprite equipIcon = itemMapper.GetIcon(item);
+				//Button itemPrefab = itemMapper.GetButtonPrefab(item);
+				//EquipmentType equipType = itemMapper.GetEquipType(item);
+				//int equipAttack = itemMapper.GetEquipAttack(item);
+				//int equipDefense = itemMapper.GetEquipDefense(item);
 
-				if (equipIcon == null || itemPrefab == null || equipType == EquipmentType.Unknown)
+				if (inventory.equipType == EquipmentType.Unknown)
 				{
 					Debug.LogError("Error: Failed to retrieve equip details for: " + item);
-					Debug.LogError(equipIcon);
-                    Debug.LogError(itemPrefab);
-                    Debug.LogError(equipType);
 					continue;
 				}
 
-				AddEquipment(item, equipIcon, equipType);
+				AddEquipment(inventory);
 			}
         }
 	}
@@ -176,13 +164,13 @@ public class SpellsManager : MonoBehaviour
 		}
 	}
 
-	private void ShowItemsDetailsPanel(string itemName, Sprite itemIcon, string itemInfo)
+	private void ShowItemsDetailsPanel(InventoryItem inventory)
 	{
 		InventoryDetailsPanel detailsPanel = inventoryDetailsPanel.GetComponent<InventoryDetailsPanel>();
 		if (detailsPanel != null)
 		{
 			detailsPanel.gameObject.SetActive(true);
-			detailsPanel.ShowDetails(itemName, itemIcon, itemInfo);
+			detailsPanel.ShowDetails(inventory.itemName, inventory.itemIcon, inventory.itemInfo);
         }
 		else
 		{
@@ -191,13 +179,13 @@ public class SpellsManager : MonoBehaviour
 	}
 
 	// Add iquipment to Equipment Panel
-	public void AddEquipment(string equipName, Sprite equipSprite, EquipmentType equipType)
+	public void AddEquipment(InventoryItem inventory)
 	{
 		for (int i = 0; i < equipSlot.Length; i++)
         {
 			if (equipSlot[i].isFull == false)
             {
-				equipSlot[i].AddEquipment(equipName, equipSprite, equipType);
+				equipSlot[i].AddEquipment(inventory);
 				return;
             }
         }

@@ -3,126 +3,153 @@ using UnityEngine.UI;
 
 public class ItemMapper : MonoBehaviour
 {
-    public bool InventoryType(string itemName)
+    public InventoryItem non;
+    public InventoryItem news1;
+    public InventoryItem news2;
+    public InventoryItem news3;
+    public InventoryItem helmet;
+
+    public InventoryItem GetInventory(string itemName)
     {
         switch (itemName)
         {
             case "News1":
-                return GameManager.Instance.inventoryManager.news1.isEquip;
+                return news1;
             case "News2":
-                return GameManager.Instance.inventoryManager.news2.isEquip;
+                return news2;
             case "News3":
-                return GameManager.Instance.inventoryManager.news3.isEquip;
+                return news3;
             case "Helmet":
-                return GameManager.Instance.inventoryManager.helmet.isEquip;
+                return helmet;
             default:
                 Debug.LogError("Unrecognized item name: " + itemName);
-                return false;
-        }
-    }
-
-    public Sprite GetIcon(string itemName)
-    {
-        switch (itemName)
-        {
-            case "News1":
-                return GameManager.Instance.inventoryManager.news1.itemIcon;
-            case "News2":
-                return GameManager.Instance.inventoryManager.news2.itemIcon;
-            case "News3":
-                return GameManager.Instance.inventoryManager.news3.itemIcon;
-            case "Helmet":
-                return GameManager.Instance.inventoryManager.helmet.equipIcon;
-            default:
-                Debug.LogError("Unrecognized item name: " + itemName);
-                return null;
-        }
-    }
-
-    public Button GetButtonPrefab(string itemName)
-    {
-        switch (itemName)
-        {
-            case "News1":
-                return GameManager.Instance.inventoryManager.news1.itemButtonPrefab;
-            case "News2":
-                return GameManager.Instance.inventoryManager.news2.itemButtonPrefab;
-            case "News3":
-                return GameManager.Instance.inventoryManager.news3.itemButtonPrefab;
-            case "Helmet":
-                return GameManager.Instance.inventoryManager.helmet.equipButtonPrefab;
-            default:
-                Debug.LogError("Unrecognized item name: " + itemName);
-                return null;
+                return non;
         }
     }
 
 
-    // only for items
-    public string GetInfo(string itemName)
-    {
-        switch (itemName)
-        {
-            case "News1":
-                return GameManager.Instance.inventoryManager.news1.itemInfo;
-            case "News2":
-                return GameManager.Instance.inventoryManager.news2.itemInfo;
-            case "News3":
-                return GameManager.Instance.inventoryManager.news3.itemInfo;
-            default:
-                Debug.LogError("Unrecognized item name: " + itemName);
-                return null;
-        }
-    }
 
 
-    // only for Equipment
-    public bool GetEquipped(string itemName)
-    {
-        switch (itemName)
-        {
-            case "Helmet":
-                return GameManager.Instance.inventoryManager.helmet.equipped;
-            default:
-                Debug.LogError("Unrecognized item name: " + itemName);
-                return false;
-        }
-    }
+    //public bool InventoryType(string itemName)
+    //{
+    //    switch (itemName)
+    //    {
+    //        case "News1":
+    //            return GameManager.Instance.inventoryManager.news1.isEquip;
+    //        case "News2":
+    //            return GameManager.Instance.inventoryManager.news2.isEquip;
+    //        case "News3":
+    //            return GameManager.Instance.inventoryManager.news3.isEquip;
+    //        case "Helmet":
+    //            return GameManager.Instance.inventoryManager.helmet.isEquip;
+    //        default:
+    //            Debug.LogError("Unrecognized item name: " + itemName);
+    //            return false;
+    //    }
+    //}
 
-    public EquipmentType GetEquipType(string itemName)
-    {
-        switch (itemName)
-        {
-            case "Helmet":
-                return GameManager.Instance.inventoryManager.helmet.equipType;
-            default:
-                Debug.LogError("Unrecognized item name: " + itemName);
-                return EquipmentType.Unknown;
-        }
-    }
+    //public Sprite GetIcon(string itemName)
+    //{
+    //    switch (itemName)
+    //    {
+    //        case "News1":
+    //            return GameManager.Instance.inventoryManager.news1.itemIcon;
+    //        case "News2":
+    //            return GameManager.Instance.inventoryManager.news2.itemIcon;
+    //        case "News3":
+    //            return GameManager.Instance.inventoryManager.news3.itemIcon;
+    //        case "Helmet":
+    //            return GameManager.Instance.inventoryManager.helmet.equipIcon;
+    //        default:
+    //            Debug.LogError("Unrecognized item name: " + itemName);
+    //            return null;
+    //    }
+    //}
 
-    public int GetEquipAttack(string itemName)
-    {
-        switch (itemName)
-        {
-            case "Helmet":
-                return GameManager.Instance.inventoryManager.helmet.equipAttack;
-            default:
-                Debug.LogError("Unrecognized item name: " + itemName);
-                return 0;
-        }
-    }
+    //public Button GetButtonPrefab(string itemName)
+    //{
+    //    switch (itemName)
+    //    {
+    //        case "News1":
+    //            return GameManager.Instance.inventoryManager.news1.itemButtonPrefab;
+    //        case "News2":
+    //            return GameManager.Instance.inventoryManager.news2.itemButtonPrefab;
+    //        case "News3":
+    //            return GameManager.Instance.inventoryManager.news3.itemButtonPrefab;
+    //        case "Helmet":
+    //            return GameManager.Instance.inventoryManager.helmet.equipButtonPrefab;
+    //        default:
+    //            Debug.LogError("Unrecognized item name: " + itemName);
+    //            return null;
+    //    }
+    //}
 
-    public int GetEquipDefense(string itemName)
-    {
-        switch (itemName)
-        {
-            case "Helmet":
-                return GameManager.Instance.inventoryManager.helmet.equipDefense;
-            default:
-                Debug.LogError("Unrecognized item name: " + itemName);
-                return 0;
-        }
-    }
+
+    //// only for items
+    //public string GetInfo(string itemName)
+    //{
+    //    switch (itemName)
+    //    {
+    //        case "News1":
+    //            return GameManager.Instance.inventoryManager.news1.itemInfo;
+    //        case "News2":
+    //            return GameManager.Instance.inventoryManager.news2.itemInfo;
+    //        case "News3":
+    //            return GameManager.Instance.inventoryManager.news3.itemInfo;
+    //        default:
+    //            Debug.LogError("Unrecognized item name: " + itemName);
+    //            return null;
+    //    }
+    //}
+
+
+    //// only for Equipment
+    //public bool GetEquipped(string itemName)
+    //{
+    //    switch (itemName)
+    //    {
+    //        case "Helmet":
+    //            return GameManager.Instance.inventoryManager.helmet.equipped;
+    //        default:
+    //            Debug.LogError("Unrecognized item name: " + itemName);
+    //            return false;
+    //    }
+    //}
+
+    //public EquipmentType GetEquipType(string itemName)
+    //{
+    //    switch (itemName)
+    //    {
+    //        case "Helmet":
+    //            return GameManager.Instance.inventoryManager.helmet.equipType;
+    //        default:
+    //            Debug.LogError("Unrecognized item name: " + itemName);
+    //            return EquipmentType.Unknown;
+    //    }
+    //}
+
+    //public int GetEquipAttack(string itemName)
+    //{
+    //    switch (itemName)
+    //    {
+    //        case "Helmet":
+    //            return GameManager.Instance.inventoryManager.helmet.equipAttack;
+    //        default:
+    //            Debug.LogError("Unrecognized item name: " + itemName);
+    //            return 0;
+    //    }
+    //}
+
+    //public int GetEquipDefense(string itemName)
+    //{
+    //    switch (itemName)
+    //    {
+    //        case "Helmet":
+    //            return GameManager.Instance.inventoryManager.helmet.equipDefense;
+    //        default:
+    //            Debug.LogError("Unrecognized item name: " + itemName);
+    //            return 0;
+    //    }
+    //}
 
 }
