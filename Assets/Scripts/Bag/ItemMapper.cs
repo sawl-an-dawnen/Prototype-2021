@@ -77,6 +77,18 @@ public class ItemMapper : MonoBehaviour
 
 
     // only for Equipment
+    public bool GetEquipped(string itemName)
+    {
+        switch (itemName)
+        {
+            case "Helmet":
+                return GameManager.Instance.inventoryManager.helmet.equipped;
+            default:
+                Debug.LogError("Unrecognized item name: " + itemName);
+                return false;
+        }
+    }
+
     public EquipmentType GetEquipType(string itemName)
     {
         switch (itemName)

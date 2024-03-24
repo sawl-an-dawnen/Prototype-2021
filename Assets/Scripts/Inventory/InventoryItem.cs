@@ -27,6 +27,7 @@ public class InventoryItem : ScriptableObject
     public string itemInfo;
 
     [Header("Equipment")]
+    public bool equipped;
     public EquipmentType equipType;
     public string equipName;
     public Sprite equipIcon;

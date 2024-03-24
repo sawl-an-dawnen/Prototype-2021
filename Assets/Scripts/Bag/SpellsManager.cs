@@ -13,11 +13,14 @@ public class SpellsManager : MonoBehaviour
 	public GameObject inventoryPanel;
 	public GameObject inventoryDetailsPanel;
 	public static bool GameIsPaused = false;
+
+	public EquipmentSlot[] equipSlot;
+	public EquippedSlot[] equippedSlot;
+
 	private List<Button> spellButtons = new List<Button>();
 	private List<Button> inventoryButtons = new List<Button>();
 
 	private ItemMapper itemMapper; // Reference to the ItemMapper script
-
 
 	void Start()
 	{
@@ -113,6 +116,8 @@ public class SpellsManager : MonoBehaviour
 			}
             else
             {
+				// If inventory type is equipment:
+				bool equipped = itemMapper.GetEquipped(item);
 				Sprite equipIcon = itemMapper.GetIcon(item);
 				Button itemPrefab = itemMapper.GetButtonPrefab(item);
 				EquipmentType equipType = itemMapper.GetEquipType(item);
@@ -127,6 +132,8 @@ public class SpellsManager : MonoBehaviour
                     Debug.LogError(equipType);
 					continue;
 				}
+
+				AddEquipment(item, equipIcon, equipType);
 			}
         }
 	}
@@ -147,6 +154,12 @@ public class SpellsManager : MonoBehaviour
 		}
 
 		inventoryButtons.Clear();
+
+		for (int i = 0; i < equipSlot.Length; i++)
+        {
+			equipSlot[i].equipImage.sprite = equipSlot[i].emptySprite;
+			equipSlot[i].isFull = false;
+		}
 	}
 
 	private void ShowDetailsPanel(GameManager.Spell spell)
@@ -177,18 +190,31 @@ public class SpellsManager : MonoBehaviour
 		}
 	}
 
-	//private void ShowEquipDetailsPanel(string equipName, Sprite equipIcon, string equipInfo)
-	//{
-	//	InventoryDetailsPanel detailsPanel = inventoryDetailsPanel.GetComponent<InventoryDetailsPanel>();
-	//	if (detailsPanel != null)
-	//	{
-	//		detailsPanel.gameObject.SetActive(true);
-	//		detailsPanel.ShowDetails(itemName, itemIcon, itemInfo);
-	//	}
-	//	else
-	//	{
-	//		Debug.LogError("SpellsDetailsPanel component not found on spellDetailsPanel GameObject.");
-	//	}
-	//}
+	// Add iquipment to Equipment Panel
+	public void AddEquipment(string equipName, Sprite equipSprite, EquipmentType equipType)
+	{
+		for (int i = 0; i < equipSlot.Length; i++)
+        {
+			if (equipSlot[i].isFull == false)
+            {
+				equipSlot[i].AddEquipment(equipName, equipSprite, equipType);
+				return;
+            }
+        }
+    }
+
+	public void DeselectAllSlots()
+    {
+		for (int i = 0; i < equipSlot.Length; i++)
+        {
+			equipSlot[i].slotShader.SetActive(false);
+			equipSlot[i].equipSelected = false;
+		}
+		for (int i = 0; i < equippedSlot.Length; i++)
+		{
+			equippedSlot[i].slotShader.SetActive(false);
+			equippedSlot[i].equipSelected = false;
+		}
+	}
 
 }
