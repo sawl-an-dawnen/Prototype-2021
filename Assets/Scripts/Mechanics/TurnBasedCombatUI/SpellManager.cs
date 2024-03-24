@@ -14,17 +14,7 @@ public class SpellManager: MonoBehaviour
         THROWKNIFE = 4,
         STUN = 5
     }
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
     public SpellSprites GetRuneSprites(Rune element)
     {
         return sprites[(int)element];

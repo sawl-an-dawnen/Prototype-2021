@@ -10,11 +10,41 @@ public class Clock : MonoBehaviour
     public float targetMinuteAngle = 180f; // Target angle for 10:30
 
     private bool isWinningConditionMet = false;
+    private bool exiting = false;
 
     public TextMeshProUGUI resultText; // Reference to the UI Text component
+    public GameObject panel;
+    
+    public void Resume()
+	{
+		panel.SetActive(false);
+		Time.timeScale = 1f;
+	}
+
+	public void Pause()
+	{
+		panel.SetActive(true);
+		Time.timeScale = 0f;
+	}
+
+    public IEnumerator returnToGame(float f)
+    {
+        yield return new WaitForSecondsRealtime(f);
+        Resume();
+    }
 
     private void Update()
     {
+        if (panel.activeSelf && !isWinningConditionMet && !exiting)
+		{
+			Pause();
+		}
+        else if (!exiting)
+        {
+            exiting = true;
+            StartCoroutine(returnToGame(2f));
+        }
+
         if (!isWinningConditionMet)
         {
             if (Input.GetKey(KeyCode.E))
@@ -36,14 +66,14 @@ public class Clock : MonoBehaviour
 
     private void RotateClockwise()
     {
-        minute.Rotate(Vector3.back, rotationSpeed * Time.deltaTime);
-        hour.Rotate(Vector3.back, rotationSpeed * 0.083f * Time.deltaTime);
+        minute.Rotate(Vector3.back, rotationSpeed * Time.unscaledDeltaTime);
+        hour.Rotate(Vector3.back, rotationSpeed * 0.083f * Time.unscaledDeltaTime);
     }
 
     private void RotateCounterclockwise()
     {
-        minute.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
-        hour.Rotate(Vector3.forward, rotationSpeed * 0.083f * Time.deltaTime);
+        minute.Rotate(Vector3.forward, rotationSpeed * Time.unscaledDeltaTime);
+        hour.Rotate(Vector3.forward, rotationSpeed * 0.083f * Time.unscaledDeltaTime);
     }
 
     private void CheckWinningCondition()

@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
 
 	void Update()
     {
-        if (dialogueUI.IsOpen)
+        if (SceneManager.GetActiveScene().name != "Combat Arena" && dialogueUI.IsOpen)
         {
             agent.SetDestination(transform.position);
             animator.SetBool("isChasing", false);

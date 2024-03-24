@@ -16870,6 +16870,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.049558043
       objectReference: {fileID: 0}
+    - target: {fileID: 6572097868507290497, guid: 9089bb920bd88f342a0b26715dc92cd5, type: 3}
+      propertyPath: dialogueUI
+      value: 
+      objectReference: {fileID: 909992398}
     - target: {fileID: 6723566337321654681, guid: 9089bb920bd88f342a0b26715dc92cd5, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.6133047
@@ -18711,6 +18715,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4348356637367757319, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: panel
+      value: 
+      objectReference: {fileID: 1752244109452913950}
     - target: {fileID: 4348356637367757319, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
       propertyPath: rotationSpeed
       value: 200

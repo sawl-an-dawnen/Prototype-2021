@@ -123,15 +123,16 @@ namespace Platformer.Mechanics
         /* All of these return a string because c# doesn't have function pointers */
         public void SubmitSelected()
         {
-            if (sc.enabled)
+			bs.StopPlayerTurnTimer();
+			if (sc.enabled)
             {
                 foreach (var func in spellEffects)
                 {
                     func();
                 }
                 spellEffects.Clear();
-                bs.OnEndTurnButton();
-            }
+				bs.OnEndTurnButton();
+			}
         }
         
         public void RuneSelected()
@@ -180,6 +181,7 @@ namespace Platformer.Mechanics
                         rpc.runes[idx].SetRuneUnselected();
                     }
                 }
+
                 spellEffects.Add(spells[i].eventFunc);
                 rpc.ColorRunes(resourceHandler);
                 ColorButtons();

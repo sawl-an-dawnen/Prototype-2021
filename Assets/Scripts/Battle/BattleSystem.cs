@@ -19,7 +19,12 @@ public enum CombatOptions
     Knife = 10,
     Slam = 12,
     Electrocute = 14,
-    Firebolt = 16
+    Firebolt = 16,
+    // element combo spells
+    FireElement = 10,
+    EarthElement = 10,
+    WaterElement = 10,
+    ElementalInfluence = 0
 }
 
 public class TurnActions {
@@ -91,18 +96,90 @@ public class BattleSystem : MonoBehaviour
     public GameManager.Spell[] spells = new GameManager.Spell[4];
     private int playerPowerBoost = 2;
     private int DialogueCounter = 0;    //Used for player corresponding dialogue options by enemy type
-    void Start()
+
+	private int fireCount;
+	private int earthCount;
+	private int waterCount;
+	private int EleInfluenceDamange;
+	private TurnbasedDialogHandler turnbasedDialogHandler;
+
+	public void StartCombatRound()
+	{
+		fireCount = 0;
+		earthCount = 0;
+		waterCount = 0;
+		EleInfluenceDamange = 0;
+	}
+
+	private float playerTurnTimer = 8f;
+	private bool isTimerStarted = false;
+    public bool hasSubmitted = false;
+	[SerializeField] TextMeshProUGUI timerText;
+
+	void Update()
+	{
+		UpdateDifficulty();
+		if (state == BattleState.PLAYER_TURN)
+		{
+			if (!isTimerStarted)
+			{
+				StartPlayerTurnTimer();
+				isTimerStarted = true;
+			}
+
+			if (playerTurnTimer > 0)
+			{
+				playerTurnTimer -= Time.deltaTime;
+			}
+			else if (!hasSubmitted && playerTurnTimer < 0)
+			{
+				playerTurnTimer = 0;
+				StopPlayerTurnTimer();
+				SubmitAndEndPlayerTurn();
+			}
+			int minutes = Mathf.FloorToInt(playerTurnTimer / 60);
+			int seconds = Mathf.FloorToInt(playerTurnTimer % 60);
+			timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+		}
+		else
+		{
+			isTimerStarted = false;
+		}
+	}
+
+    private void SubmitAndEndPlayerTurn()
     {
-        animator = GetComponent<Animator>();
+		turnbasedDialogHandler.SubmitSelected();
+	}
+
+    public void StartPlayerTurnTimer()
+	{
+		hasSubmitted = false;
+		playerTurnTimer = 8f;
+		timerText.color = Color.white;
+	}
+
+	public void StopPlayerTurnTimer()
+	{
+		hasSubmitted = true;
+		playerTurnTimer = 0f;
+		timerText.text = "00:00";
+		timerText.color = Color.red;
+	}
+
+
+	void Start()
+    {
+		animator = GetComponent<Animator>();
         state = BattleState.START;
         player = GameObject.FindWithTag("Player");
         enemy = GameObject.FindWithTag("Enemy");
         playerHP = player.GetComponent<PlayerHealthBar>();
         enemyHP = enemy.GetComponentInChildren<PlayerHealthBar>();
         battleDialog = GameObject.FindWithTag("BattleDialog").GetComponent<TextMeshProUGUI>();
-        
-        //freeze rotation/position
-        playerRBConstraints = player.GetComponentInChildren<Rigidbody>().constraints;
+		turnbasedDialogHandler = GetComponentInChildren<TurnbasedDialogHandler>();
+		//freeze rotation/position
+		playerRBConstraints = player.GetComponentInChildren<Rigidbody>().constraints;
         player.GetComponentInChildren<Rigidbody>().constraints = (RigidbodyConstraints)122;//freeze position xz, rotation
 
         enemyReference = GameObject.FindWithTag("enemyReference");
@@ -163,6 +240,10 @@ public class BattleSystem : MonoBehaviour
                 "Slam"        => OnSlamButton,
                 "Stun"        => OnStunButton,
                 "Knife Throw" => OnKnifeButton,
+                "Fire Element" => OnFireEleButton,
+                "Earth Element" => OnEarthEleButton,
+                "Water Element" => OnWaterEleButton,
+                "Elemental Influence" => OnElementalButton,
                 _             => null
             };
             
@@ -206,10 +287,30 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator ProcessTurn()
     {
+        StartCombatRound();
         foreach (var fun in playerTurnEndListeners)
         {
             fun();
         }
+
+        List<TurnActions> elementalInfluences = new List<TurnActions>();
+        List<TurnActions> otherActions = new List<TurnActions>();
+
+        foreach (var action in turnActions)
+        {
+            if (action.action == CombatOptions.ElementalInfluence)
+            {
+                elementalInfluences.Add(action);
+            }
+            else
+            {
+                otherActions.Add(action);
+            }
+        }
+
+        otherActions.AddRange(elementalInfluences);
+        turnActions.Clear();
+        turnActions.AddRange(otherActions);
 
         foreach (var action in turnActions)
         {
@@ -224,7 +325,7 @@ public class BattleSystem : MonoBehaviour
                 yield return new WaitForSeconds(action.waitTime);
                 yield return SpellEffectByEnemy(action);
                 GameObject.Destroy(gameObj);
-            }            
+            }
 
             yield return new WaitForSeconds(dialogWaitTime);
             if (enemyHP.currentHealth <= 0)
@@ -232,24 +333,25 @@ public class BattleSystem : MonoBehaviour
                 state = BattleState.WON;
                 break;
             }
-
         }
-        turnActions.Clear();
-
-        if (state == BattleState.WON)
+		turnActions.Clear();
+		if (state == BattleState.WON)
         {
             StartCoroutine(EndBattle());
-        } else if (remaningStunTurns < 1)
+        }
+        else if (remaningStunTurns < 1)
         {
             state = BattleState.ENEMY_TURN;
             StartCoroutine(EnemyTurn());
-        } else
+        }
+        else
         {
             if (--remaningStunTurns == 0)
                 Destroy(stunObj);
             PlayerTurn();
         }
     }
+
 
     //This Function plays goofy dialogues based on the spells used and also updates the enemy health.
     IEnumerator SpellEffectByEnemy(TurnActions action)
@@ -348,11 +450,15 @@ public class BattleSystem : MonoBehaviour
                     break;
             }
         }
-        else
+		else if (action.action == CombatOptions.ElementalInfluence)
+		{
+			enemyNewHP = enemyHP.TakeDamage(EleInfluenceDamange, false);
+		}
+		else
         {
             enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * (int)action.action / 2, false);
         }
-    }
+	}
 
     public int getRandomAbilityBasedOnEnemyType()
     {
@@ -652,11 +758,40 @@ public class BattleSystem : MonoBehaviour
 
         return null;
     }
-
-    void Update()
+    GameObject sendFireEle(bool isFromPlayer = true)
     {
-        UpdateDifficulty();
+		animator.Play("FireElement");
+		if (fireCount == 0)
+		    fireCount++;
+		return null;
+	}
+
+    GameObject sendEarthEle(bool isFromPlayer = true)
+    {
+		animator.Play("EarthElement");
+		if (earthCount == 0)
+		    earthCount++;
+		return null;
     }
+
+    GameObject sendWaterEle(bool isFromPlayer = true)
+    {
+		animator.Play("WaterElement");
+		if (waterCount == 0)
+		    waterCount++;
+		return null;
+    }
+
+    GameObject sendElemental(bool isFromPlayer = true)
+    {
+		animator.Play("ElementalInfluence");
+		EleInfluenceDamange = (fireCount + earthCount + waterCount) * 10;
+        if (fireCount > 0 && earthCount > 0 && waterCount > 0)
+		{
+			EleInfluenceDamange += 10;
+		}
+        return null;
+	}
 
     private void UpdateDifficulty()
     {
@@ -690,7 +825,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.PLAYER_TURN)
         {
-            turnActions.Add(new (CombatOptions.Slam, 1.5f, sendSlam)) ;
+            turnActions.Add(new (CombatOptions.Slam, 1.5f, sendSlam));
         }
     }
 
@@ -740,6 +875,34 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    public void OnFireEleButton()
+    {
+        if (state == BattleState.PLAYER_TURN)
+        {
+            turnActions.Add(new(CombatOptions.FireElement, 0, sendFireEle));
+        }
+    }
+    public void OnEarthEleButton()
+    {
+        if (state == BattleState.PLAYER_TURN)
+        {
+            turnActions.Add(new(CombatOptions.EarthElement, 0, sendEarthEle));
+        }
+    }
+    public void OnWaterEleButton()
+    {
+        if (state == BattleState.PLAYER_TURN)
+        {
+            turnActions.Add(new(CombatOptions.WaterElement, 0, sendWaterEle));
+        }
+    }
+    public void OnElementalButton()
+    {
+        if (state == BattleState.PLAYER_TURN)
+        {
+            turnActions.Add(new(CombatOptions.ElementalInfluence, 0, sendElemental));
+        }
+    }
 
     public void OnEndTurnButton()//todo: remove listener on mouse click
     {

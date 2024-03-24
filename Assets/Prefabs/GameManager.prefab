@@ -128,6 +128,22 @@ MonoBehaviour:
     prefabButton: {fileID: 7313625124187144831, guid: e1eb69a7264a44ad8bb484cebc52a106, type: 3}
     cost: 00000000000000000100000001000000
     description: KnifeThrowDescription
+  - name: Fire Element
+    prefabButton: {fileID: 7313625124187144831, guid: 3dbf97a75ea7e42769aeb95281e1e417, type: 3}
+    cost: 00000000010000000000000000000000
+    description: FireElementDescription
+  - name: Earth Element
+    prefabButton: {fileID: 7313625124187144831, guid: 2755ecf8b88b0483fbebc1cd27df8f5c, type: 3}
+    cost: 00000000000000000100000000000000
+    description: EarthElementDescription
+  - name: Water Element
+    prefabButton: {fileID: 7313625124187144831, guid: 47bd9a9f2f5184761afe134998d8fd8d, type: 3}
+    cost: 01000000000000000000000000000000
+    description: WaterElementDescription
+  - name: Elemental Influence
+    prefabButton: {fileID: 7313625124187144831, guid: 1ae16947774c04ac29c091559fdf6645, type: 3}
+    cost: 01000000010000000100000000000000
+    description: ElementalInfluenceDescription
 --- !u!114 &6013862213860267869
 MonoBehaviour:
   m_ObjectHideFlags: 0
