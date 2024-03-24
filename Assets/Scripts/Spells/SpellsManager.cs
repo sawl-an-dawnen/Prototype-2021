@@ -86,9 +86,9 @@ public class SpellsManager : MonoBehaviour
 			bool isEquip = itemMapper.InventoryType(item);
 			if (!isEquip)
             {
-				Sprite itemIcon = itemMapper.GetItemIcon(item);
-				Button itemPrefab = itemMapper.GetItemButtonPrefab(item);
-				string itemInfo = itemMapper.GetItemInfo(item);
+				Sprite itemIcon = itemMapper.GetIcon(item);
+				Button itemPrefab = itemMapper.GetButtonPrefab(item);
+				string itemInfo = itemMapper.GetInfo(item);
 
 				if (itemIcon == null || itemPrefab == null || itemInfo == null)
 				{
@@ -111,11 +111,24 @@ public class SpellsManager : MonoBehaviour
 
 				inventoryButton.onClick.AddListener(() => ShowItemsDetailsPanel(item, itemIcon, itemInfo));
 			}
-            //else
-            //{
+            else
+            {
+				Sprite equipIcon = itemMapper.GetIcon(item);
+				Button itemPrefab = itemMapper.GetButtonPrefab(item);
+				EquipmentType equipType = itemMapper.GetEquipType(item);
+				int equipAttack = itemMapper.GetEquipAttack(item);
+				int equipDefense = itemMapper.GetEquipDefense(item);
 
-            //}
-		}
+				if (equipIcon == null || itemPrefab == null || equipType == EquipmentType.Unknown)
+				{
+					Debug.LogError("Error: Failed to retrieve equip details for: " + item);
+					Debug.LogError(equipIcon);
+                    Debug.LogError(itemPrefab);
+                    Debug.LogError(equipType);
+					continue;
+				}
+			}
+        }
 	}
 
 
@@ -163,5 +176,19 @@ public class SpellsManager : MonoBehaviour
 			Debug.LogError("SpellsDetailsPanel component not found on spellDetailsPanel GameObject.");
 		}
 	}
+
+	//private void ShowEquipDetailsPanel(string equipName, Sprite equipIcon, string equipInfo)
+	//{
+	//	InventoryDetailsPanel detailsPanel = inventoryDetailsPanel.GetComponent<InventoryDetailsPanel>();
+	//	if (detailsPanel != null)
+	//	{
+	//		detailsPanel.gameObject.SetActive(true);
+	//		detailsPanel.ShowDetails(itemName, itemIcon, itemInfo);
+	//	}
+	//	else
+	//	{
+	//		Debug.LogError("SpellsDetailsPanel component not found on spellDetailsPanel GameObject.");
+	//	}
+	//}
 
 }

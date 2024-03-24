@@ -9,7 +9,7 @@ public class InventoryManager : MonoBehaviour
     public InventoryItem news1;
     public InventoryItem news2;
     public InventoryItem news3;
-    //public InventoryItem helmet;
+    public InventoryItem helmet;
     public DialogueUI dialogueUI;
     public GameObject toDestroy;
 

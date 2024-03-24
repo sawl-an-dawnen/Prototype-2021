@@ -11,7 +11,8 @@ public enum EquipmentType
     MainHand,
     OffHand,
     Relic,
-    Feet
+    Feet,
+    Unknown
 }
 
 [CreateAssetMenu(menuName = "Inventory/Item")]

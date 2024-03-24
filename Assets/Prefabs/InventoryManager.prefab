@@ -49,5 +49,6 @@ MonoBehaviour:
   news1: {fileID: 11400000, guid: c0b6619f515fc4041a8f80435d7a3c7e, type: 2}
   news2: {fileID: 11400000, guid: 89dff3c1294c6b647a8f7c066c35bbd9, type: 2}
   news3: {fileID: 11400000, guid: 07ddf94fec5c8234ea0d91ad07fec9e7, type: 2}
+  helmet: {fileID: 11400000, guid: 2b38f056bc0c9d546821862f60975689, type: 2}
   dialogueUI: {fileID: 0}
   toDestroy: {fileID: 0}
