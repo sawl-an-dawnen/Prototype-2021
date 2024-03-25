@@ -20,24 +20,29 @@ public class InventoryItem : ScriptableObject
 {
     public bool isEquip;
 
-    [Header("Item")]
     public string itemName;
     public Sprite itemIcon;
+
+    [Header("Item")]
     public Button itemButtonPrefab;
     public string itemInfo;
 
     [Header("Equipment")]
     public bool equipped;
     public EquipmentType equipType;
-    public string equipName;
-    public Sprite equipIcon;
     public int equipAttack;
     public int equipDefense;
-    public bool equipSpecial;
     public string specialInfo;
+
+    public void PreviewEquipment()
+    {
+        PlayerStatus playerStatus = GameObject.Find("StatPanel").GetComponent<PlayerStatus>();
+        playerStatus.PreviewEquipmentStatus(itemIcon, equipAttack, equipDefense, specialInfo);
+    }
 
     public void Equip()
     {
+        equipped = true;
         PlayerStatus playerStatus = GameObject.Find("StatPanel").GetComponent<PlayerStatus>();
         GameManager.Instance.SetPlayerAttack(GameManager.Instance.GetPlayerAttack() + equipAttack);
         GameManager.Instance.SetPlayerDefense(GameManager.Instance.GetPlayerDefense() + equipDefense);
@@ -47,6 +52,7 @@ public class InventoryItem : ScriptableObject
 
     public void UnEquip()
     {
+        equipped = false;
         PlayerStatus playerStatus = GameObject.Find("StatPanel").GetComponent<PlayerStatus>();
         GameManager.Instance.SetPlayerAttack(GameManager.Instance.GetPlayerAttack() - equipAttack);
         GameManager.Instance.SetPlayerDefense(GameManager.Instance.GetPlayerDefense() - equipDefense);

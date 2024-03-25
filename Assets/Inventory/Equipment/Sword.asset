@@ -13,15 +13,12 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   isEquip: 1
-  itemName: 
-  itemIcon: {fileID: 0}
+  itemName: Sword
+  itemIcon: {fileID: 21300000, guid: 5fd50594014b70e48bd6993443d46b32, type: 3}
   itemButtonPrefab: {fileID: 0}
   itemInfo: 
   equipped: 0
   equipType: 4
-  equipName: Sword
-  equipIcon: {fileID: 21300000, guid: 5fd50594014b70e48bd6993443d46b32, type: 3}
   equipAttack: 10
-  equipDefense: 2
-  equipSpecial: 0
-  specialInfo: 
+  equipDefense: 10
+  specialInfo: SR

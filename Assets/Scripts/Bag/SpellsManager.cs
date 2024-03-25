@@ -106,15 +106,20 @@ public class SpellsManager : MonoBehaviour
 				inventoryButton.onClick.AddListener(() => ShowItemsDetailsPanel(inventory));
 			}
 			// Equipment:
+            else if (inventory.equipped)
+			{
+				foreach (EquippedSlot slot in equippedSlot)
+				{
+					if (slot.equipType == inventory.equipType)
+					{
+						// Call EquipGear function on the found slot
+						slot.EquipGear(inventory);
+						break; // Once equipped, break the loop
+					}
+				}
+			}
 			else
 			{
-				//bool equipped = itemMapper.GetEquipped(item);
-				//Sprite equipIcon = itemMapper.GetIcon(item);
-				//Button itemPrefab = itemMapper.GetButtonPrefab(item);
-				//EquipmentType equipType = itemMapper.GetEquipType(item);
-				//int equipAttack = itemMapper.GetEquipAttack(item);
-				//int equipDefense = itemMapper.GetEquipDefense(item);
-
 				if (inventory.equipType == EquipmentType.Unknown)
 				{
 					Debug.LogError("Error: Failed to retrieve equip details for: " + item);
@@ -123,7 +128,7 @@ public class SpellsManager : MonoBehaviour
 
 				AddEquipment(inventory);
 			}
-        }
+		}
 	}
 
 

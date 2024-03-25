@@ -13,15 +13,12 @@ MonoBehaviour:
   m_Name: Boots
   m_EditorClassIdentifier: 
   isEquip: 1
-  itemName: 
-  itemIcon: {fileID: 0}
+  itemName: Boots
+  itemIcon: {fileID: 21300000, guid: e420c5bc93cb2604695a893500c897e3, type: 3}
   itemButtonPrefab: {fileID: 0}
   itemInfo: 
   equipped: 0
   equipType: 7
-  equipName: Boots
-  equipIcon: {fileID: 21300000, guid: e420c5bc93cb2604695a893500c897e3, type: 3}
   equipAttack: 1
   equipDefense: 5
-  equipSpecial: 0
-  specialInfo: 
+  specialInfo: C

@@ -34,8 +34,8 @@ public class EquipmentSlot : MonoBehaviour, IPointerClickHandler
     {
         this.equipment = inventory;
         this.equipType = inventory.equipType;
-        this.equipName = inventory.equipName;
-        this.equipSprite = inventory.equipIcon;
+        this.equipName = inventory.itemName;
+        this.equipSprite = inventory.itemIcon;
         isFull = true;
         equipImage.sprite = equipSprite;
     }
@@ -57,12 +57,19 @@ public class EquipmentSlot : MonoBehaviour, IPointerClickHandler
         if (isFull && equipSelected)
         {
             EquipGear();
+            GameObject.Find("StatPanel").GetComponent<PlayerStatus>().TurnOffPreviewStatus();
         }
         else if (isFull)
         {
             spellsManager.DeselectAllSlots();
             slotShader.SetActive(true);
             equipSelected = true;
+            equipment.PreviewEquipment();
+        }
+        else
+        {
+            spellsManager.DeselectAllSlots();
+            GameObject.Find("StatPanel").GetComponent<PlayerStatus>().TurnOffPreviewStatus();
         }
     }
 

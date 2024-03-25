@@ -15,8 +15,8 @@ public class EquippedSlot : MonoBehaviour, IPointerClickHandler
     private TMP_Text slotName;
 
     // Slot Data
-    [SerializeField]
-    private EquipmentType equipType = new EquipmentType();
+    //[SerializeField]
+    public EquipmentType equipType = new EquipmentType();
 
     private InventoryItem equipment;
     private Sprite equipSprite;
@@ -60,6 +60,12 @@ public class EquippedSlot : MonoBehaviour, IPointerClickHandler
             spellsManager.DeselectAllSlots();
             slotShader.SetActive(true);
             equipSelected = true;
+            equipment.PreviewEquipment();
+        }
+        else
+        {
+            spellsManager.DeselectAllSlots();
+            GameObject.Find("StatPanel").GetComponent<PlayerStatus>().TurnOffPreviewStatus();
         }
     }
 
@@ -73,12 +79,12 @@ public class EquippedSlot : MonoBehaviour, IPointerClickHandler
         this.equipment = newEquipment;
 
         // Update Image
-        this.equipSprite = equipment.equipIcon;
+        this.equipSprite = equipment.itemIcon;
         slotImage.sprite = this.equipSprite;
         slotName.enabled = false;
 
         // Update Status
-        this.equipName = equipment.equipName;
+        this.equipName = equipment.itemName;
         slotInUse = true;
     }
 
@@ -94,5 +100,7 @@ public class EquippedSlot : MonoBehaviour, IPointerClickHandler
         slotName.enabled = true;
 
         slotInUse = false;
+
+        GameObject.Find("StatPanel").GetComponent<PlayerStatus>().TurnOffPreviewStatus();
     }
 }
