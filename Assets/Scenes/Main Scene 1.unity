@@ -21953,6 +21953,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4274689643213829329, guid: 2e91eed922881bf4ba9cfee172562d6f, type: 3}
+      propertyPath: axe
+      value: 
+      objectReference: {fileID: 11400000, guid: 84ac411d0e622294792da63419a2b473, type: 2}
+    - target: {fileID: 4274689643213829329, guid: 2e91eed922881bf4ba9cfee172562d6f, type: 3}
+      propertyPath: boots
+      value: 
+      objectReference: {fileID: 11400000, guid: 767e05e4a8f51314b891920f9c48f75f, type: 2}
+    - target: {fileID: 4274689643213829329, guid: 2e91eed922881bf4ba9cfee172562d6f, type: 3}
       propertyPath: news1
       value: 
       objectReference: {fileID: 11400000, guid: c0b6619f515fc4041a8f80435d7a3c7e, type: 2}
@@ -21964,6 +21972,10 @@ PrefabInstance:
       propertyPath: news3
       value: 
       objectReference: {fileID: 11400000, guid: 07ddf94fec5c8234ea0d91ad07fec9e7, type: 2}
+    - target: {fileID: 4274689643213829329, guid: 2e91eed922881bf4ba9cfee172562d6f, type: 3}
+      propertyPath: sword
+      value: 
+      objectReference: {fileID: 11400000, guid: 17d5ff9b7fb46a541a7a71ecd3ec4e3f, type: 2}
     - target: {fileID: 4274689643213829329, guid: 2e91eed922881bf4ba9cfee172562d6f, type: 3}
       propertyPath: toDestroy
       value: 
@@ -28168,6 +28180,42 @@ MonoBehaviour:
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 11400000, guid: 2b38f056bc0c9d546821862f60975689, type: 2}
+            m_ObjectArgumentAssemblyTypeName: InventoryItem, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 785907792}
+          m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
+          m_MethodName: AddItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 84ac411d0e622294792da63419a2b473, type: 2}
+            m_ObjectArgumentAssemblyTypeName: InventoryItem, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 785907792}
+          m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
+          m_MethodName: AddItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 17d5ff9b7fb46a541a7a71ecd3ec4e3f, type: 2}
+            m_ObjectArgumentAssemblyTypeName: InventoryItem, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 785907792}
+          m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
+          m_MethodName: AddItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 767e05e4a8f51314b891920f9c48f75f, type: 2}
             m_ObjectArgumentAssemblyTypeName: InventoryItem, Assembly-CSharp
             m_IntArgument: 0
             m_FloatArgument: 0

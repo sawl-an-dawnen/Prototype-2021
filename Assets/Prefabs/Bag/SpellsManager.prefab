@@ -2242,6 +2242,9 @@ MonoBehaviour:
   news2: {fileID: 11400000, guid: 89dff3c1294c6b647a8f7c066c35bbd9, type: 2}
   news3: {fileID: 11400000, guid: 07ddf94fec5c8234ea0d91ad07fec9e7, type: 2}
   helmet: {fileID: 11400000, guid: 2b38f056bc0c9d546821862f60975689, type: 2}
+  boots: {fileID: 11400000, guid: 767e05e4a8f51314b891920f9c48f75f, type: 2}
+  axe: {fileID: 11400000, guid: 84ac411d0e622294792da63419a2b473, type: 2}
+  sword: {fileID: 11400000, guid: 17d5ff9b7fb46a541a7a71ecd3ec4e3f, type: 2}
 --- !u!1 &2022154284591337651
 GameObject:
   m_ObjectHideFlags: 0

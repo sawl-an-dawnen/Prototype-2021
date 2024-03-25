@@ -31,9 +31,26 @@ public class InventoryItem : ScriptableObject
     public EquipmentType equipType;
     public string equipName;
     public Sprite equipIcon;
-    public Button equipButtonPrefab;
     public int equipAttack;
     public int equipDefense;
     public bool equipSpecial;
     public string specialInfo;
+
+    public void Equip()
+    {
+        PlayerStatus playerStatus = GameObject.Find("StatPanel").GetComponent<PlayerStatus>();
+        GameManager.Instance.SetPlayerAttack(GameManager.Instance.GetPlayerAttack() + equipAttack);
+        GameManager.Instance.SetPlayerDefense(GameManager.Instance.GetPlayerDefense() + equipDefense);
+
+        playerStatus.UpdateEquipmentStatus();
+    }
+
+    public void UnEquip()
+    {
+        PlayerStatus playerStatus = GameObject.Find("StatPanel").GetComponent<PlayerStatus>();
+        GameManager.Instance.SetPlayerAttack(GameManager.Instance.GetPlayerAttack() - equipAttack);
+        GameManager.Instance.SetPlayerDefense(GameManager.Instance.GetPlayerDefense() - equipDefense);
+
+        playerStatus.UpdateEquipmentStatus();
+    }
 }

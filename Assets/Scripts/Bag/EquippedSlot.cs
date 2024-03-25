@@ -63,12 +63,14 @@ public class EquippedSlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void EquipGear(InventoryItem equipment)
+    public void EquipGear(InventoryItem newEquipment)
     {
-        this.equipment = equipment;
+        newEquipment.Equip();
         // If something is already equipped, send it back brfore re-writing the data for this slot
         if (slotInUse)
             UnEquipGear(equipment);
+
+        this.equipment = newEquipment;
 
         // Update Image
         this.equipSprite = equipment.equipIcon;
@@ -82,6 +84,7 @@ public class EquippedSlot : MonoBehaviour, IPointerClickHandler
 
     public void UnEquipGear(InventoryItem equipment)
     {
+        equipment.UnEquip();
         spellsManager.DeselectAllSlots();
         spellsManager.AddEquipment(equipment);
 
