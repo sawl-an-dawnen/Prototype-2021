@@ -18,6 +18,7 @@ public class EquippedSlot : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     private EquipmentType equipType = new EquipmentType();
 
+    private InventoryItem equipment;
     private Sprite equipSprite;
     private string equipName;
     private string equipDescription;
@@ -52,7 +53,7 @@ public class EquippedSlot : MonoBehaviour, IPointerClickHandler
     {
         if (slotInUse && equipSelected)
         {
-            UnEquipGear();
+            UnEquipGear(equipment);
         }
         else if (slotInUse)
         {
@@ -62,26 +63,27 @@ public class EquippedSlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void EquipGear(Sprite equipSprite, string equipName)
+    public void EquipGear(InventoryItem equipment)
     {
+        this.equipment = equipment;
         // If something is already equipped, send it back brfore re-writing the data for this slot
         if (slotInUse)
-            UnEquipGear();
+            UnEquipGear(equipment);
 
         // Update Image
-        this.equipSprite = equipSprite;
+        this.equipSprite = equipment.equipIcon;
         slotImage.sprite = this.equipSprite;
         slotName.enabled = false;
 
         // Update Status
-        this.equipName = equipName;
+        this.equipName = equipment.equipName;
         slotInUse = true;
     }
 
-    public void UnEquipGear()
+    public void UnEquipGear(InventoryItem equipment)
     {
         spellsManager.DeselectAllSlots();
-        spellsManager.AddEquipment(equipName, equipSprite, equipType);
+        spellsManager.AddEquipment(equipment);
 
         // Update Slot Image
         this.equipSprite = emptySprite;

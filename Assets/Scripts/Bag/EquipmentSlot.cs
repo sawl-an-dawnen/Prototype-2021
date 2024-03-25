@@ -7,6 +7,7 @@ public class EquipmentSlot : MonoBehaviour, IPointerClickHandler
     private SpellsManager spellsManager;
 
     // Equipment Data
+    private InventoryItem equipment;
     public string equipName;
     public Sprite equipSprite;
     public bool isFull;
@@ -31,6 +32,7 @@ public class EquipmentSlot : MonoBehaviour, IPointerClickHandler
 
     public void AddEquipment(InventoryItem inventory)
     {
+        this.equipment = inventory;
         this.equipType = inventory.equipType;
         this.equipName = inventory.equipName;
         this.equipSprite = inventory.equipIcon;
@@ -67,21 +69,21 @@ public class EquipmentSlot : MonoBehaviour, IPointerClickHandler
     private void EquipGear()
     {
         if (equipType == EquipmentType.Head)
-            headSlot.EquipGear(equipSprite, equipName);
+            headSlot.EquipGear(equipment);
         if (equipType == EquipmentType.Body)
-            bodySlot.EquipGear(equipSprite, equipName);
+            bodySlot.EquipGear(equipment);
         if (equipType == EquipmentType.Shirt)
-            shirtSlot.EquipGear(equipSprite, equipName);
+            shirtSlot.EquipGear(equipment);
         if (equipType == EquipmentType.Legs)
-            legsSlot.EquipGear(equipSprite, equipName);
+            legsSlot.EquipGear(equipment);
         if (equipType == EquipmentType.MainHand)
-            mainHandSlot.EquipGear(equipSprite, equipName);
+            mainHandSlot.EquipGear(equipment);
         if (equipType == EquipmentType.OffHand)
-            offHandSlot.EquipGear(equipSprite, equipName);
+            offHandSlot.EquipGear(equipment);
         if (equipType == EquipmentType.Relic)
-            relicSlot.EquipGear(equipSprite, equipName);
+            relicSlot.EquipGear(equipment);
         if (equipType == EquipmentType.Feet)
-            feetSlot.EquipGear(equipSprite, equipName);
+            feetSlot.EquipGear(equipment);
 
         EmptySlot();
     }
