@@ -855,6 +855,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5872571429534200388, guid: 3fc82a3f02e126f4884afc4f94e7abf1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5872571429555145730, guid: 3fc82a3f02e126f4884afc4f94e7abf1, type: 3}
       propertyPath: m_Name
       value: SlidingGameCanvas
@@ -942,6 +946,32 @@ PrefabInstance:
     - target: {fileID: 5872571429555145742, guid: 3fc82a3f02e126f4884afc4f94e7abf1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872571429706408604, guid: 3fc82a3f02e126f4884afc4f94e7abf1, type: 3}
+      propertyPath: m_text
+      value: 'Drawer Unlocked:
+
+        You found Research Files.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872571429706408604, guid: 3fc82a3f02e126f4884afc4f94e7abf1, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872571429706408604, guid: 3fc82a3f02e126f4884afc4f94e7abf1, type: 3}
+      propertyPath: m_margin.x
+      value: -366.8225
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872571429706408604, guid: 3fc82a3f02e126f4884afc4f94e7abf1, type: 3}
+      propertyPath: m_margin.z
+      value: -503.51276
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872571429706408604, guid: 3fc82a3f02e126f4884afc4f94e7abf1, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872571429813420649, guid: 3fc82a3f02e126f4884afc4f94e7abf1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fc82a3f02e126f4884afc4f94e7abf1, type: 3}

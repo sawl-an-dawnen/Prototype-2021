@@ -16,9 +16,9 @@ MonoBehaviour:
   - The door is locked, and I look through the crack in the door.
   - In the dim light, I glimpse a shadowy figure, its eyes gleaming with an unnatural
     glow, staring at me deeply.
-  - My heart pound in my chest as dread washes over me.
-  - Finally, I take a breath and pretend not seeing anything, but the image of those
-    eerie eyes haunt my thoughts long after.
+  - My heart pounds in my chest as dread washes over me.
+  - Finally, I take a breath and pretend to not have seen anything, but the image
+    of those eerie eyes haunt my thoughts long after.
   responses:
   - responseText: Leave.
     dialogueObject: {fileID: 0}

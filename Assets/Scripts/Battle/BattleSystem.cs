@@ -12,6 +12,7 @@ using static Rune;
 [Serializable]
 public enum BattleState { START, PLAYER_TURN, ENEMY_TURN, WON, LOST }
 
+//Need to change enum to class, or it needs ot have unique damage
 public enum CombatOptions
 {
     Stun = 5,
@@ -19,11 +20,11 @@ public enum CombatOptions
     Knife = 10,
     Slam = 12,
     Electrocute = 14,
-    Firebolt = 16,
+    Fireball = 16,
     // element combo spells
-    FireElement = 10,
-    EarthElement = 10,
-    WaterElement = 10,
+    FireElement = 6,
+    EarthElement = 7,
+    WaterElement = 8,
     ElementalInfluence = 0
 }
 
@@ -111,7 +112,7 @@ public class BattleSystem : MonoBehaviour
 		EleInfluenceDamange = 0;
 	}
 
-	private float playerTurnTimer = 8f;
+	private float playerTurnTimer = 11f;
 	private bool isTimerStarted = false;
     public bool hasSubmitted = false;
 	[SerializeField] TextMeshProUGUI timerText;
@@ -121,29 +122,30 @@ public class BattleSystem : MonoBehaviour
 		UpdateDifficulty();
 		if (state == BattleState.PLAYER_TURN)
 		{
+			int minutes = Mathf.FloorToInt(playerTurnTimer / 60);
+			int seconds = Mathf.FloorToInt(playerTurnTimer % 60);
 			if (!isTimerStarted)
 			{
 				StartPlayerTurnTimer();
 				isTimerStarted = true;
 			}
-
 			if (playerTurnTimer > 0)
 			{
 				playerTurnTimer -= Time.deltaTime;
+				timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 			}
 			else if (!hasSubmitted && playerTurnTimer < 0)
 			{
 				playerTurnTimer = 0;
-				StopPlayerTurnTimer();
+				timerText.text = "00:00";
+				timerText.color = Color.red;
 				SubmitAndEndPlayerTurn();
 			}
-			int minutes = Mathf.FloorToInt(playerTurnTimer / 60);
-			int seconds = Mathf.FloorToInt(playerTurnTimer % 60);
-			timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 		}
 		else
 		{
 			isTimerStarted = false;
+            timerText.text = "";
 		}
 	}
 
@@ -154,17 +156,16 @@ public class BattleSystem : MonoBehaviour
 
     public void StartPlayerTurnTimer()
 	{
-		hasSubmitted = false;
-		playerTurnTimer = 8f;
 		timerText.color = Color.white;
+		hasSubmitted = false;
+		playerTurnTimer = 11f;
 	}
 
 	public void StopPlayerTurnTimer()
 	{
+		playerTurnTimer = 0;
+		timerText.text = "";
 		hasSubmitted = true;
-		playerTurnTimer = 0f;
-		timerText.text = "00:00";
-		timerText.color = Color.red;
 	}
 
 
@@ -260,7 +261,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator SetupBattle()
     {
-        battleDialog.text = "Fighting the enemy!";
+        battleDialog.text = "Combat Start!";
         
         foreach (var fun in battleStartListeners)
         {
@@ -277,7 +278,8 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerTurn()
     {
-        battleDialog.text = "What will you do?";
+        battleDialog.color = Color.white;
+        battleDialog.text = "";
         state = BattleState.PLAYER_TURN;
         foreach (var fun in playerTurnBeginListeners)
         {
@@ -360,25 +362,31 @@ public class BattleSystem : MonoBehaviour
         if (action.action == CombatOptions.Slam && enemyReference.name.ToLower().Contains("skel"))
         {
             enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * (int)action.action), false);
+            GameManager.Instance.foundWeakness("Slam");
             switch (DialogueCounter)
             {
                 case 0:
                     DialogueCounter++;
+                    battleDialog.color = Color.white;
                     battleDialog.text = "Skeleton's bones rattled";
                     yield return new WaitForSeconds(1.5f);
-                    battleDialog.text = "<size=60%> Skeleton: Be Careful! My bones are brittle from lack of vitamin D";
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> Be careful! My bones are brittle from lack of vitamin D";
                     yield return new WaitForSeconds(2.5f);
                     break;
                 case 1:
                     DialogueCounter++;
+                    battleDialog.color = Color.white;
                     battleDialog.text = "Skeleton's tooth fell out";
                     yield return new WaitForSeconds(1.5f);
-                    battleDialog.text = "<size=60%> Skeleton: Just my Luck, if only we had a dentist in this mansion";
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> Just my luck, if only we had a dentist in this mansion";
                     yield return new WaitForSeconds(2.5f);
                     break;
                 case 2:
                     DialogueCounter++;
-                    battleDialog.text = "<size=60%> Skeleton: I got no Hair, but i sure got some hairline Fractures now";
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> I got no hair, but I sure got some hairline fractures now";
                     yield return new WaitForSeconds(2.5f);
                     break;
             }
@@ -390,62 +398,74 @@ public class BattleSystem : MonoBehaviour
             {
                 case 0:
                     DialogueCounter++;
+                    battleDialog.color = Color.white;
                     battleDialog.text = "One of the Monster's eyes popped";
                     yield return new WaitForSeconds(2f);
-                    battleDialog.text = "<size=60%> Eye Monster: I would have been in trouble if not for my 11 other eyes";
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> I would have been in trouble if not for my 11 other eyes";
                     yield return new WaitForSeconds(2.5f);
                     break;
                 case 1:
                     DialogueCounter++;
-                    battleDialog.text = "<size=60%> Eye Monster: That was my Favorite Eye!!";
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> That was my favorite eye!!";
                     yield return new WaitForSeconds(2f);
                     break;
                 case 2:
                     DialogueCounter++;
-                    battleDialog.text = "<size=60%> Eye Monster: Are you in a Knife Throwing Competition, and my eyes the Bullseyes???";
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> Are you in a Knife Throwing Competition, and my eye is the bullseye???";
                     yield return new WaitForSeconds(2.5f);
                     break;
                 default:
                     DialogueCounter++;
-                    battleDialog.text = "<size=60%> Eye Monster: Stop it!! I am gonna run out of my eyes!!";
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> Stop it!! I am gonna run out of eyes!!";
                     yield return new WaitForSeconds(2.5f);
                     break;
             }
         }
-        else if (action.action == CombatOptions.Firebolt && enemyReference.name.ToLower().Contains("horse"))
+        else if (action.action == CombatOptions.Fireball && enemyReference.name.ToLower().Contains("horse"))
         {
             switch (DialogueCounter)
             {
                 case 0:
                     DialogueCounter++;
                     enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 8, false);
-                    battleDialog.text = "Boss started to glow slightly red";
+                    battleDialog.color = Color.white;
+                    battleDialog.text = "The boss started to glow slightly red";
                     yield return new WaitForSeconds(1.7f);
-                    battleDialog.text = "<size=60%> Boss: who turned on the heater?";
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> Who turned on the heater?";
                     yield return new WaitForSeconds(2f);
                     break;
                 case 1:
                     DialogueCounter++;
                     enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 9, false);
-                    battleDialog.text = "Boss Turned even more reader";
+                    battleDialog.color = Color.white;
+                    battleDialog.text = "The boss turned even more red";
                     yield return new WaitForSeconds(1.7f);
-                    battleDialog.text = "<size=60%>  Boss: Somebody! turn on the A/C!";
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%>  Somebody! Turn on the A/C!";
                     yield return new WaitForSeconds(2f);
-                    battleDialog.text = "<size=60%>  Boss: oh wait... our bills for utility are due since ages";
+                    battleDialog.text = "<size=60%>  Oh wait... Our utility bills have been due for ages";
                     yield return new WaitForSeconds(2f);
                     break;
                 case 2:
                     DialogueCounter++;
                     enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 10, false);
-                    battleDialog.text = "Boss started melting";
+                    battleDialog.color = Color.white;
+                    battleDialog.text = "The boss started melting";
                     yield return new WaitForSeconds(1f);
-                    battleDialog.text = "<size=60%> Boss: Go be a pyromaniac somewhere else!";
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> Go be a pyromaniac somewhere else!";
                     yield return new WaitForSeconds(2.5f);
                     break;
                 default:
                     DialogueCounter++;
                     enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 12, false);
-                    battleDialog.text = "<size=60%> Boss: I am about to have a heat stroke!";
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> I am about to have a heat stroke!";
                     yield return new WaitForSeconds(2f);
                     break;
             }
@@ -477,6 +497,7 @@ public class BattleSystem : MonoBehaviour
     {
         int randomInt = getRandomAbilityBasedOnEnemyType();
         CombatOptions enemyAction = CombatOptions.Knife;
+        battleDialog.color = Color.white;
         string dialogText = "The enemy <harm> you";
 
         if (playerDodged)
@@ -509,7 +530,7 @@ public class BattleSystem : MonoBehaviour
                 break;
             case < 50:
                 enemyAction = CombatOptions.Slam;
-                battleDialog.text = playerDodged ? "You dodged enemy's slam!" : dialogText.Replace("<harm>", "slammed");
+                battleDialog.text = playerDodged ? "You dodged enemy's slam!" : dialogText.Replace("<harm>", "slammed into");
 
                 if (!playerDodged) { 
                     sendSlam(false);
@@ -518,9 +539,9 @@ public class BattleSystem : MonoBehaviour
                     yield return wait3sec; // important for animation to finish
                 break;
             case < 75:
-                enemyAction = CombatOptions.Firebolt;
+                enemyAction = CombatOptions.Fireball;
                 battleDialog.text = dialogText.Replace("<harm>", "threw a fireball at");
-                sendFirebolt(false);
+                sendFireball(false);
                 yield return wait1sec; //new WaitForSeconds(1f);
                 break;
             default:
@@ -562,6 +583,7 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.WON)
         {
             winSound.Play();
+            battleDialog.color = Color.white;
             battleDialog.text = "You have prevailed!";
             var lowerCaseEnemyName = PlayerPrefs.GetString("ObjectToSpawn").ToLower();
             if (lowerCaseEnemyName.Contains("skeleton"))
@@ -604,24 +626,28 @@ public class BattleSystem : MonoBehaviour
     {
         if (enemyReference.name.ToLower().Contains("skel"))
         {
-            battleDialog.text = "skeleton: I will pick a bone with you next time!";
+            battleDialog.color = Color.red;
+            battleDialog.text = "I will pick a bone with you next time!";
             yield return new WaitForSeconds(2.5f);
         }
         else if (enemyReference.name.ToLower().Contains("eye"))
         {
-            battleDialog.text = "eye monster: I did not... see that coming...";
+            battleDialog.color = Color.red;
+            battleDialog.text = "I did not... see that coming...";
             yield return new WaitForSeconds(2.5f);
         }
         else if (enemyReference.name.ToLower().Contains("horse"))
         {
-            battleDialog.text = "Boss: This is just the beginning";
+            battleDialog.color = Color.red;
+            battleDialog.text = "This is just the beginning";
             yield return new WaitForSeconds(2f);
-            battleDialog.text = "The Boss Disappeared into the ground";
+            battleDialog.color = Color.white;
+            battleDialog.text = "The Boss disappeared into the ground";
             yield return new WaitForSeconds(2f);
         }
     }
 
-    GameObject sendFirebolt(bool isFromPlayer = true)//todo: change for enemy
+    GameObject sendFireball(bool isFromPlayer = true)//todo: change for enemy
     {
         if (isFromPlayer)
         {
@@ -760,7 +786,7 @@ public class BattleSystem : MonoBehaviour
     }
     GameObject sendFireEle(bool isFromPlayer = true)
     {
-		animator.Play("FireElement");
+		animator.Play("PlayerThrowFireEle");
 		if (fireCount == 0)
 		    fireCount++;
 		return null;
@@ -768,7 +794,7 @@ public class BattleSystem : MonoBehaviour
 
     GameObject sendEarthEle(bool isFromPlayer = true)
     {
-		animator.Play("EarthElement");
+		animator.Play("PlayerThrowEarthEle");
 		if (earthCount == 0)
 		    earthCount++;
 		return null;
@@ -776,7 +802,7 @@ public class BattleSystem : MonoBehaviour
 
     GameObject sendWaterEle(bool isFromPlayer = true)
     {
-		animator.Play("WaterElement");
+		animator.Play("PlayerThrowWaterEle");
 		if (waterCount == 0)
 		    waterCount++;
 		return null;
@@ -784,7 +810,18 @@ public class BattleSystem : MonoBehaviour
 
     GameObject sendElemental(bool isFromPlayer = true)
     {
-		animator.Play("ElementalInfluence");
+        if (fireCount > 0)
+        {
+			animator.Play("PlayerThrowFireEle");
+		}
+		if (waterCount > 0)
+		{
+			animator.Play("PlayerThrowWaterEle");
+		}
+		if (earthCount > 0)
+		{
+			animator.Play("PlayerThrowEarthEle");
+		}
 		EleInfluenceDamange = (fireCount + earthCount + waterCount) * 10;
         if (fireCount > 0 && earthCount > 0 && waterCount > 0)
 		{
@@ -833,7 +870,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.PLAYER_TURN)
         {
-            turnActions.Add(new (CombatOptions.Firebolt, 1f, sendFirebolt));
+            turnActions.Add(new (CombatOptions.Fireball, 1f, sendFireball));
         }
     }
 

@@ -17,6 +17,6 @@ MonoBehaviour:
   - The old bicycle keep making a regular and disturbing ticking sound.
   - I find a tattered newspaper on its back seat.
   responses:
-  - responseText: 'Pike it up. '
+  - responseText: 'Pick it up. '
     dialogueObject: {fileID: 11400000, guid: eb5ef2645c30e6541849d51db88e3801, type: 2}
   needCondition: 0

@@ -40,6 +40,15 @@ public class SpellsDetailsPanel : MonoBehaviour
         spellImage.sprite = spell.prefabButton.GetComponent<Image>().sprite; 
 		spellCostText.text = "Cost:\n" + string.Join("\n", spell.cost.Select((c, i) => $"{GetElementName(i)}({GetElementColor(i)}): {c}"));
 		spellDescriptionText.text = spell.description;
+		if(spell.weaknessIsFound){
+			spellDescriptionText.text = spell.description + " Strong Against: " + spell.strongAgainst;
+		}
+		else if (spell.name == "Knife Throw" || spell.name == "Slam" || spell.name =="Fireball"){
+			spellDescriptionText.text = spell.description + " Strong Against: ???";
+		}
+		else{
+			spellDescriptionText.text = spell.description;
+		}
 
 	}
 }

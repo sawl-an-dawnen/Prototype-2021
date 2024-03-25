@@ -103,47 +103,69 @@ MonoBehaviour:
   - name: Dodge
     prefabButton: {fileID: 7313625124187144831, guid: 93c78d886e4da4cef997f5d82b6092c5, type: 3}
     cost: 00000000000000000200000001000000
-    description: DodgeDescription
+    description: Avoid the next enemy attack.
+    strongAgainst: 
+    weaknessIsFound: 0
   - name: Electrocute
     prefabButton: {fileID: 7313625124187144831, guid: 450f000e58d2241d08f966eaaa11d930, type: 3}
     cost: 01000000010000000000000001000000
-    description: ElectrocuteDescription
+    description: Deal 14 damage to an enemy.
+    strongAgainst: 
+    weaknessIsFound: 0
   - name: Fireball
     prefabButton: {fileID: 7313625124187144831, guid: e19c2675809564a30b2c2c9fbf908b4a, type: 3}
     cost: 00000000020000000000000001000000
-    description: FireballDescription
+    description: Deal 16 damage to an enemy.
+    strongAgainst: Knight
+    weaknessIsFound: 0
   - name: Heal
     prefabButton: {fileID: 7313625124187144831, guid: c0586a6f781804850932d5d6b0e70876, type: 3}
     cost: 02000000000000000000000000000000
-    description: HealDescription
+    description: Recover 15 HP.
+    strongAgainst: 
+    weaknessIsFound: 0
   - name: Slam
     prefabButton: {fileID: 7313625124187144831, guid: 0c3ab464326ec4633b9552892ceeb4f8, type: 3}
     cost: 00000000000000000100000002000000
-    description: SlamlDescription
+    description: Deal 14 damage to an enemy.
+    strongAgainst: Skeleton
+    weaknessIsFound: 0
   - name: Stun
     prefabButton: {fileID: 7313625124187144831, guid: 9d62408400cb24a8dbaaba553797282a, type: 3}
     cost: 00000000010000000100000002000000
-    description: StunDescription
+    description: Deal 6 damage and delay next enemy attack.
+    strongAgainst: 
+    weaknessIsFound: 0
   - name: Knife Throw
     prefabButton: {fileID: 7313625124187144831, guid: e1eb69a7264a44ad8bb484cebc52a106, type: 3}
     cost: 00000000000000000100000001000000
-    description: KnifeThrowDescription
+    description: Deal 9 damage to an enemy
+    strongAgainst: Eye Monster
+    weaknessIsFound: 0
   - name: Fire Element
     prefabButton: {fileID: 7313625124187144831, guid: 3dbf97a75ea7e42769aeb95281e1e417, type: 3}
     cost: 00000000010000000000000000000000
     description: FireElementDescription
+    strongAgainst: 
+    weaknessIsFound: 0
   - name: Earth Element
     prefabButton: {fileID: 7313625124187144831, guid: 2755ecf8b88b0483fbebc1cd27df8f5c, type: 3}
     cost: 00000000000000000100000000000000
     description: EarthElementDescription
+    strongAgainst: 
+    weaknessIsFound: 0
   - name: Water Element
     prefabButton: {fileID: 7313625124187144831, guid: 47bd9a9f2f5184761afe134998d8fd8d, type: 3}
     cost: 01000000000000000000000000000000
     description: WaterElementDescription
+    strongAgainst: 
+    weaknessIsFound: 0
   - name: Elemental Influence
     prefabButton: {fileID: 7313625124187144831, guid: 1ae16947774c04ac29c091559fdf6645, type: 3}
     cost: 01000000010000000100000000000000
     description: ElementalInfluenceDescription
+    strongAgainst: 
+    weaknessIsFound: 0
 --- !u!114 &6013862213860267869
 MonoBehaviour:
   m_ObjectHideFlags: 0

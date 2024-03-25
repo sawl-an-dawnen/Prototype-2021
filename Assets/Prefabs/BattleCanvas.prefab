@@ -346,36 +346,37 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '1. Casting SPELLS to defeat the enemy
+  m_text: '1. Cast SPELLS to defeat the enemy
 
-    2. Specific combination of
-    RUNES is required for each spell
+    2. A specific combination of RUNES
+    is required for each spell
 
-    3. SELECT the RUNES that you don''t need
-    and REROLL them
+    3. SELECT the RUNES that you don''t need and
+    REROLL them
 
     4. You can only REROLL twice each turn
 
-    5. SELECT
-    the spells that fit the requirement to make them in the using queue
+    5. If you have the
+    runes to cast a spell, SELECT the spell to add them to the casting queue
 
     6.
-    After SELECT a spell, it will RESERVE required runes and you cannot reroll them
+    After you SELECT a spell, it will RESERVE required runes and you cannot reroll
+    them
 
-    7.
-    press RESET to unselect the spell you''ve chosen and free up the runes
+    7. Press RESET to clear the casting queue and free up the reserved
+    runes
 
-    8.
-    The REROLL CANNOT be RESET
+    8. REROLLS CANNOT be RESET
 
-    9. Use mouse or keyboard (WASD for RUNES / 1234
-    for SPELLS)
+    9. Use mouse or keyboard (WASD for
+    RUNES / 1234 for SPELLS)
 
 
-    ** If you cannot cast any spells because no runes match your
-    spell costs,
+    ** If you cannot cast any spells because no runes
+    match your spell costs,
 
-    you unfortunately must end your turn with no actions taken.
+    you unfortunately must end your turn with no actions
+    taken.
 
 '
   m_isRightToLeft: 0
@@ -775,7 +776,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.5, y: 250}
+  m_AnchoredPosition: {x: -2, y: 237}
   m_SizeDelta: {x: 1920, y: 525.9641}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9014410551342908648
@@ -911,7 +912,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7697716997777354927
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1165,7 +1166,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -474, y: 445.99994}
+  m_AnchoredPosition: {x: 192, y: 436.99994}
   m_SizeDelta: {x: 23.5995, y: 22.7176}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1157642806715204382
@@ -1436,7 +1437,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.5, y: -273}
+  m_AnchoredPosition: {x: -2, y: -286}
   m_SizeDelta: {x: 1920, y: 552.85236}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5702973647879886298
@@ -1984,7 +1985,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -474, y: 446}
+  m_AnchoredPosition: {x: 192, y: 437}
   m_SizeDelta: {x: 58.7165, y: 75.7254}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &895872526344434533
@@ -2157,6 +2158,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 76299821530516689, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1605389651130016942, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -2178,8 +2183,20 @@ PrefabInstance:
       value: 1.7866
       objectReference: {fileID: 0}
     - target: {fileID: 2975880188780177915, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 668
+      objectReference: {fileID: 0}
+    - target: {fileID: 2975880188780177915, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 131
+      value: 121.999985
+      objectReference: {fileID: 0}
+    - target: {fileID: 5227935683239969208, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -443
+      objectReference: {fileID: 0}
+    - target: {fileID: 5646469638108831122, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8289351281399176249, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
       propertyPath: m_fontSize
@@ -2233,6 +2250,14 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -2733330888630039257, guid: 2b5d54a1a33509c4d92d2d0d9bf16dc0, type: 2}
+    - target: {fileID: 8828049685575157767, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -499.15656
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828049685575157767, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -88
+      objectReference: {fileID: 0}
     - target: {fileID: 8828049685577337173, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -2249,6 +2274,22 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -2733330888630039257, guid: 2b5d54a1a33509c4d92d2d0d9bf16dc0, type: 2}
+    - target: {fileID: 8828049685989413842, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 666
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828049685989413842, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828049686120978927, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -910
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828049686120978927, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -88
+      objectReference: {fileID: 0}
     - target: {fileID: 8828049686260786607, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -2265,6 +2306,22 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -2733330888630039257, guid: 2b5d54a1a33509c4d92d2d0d9bf16dc0, type: 2}
+    - target: {fileID: 8828049686634941203, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828049686870342638, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -328.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828049686882261588, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -711.1566
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828049686882261588, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -88
+      objectReference: {fileID: 0}
     - target: {fileID: 8828049686927820112, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.76
@@ -2292,6 +2349,14 @@ PrefabInstance:
     - target: {fileID: 8828049687280141776, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828049687304679239, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -287.04675
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828049687304679239, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -88
       objectReference: {fileID: 0}
     - target: {fileID: 8945914272445893510, guid: 92398f1eb68c22947ad9e26e1722138d, type: 3}
       propertyPath: m_Pivot.x

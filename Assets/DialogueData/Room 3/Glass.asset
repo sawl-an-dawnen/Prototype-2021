@@ -15,8 +15,7 @@ MonoBehaviour:
   dialogue:
   - The dazzling stained glass fascinates me.
   - I watch the refracted light from every angle.
-  - Suddenly, I discover that several pieces of bright yellow glass are actually
-    coins!
+  - I discover that the several pieces of bright yellow glass are actually coins!
   responses:
   - responseText: Pick them out
     dialogueObject: {fileID: 11400000, guid: de56d73477a385848aeae7f7d972fd35, type: 2}

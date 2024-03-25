@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 5-2
   m_EditorClassIdentifier: 
   dialogue:
-  - It might be a good choice not to go in...
+  - It might be a good idea not to go in...
   responses: []
   needCondition: 0
