@@ -8,13 +8,20 @@ public class Clock : MonoBehaviour
     public float rotationSpeed = 200f;
     public float targetHourAngle = -30f; // Target angle for 10:30
     public float targetMinuteAngle = 180f; // Target angle for 10:30
+    public string spellToGet;
+    private Sprite img;
 
     private bool isWinningConditionMet = false;
     private bool exiting = false;
 
-    public TextMeshProUGUI resultText; // Reference to the UI Text component
+    private AudioSource audioSource;
+
+    public TextMeshProUGUI resultText1; // Reference to the UI Text component
+    public TextMeshProUGUI resultText2;
     public GameObject panel;
-    
+
+    private PopUpManager pm;
+
     public void Resume()
 	{
 		panel.SetActive(false);
@@ -31,6 +38,12 @@ public class Clock : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(f);
         Resume();
+    }
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        pm = GameObject.FindGameObjectWithTag("PopMan").GetComponent<PopUpManager>();
     }
 
     private void Update()
@@ -86,12 +99,24 @@ public class Clock : MonoBehaviour
 
         if (Mathf.Abs(currentHourAngle - targetHourAngle) < 5f && Mathf.Abs(currentMinuteAngle - targetMinuteAngle) < 5f)
         {
-            resultText.text = "Congratulations! This is the right time!";
+            audioSource.Stop();
+            audioSource.Play();
+            resultText1.text = "Congratulations, this is the right time";
+            resultText2.text = "Get " + spellToGet + " Spell!";
             isWinningConditionMet = true;
+            GameManager.Instance.AvailableSpells[spellToGet] = true;
+            foreach (GameManager.Spell spell in GameManager.Instance.spells)
+            {
+                if (spell.name == spellToGet)
+                {
+                    img = spell.prefabButton.image.sprite;
+                }
+            }
+            pm.CreatePopUp("You Found " + spellToGet + ", press 'I' to check your inventory", img);
         }
         else
         {
-            resultText.text = "Not yet at the right time. Keep adjusting.";
+            resultText1.text = "Not yet at the right time. Keep adjusting.";
             StartCoroutine(ClearResultTextAfterDelay(2f));
         }
     }
@@ -105,6 +130,6 @@ public class Clock : MonoBehaviour
     private IEnumerator ClearResultTextAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        resultText.text = "";
+        resultText1.text = "";
     }
 }

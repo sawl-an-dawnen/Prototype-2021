@@ -95,10 +95,11 @@ MonoBehaviour:
   sceneChange: {fileID: 6013862213860267869}
   SaveFilePath: 
   DefaultSpells:
-  - Slam
-  - Dodge
-  - Fireball
+  - Fire Element
+  - Earth Element
+  - Water Element
   - Electrocute
+  - Dodge
   spells:
   - name: Dodge
     prefabButton: {fileID: 7313625124187144831, guid: 93c78d886e4da4cef997f5d82b6092c5, type: 3}

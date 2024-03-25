@@ -19,8 +19,14 @@ public class counterPuzzle : MonoBehaviour
     int counter3;
     int counter4;
 	public GameObject panel;
+    private bool puzzleSolved = false;
 
-	public void Resume()
+    public string spellToGet;
+    private Sprite img;
+
+    private PopUpManager pm;
+
+    public void Resume()
 	{
 		panel.SetActive(false);
 		Time.timeScale = 1f;
@@ -106,7 +112,8 @@ public class counterPuzzle : MonoBehaviour
     {
 		successText.gameObject.SetActive(false);
         successImage.gameObject.SetActive(false);
-	}
+        pm = GameObject.FindGameObjectWithTag("PopMan").GetComponent<PopUpManager>();
+    }
 
 	void Update()
 	{
@@ -115,11 +122,22 @@ public class counterPuzzle : MonoBehaviour
 			Pause();
 		}
 
-		if (counter1 == 1 && counter2 == 3 && counter3 == 1 && counter4 == 4)
+		if (counter1 == 1 && counter2 == 3 && counter3 == 1 && counter4 == 4 && !puzzleSolved)
 		{
-			successText.gameObject.SetActive(true);
+            puzzleSolved = true;
+            successText.gameObject.SetActive(true);
 			successImage.gameObject.SetActive(true);
-		}
+
+            GameManager.Instance.AvailableSpells[spellToGet] = true;
+            foreach (GameManager.Spell spell in GameManager.Instance.spells)
+            {
+                if (spell.name == spellToGet)
+                {
+                    img = spell.prefabButton.image.sprite;
+                }
+            }
+            pm.CreatePopUp("You Found " + spellToGet + ", press 'I' to check your inventory", img);
+        }
 	}
 
 }
