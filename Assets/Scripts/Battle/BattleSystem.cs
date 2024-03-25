@@ -158,7 +158,7 @@ public class BattleSystem : MonoBehaviour
 	{
 		timerText.color = Color.white;
 		hasSubmitted = false;
-		playerTurnTimer = 11f;
+		playerTurnTimer = 8f;
 	}
 
 	public void StopPlayerTurnTimer()

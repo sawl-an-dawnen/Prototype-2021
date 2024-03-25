@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 
 	public GameObject enemyToSpawn; // Store the collided enemy to spawn in the combat scene
 	[SerializeField] private int playerHealth;
+	[SerializeField] private int playerAttack;
+	[SerializeField] private int playerDefense;
 	[SerializeField] private float coins;
 	[SerializeField] private bool CanOpen;
 	[SerializeField] public List<string> items;
@@ -102,6 +104,26 @@ public class GameManager : MonoBehaviour
 	public int GetPlayerHealth()
 	{
 		return playerHealth;
+	}
+
+	public void SetPlayerAttack(int i)
+	{
+		playerAttack = i;
+	}
+
+	public int GetPlayerAttack()
+	{
+		return playerAttack;
+	}
+
+	public void SetPlayerDefense(int i)
+	{
+		playerDefense = i;
+	}
+
+	public int GetPlayerDefense()
+	{
+		return playerDefense;
 	}
 
 	public void SetCoins(float i)
@@ -191,6 +213,8 @@ public class GameManager : MonoBehaviour
 	{
 		Checkpoint = new Checkpoint(
 			playerHealth,
+			playerAttack,
+			playerDefense,
 			Spawns,
 			PlayDoorSound,
 			PlayerPos,
@@ -210,6 +234,8 @@ public class GameManager : MonoBehaviour
 			return;
 		}
 		playerHealth = Checkpoint.playerHealth;
+		playerAttack = Checkpoint.playerAttack;
+		playerDefense = Checkpoint.playerDefense;
 		Spawns = Checkpoint.spawns;
 		PlayDoorSound = Checkpoint.playDoorSound;
 		PlayerPos = Checkpoint.playerPos;
@@ -225,7 +251,7 @@ public class GameManager : MonoBehaviour
 	{
 		const string scene = "IntroStory";
 		items.Clear();
-		Checkpoint = new(100, new(), new(), new(), CreateDefaultAvailableSpells(), scene, 0, false, new());
+		Checkpoint = new(100, 5, 3, new(), new(), new(), CreateDefaultAvailableSpells(), scene, 0, false, new());
 		LoadCheckpoint();
 	}
 

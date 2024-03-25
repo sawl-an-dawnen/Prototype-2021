@@ -10,6 +10,8 @@ namespace Platformer.Mechanics
     public class Checkpoint
     {
         public int playerHealth;
+        public int playerAttack;
+        public int playerDefense;
         public SpawnsDict spawns = new();
         public PlayDoorSoundDict playDoorSound = new();
         public PlayerPosDict playerPos = new();
@@ -21,6 +23,8 @@ namespace Platformer.Mechanics
 
         public Checkpoint(
             int playerHealth,
+            int playerAttack,
+            int playerDefense,
             SpawnsDict Spawns,
             PlayDoorSoundDict PlayDoorSound,
             PlayerPosDict PlayerPos,
@@ -33,6 +37,8 @@ namespace Platformer.Mechanics
         {
             //this.playerHealth = Math.Min(100, playerHealth + 30);        
             this.playerHealth = playerHealth;
+            this.playerAttack = playerAttack;
+            this.playerDefense = playerDefense;
             spawns = Spawns.GetCopy();
             playDoorSound = PlayDoorSound.GetCopy();
             playerPos = PlayerPos.GetCopy();

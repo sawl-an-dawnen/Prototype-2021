@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Leave
   m_EditorClassIdentifier: 
   dialogue:
-  - Hmph, that's so lame.
+  - Then I'll give you something hehe!
   responses: []
   needCondition: 0

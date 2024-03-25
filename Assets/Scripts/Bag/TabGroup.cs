@@ -12,6 +12,13 @@ public class TabGroup : MonoBehaviour
     public List<GameObject> objectsToSwap;
     public List<GameObject> objectsToClose;
 
+    private SpellsManager spellsManager;
+
+    private void Start()
+    {
+        spellsManager = GameObject.Find("SpellsManager").GetComponent<SpellsManager>();
+    }
+
     public void Subscribe(TabButton button)
     {
         if (tabButtons == null)
@@ -52,6 +59,7 @@ public class TabGroup : MonoBehaviour
             {
                 objectsToSwap[i].SetActive(false);
                 objectsToClose[i].SetActive(false);
+                spellsManager.DeselectAllSlots();
             }
         }
     }
