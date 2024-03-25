@@ -6,7 +6,7 @@ public class ClockPuzzleTrigger : MonoBehaviour
     public GameObject activeCue;
 
     private bool playerInTriggerZone = false;
-    private bool puzzleActivated = false;
+    public bool puzzleActivated = false;
 
 
     private void Start()
@@ -16,7 +16,7 @@ public class ClockPuzzleTrigger : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("HIIIII");
+        Debug.Log("Clock puzzle.");
         activeCue.SetActive(true);
         if (other.CompareTag("Player") && !puzzleActivated)
         {
