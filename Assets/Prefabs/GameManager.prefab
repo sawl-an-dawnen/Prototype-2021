@@ -53,6 +53,8 @@ MonoBehaviour:
   inventoryManager: {fileID: 0}
   enemyToSpawn: {fileID: 0}
   playerHealth: 0
+  playerAttack: 0
+  playerDefense: 0
   coins: 0
   CanOpen: 0
   items: []
@@ -76,6 +78,8 @@ MonoBehaviour:
     m_Values: 
   Checkpoint:
     playerHealth: 0
+    playerAttack: 0
+    playerDefense: 0
     spawns:
       m_Keys: []
       m_Values: []
@@ -140,31 +144,32 @@ MonoBehaviour:
   - name: Knife Throw
     prefabButton: {fileID: 7313625124187144831, guid: e1eb69a7264a44ad8bb484cebc52a106, type: 3}
     cost: 00000000000000000100000001000000
-    description: Deal 9 damage to an enemy
+    description: Deal 9 damage to an enemy.
     strongAgainst: Eye Monster
     weaknessIsFound: 0
   - name: Fire Element
     prefabButton: {fileID: 7313625124187144831, guid: 3dbf97a75ea7e42769aeb95281e1e417, type: 3}
     cost: 00000000010000000000000000000000
-    description: FireElementDescription
+    description: Unleash a flicker of flames.
     strongAgainst: 
     weaknessIsFound: 0
   - name: Earth Element
     prefabButton: {fileID: 7313625124187144831, guid: 2755ecf8b88b0483fbebc1cd27df8f5c, type: 3}
     cost: 00000000000000000100000000000000
-    description: EarthElementDescription
+    description: Hurl a green round spell.
     strongAgainst: 
     weaknessIsFound: 0
   - name: Water Element
     prefabButton: {fileID: 7313625124187144831, guid: 47bd9a9f2f5184761afe134998d8fd8d, type: 3}
     cost: 01000000000000000000000000000000
-    description: WaterElementDescription
+    description: Summon a gentle wave.
     strongAgainst: 
     weaknessIsFound: 0
   - name: Elemental Influence
     prefabButton: {fileID: 7313625124187144831, guid: 1ae16947774c04ac29c091559fdf6645, type: 3}
     cost: 01000000010000000100000000000000
-    description: ElementalInfluenceDescription
+    description: Combine feeble fire, meager water, and brittle earth, amplifying
+      their influence
     strongAgainst: 
     weaknessIsFound: 0
 --- !u!114 &6013862213860267869

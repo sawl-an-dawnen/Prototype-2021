@@ -158,7 +158,7 @@ public class BattleSystem : MonoBehaviour
 	{
 		timerText.color = Color.white;
 		hasSubmitted = false;
-		playerTurnTimer = 11f;
+		playerTurnTimer = 8f;
 	}
 
 	public void StopPlayerTurnTimer()
@@ -190,8 +190,8 @@ public class BattleSystem : MonoBehaviour
         // Adjust the enemy health based on enemy type
         if (enemyReference.name.ToLower().Contains("skel"))
         {
-            enemyHP.healthBar.SetMaxHealth(60);
-            enemyHP.currentHealth = 60;
+            enemyHP.healthBar.SetMaxHealth(45);
+            enemyHP.currentHealth = 45;
         }
         else if (enemyReference.name.ToLower().Contains("eye"))
         {
