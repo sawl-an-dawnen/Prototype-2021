@@ -4,8 +4,8 @@ using TMPro;
 
 public class ShopManager : MonoBehaviour
 {
-	public int[,] shopItems = new int[8, 8];
-	public string[] itemNames = new string[8];
+	public int[,] shopItems = new int[10, 10];
+	public string[] itemNames = new string[10];
 	public float coins;
 	public TextMeshProUGUI ConisTXT;
 	public Confirmation confirmationWindow;
@@ -31,6 +31,8 @@ public class ShopManager : MonoBehaviour
 		shopItems[1, 5] = 5;
 		shopItems[1, 6] = 6;
 		shopItems[1, 7] = 7;
+		shopItems[1, 8] = 8;
+		shopItems[1, 9] = 9;
 
 		//Price
 		shopItems[2, 1] = 10;
@@ -40,6 +42,8 @@ public class ShopManager : MonoBehaviour
 		shopItems[2, 5] = 0;
 		shopItems[2, 6] = 0;
 		shopItems[2, 7] = 0;
+		shopItems[2, 8] = 50;
+		shopItems[2, 9] = 60;
 
 		//Names
 		itemNames[1] = "Knife Throw";
@@ -49,6 +53,8 @@ public class ShopManager : MonoBehaviour
 		itemNames[5] = "Water Element";
 		itemNames[6] = "Earth Element";
 		itemNames[7] = "Elemental Influence";
+		itemNames[8] = "Slam";
+		itemNames[9] = "Fireball";
 		InitializeShop();
 	}
 
