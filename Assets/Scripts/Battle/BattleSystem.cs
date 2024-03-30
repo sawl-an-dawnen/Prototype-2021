@@ -332,7 +332,7 @@ public class BattleSystem : MonoBehaviour
             }
             else
             {
-                battleDialog.text = "The enemy takes " + action.action.ToString();
+                battleDialog.text = "The enemy takes " + action.action.name;
                 var gameObj = action.actionFunc(true);
                 yield return new WaitForSeconds(action.waitTime);
                 yield return SpellEffectByEnemy(action);
