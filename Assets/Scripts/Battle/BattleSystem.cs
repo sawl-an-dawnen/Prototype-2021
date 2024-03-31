@@ -33,6 +33,7 @@ public class CombatOptions
     public static CombatOptions EarthElement { get; } = new CombatOptions("EarthElement", 3);
     public static CombatOptions WaterElement { get; } = new CombatOptions("WaterElement", 3);
     public static CombatOptions ElementalInfluence { get; } = new CombatOptions("ElementalInfluence", 0);
+    public static CombatOptions Hydrosphere { get; } = new CombatOptions("Hydrosphere", 4);
 }
 
 
@@ -112,7 +113,7 @@ public class BattleSystem : MonoBehaviour
 	private int earthCount;
 	private int waterCount;
 	private int EleInfluenceDamange;
-	private TurnbasedDialogHandler turnbasedDialogHandler;
+    private TurnbasedDialogHandler turnbasedDialogHandler;
 
     public void StartCombatRound()
 	{
@@ -120,7 +121,7 @@ public class BattleSystem : MonoBehaviour
 		earthCount = 0;
 		waterCount = 0;
 		EleInfluenceDamange = 0;
-	}
+    }
 
 	private float playerTurnTimer = 11f;
 	private bool isTimerStarted = false;
@@ -255,6 +256,7 @@ public class BattleSystem : MonoBehaviour
                 "Earth Element" => OnEarthEleButton,
                 "Water Element" => OnWaterEleButton,
                 "Elemental Influence" => OnElementalButton,
+                "Hydrosphere" => OnHydrosphereButton,
                 _             => null
             };
             
@@ -842,6 +844,27 @@ public class BattleSystem : MonoBehaviour
 		}
         return null;
 	}
+    GameObject sendHydrophere(bool isFromPlayer = true)
+    {
+        if (fireCount > 0)
+        {
+            animator.Play("PlayerThrowFireEle");
+        }
+        if (waterCount > 0)
+        {
+            animator.Play("PlayerThrowWaterEle");
+        }
+        if (earthCount > 0)
+        {
+            animator.Play("PlayerThrowEarthEle");
+        }
+        EleInfluenceDamange = (fireCount + earthCount + waterCount) * 10;
+        if (fireCount > 0 && earthCount > 0 && waterCount > 0)
+        {
+            EleInfluenceDamange += 10;
+        }
+        return null;
+    }
 
     private void UpdateDifficulty()
     {
@@ -951,6 +974,13 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.PLAYER_TURN)
         {
             turnActions.Add(new(CombatOptions.ElementalInfluence, 0, sendElemental));
+        }
+    }
+    public void OnHydrosphereButton()
+    {
+        if (state == BattleState.PLAYER_TURN)
+        {
+            turnActions.Add(new(CombatOptions.Hydrosphere, 0, sendHydrophere));
         }
     }
 
