@@ -17,26 +17,36 @@ public class CombatOptions
 {
     public string name;
     public int damage;
+	public SpellType Type;
 
-    public CombatOptions(string name, int damage)
+	public CombatOptions(string name, int damage, SpellType type)
     {
         this.name = name;
         this.damage = damage;
-    }
-    public static CombatOptions Stun { get; } = new CombatOptions("Stun", 5);
-    public static CombatOptions Heal { get; } = new CombatOptions("Heal", 15);
-    public static CombatOptions Knife { get; } = new CombatOptions("Knife", 10);
-    public static CombatOptions Slam { get; } = new CombatOptions("Slam", 12);
-    public static CombatOptions Electrocute { get; } = new CombatOptions("Electrocute", 12);
-    public static CombatOptions Fireball { get; } = new CombatOptions("Fireball", 12);
-    public static CombatOptions FireElement { get; } = new CombatOptions("FireElement", 3);
-    public static CombatOptions EarthElement { get; } = new CombatOptions("EarthElement", 3);
-    public static CombatOptions WaterElement { get; } = new CombatOptions("WaterElement", 3);
-    public static CombatOptions ElementalInfluence { get; } = new CombatOptions("ElementalInfluence", 0);
-    public static CombatOptions Hydrosphere { get; } = new CombatOptions("Hydrosphere", 4);
+		this.Type = type;
+	}
+    public static CombatOptions Stun { get; } = new CombatOptions("Stun", 5, SpellType.Normal);
+    public static CombatOptions Heal { get; } = new CombatOptions("Heal", 15, SpellType.Normal);
+    public static CombatOptions Knife { get; } = new CombatOptions("Knife", 10, SpellType.Normal);
+    public static CombatOptions Slam { get; } = new CombatOptions("Slam", 12, SpellType.Normal);
+    public static CombatOptions Electrocute { get; } = new CombatOptions("Electrocute", 12, SpellType.Normal);
+    public static CombatOptions Fireball { get; } = new CombatOptions("Fireball", 12, SpellType.Fire);
+    public static CombatOptions FireElement { get; } = new CombatOptions("FireElement", 3, SpellType.Fire);
+    public static CombatOptions EarthElement { get; } = new CombatOptions("EarthElement", 3, SpellType.Earth);
+    public static CombatOptions WaterElement { get; } = new CombatOptions("WaterElement", 3, SpellType.Water);
+    public static CombatOptions ElementalInfluence { get; } = new CombatOptions("ElementalInfluence", 0, SpellType.Special);
+    public static CombatOptions Hydrosphere { get; } = new CombatOptions("Hydrosphere", 4, SpellType.Water);
 }
 
-
+public enum SpellType
+{
+	Normal,
+	Special,
+	Fire,
+	Earth,
+	Water,
+	Wind
+}
 public class TurnActions
 {
     public CombatOptions action;
