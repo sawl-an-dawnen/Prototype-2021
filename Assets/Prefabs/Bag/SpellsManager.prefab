@@ -624,6 +624,7 @@ MonoBehaviour:
   slotImage: {fileID: 4032182418229415909}
   slotName: {fileID: 3401514719865668923}
   equipType: 3
+  slotInUse: 0
   slotShader: {fileID: 5799506564055789152}
   equipSelected: 0
   emptySprite: {fileID: 21300000, guid: 5ac7fff075a6f7c4e82246820603cd78, type: 3}
@@ -3194,6 +3195,7 @@ MonoBehaviour:
   slotImage: {fileID: 3601298049682170508}
   slotName: {fileID: 345581922233301085}
   equipType: 7
+  slotInUse: 0
   slotShader: {fileID: 9211296936694831389}
   equipSelected: 0
   emptySprite: {fileID: 21300000, guid: 5ac7fff075a6f7c4e82246820603cd78, type: 3}
@@ -4628,6 +4630,7 @@ MonoBehaviour:
   slotImage: {fileID: 1011089224238302984}
   slotName: {fileID: 1156606139580335909}
   equipType: 4
+  slotInUse: 0
   slotShader: {fileID: 3069834788671714902}
   equipSelected: 0
   emptySprite: {fileID: 21300000, guid: 5ac7fff075a6f7c4e82246820603cd78, type: 3}
@@ -5820,6 +5823,7 @@ MonoBehaviour:
   slotImage: {fileID: 2465875739090789068}
   slotName: {fileID: 5295193950788780049}
   equipType: 2
+  slotInUse: 0
   slotShader: {fileID: 7717688581726371780}
   equipSelected: 0
   emptySprite: {fileID: 21300000, guid: 5ac7fff075a6f7c4e82246820603cd78, type: 3}
@@ -6023,6 +6027,7 @@ MonoBehaviour:
   slotImage: {fileID: 457397866604285269}
   slotName: {fileID: 5529018945429155358}
   equipType: 1
+  slotInUse: 0
   slotShader: {fileID: 9041971668645257632}
   equipSelected: 0
   emptySprite: {fileID: 21300000, guid: 5ac7fff075a6f7c4e82246820603cd78, type: 3}
@@ -7146,6 +7151,7 @@ MonoBehaviour:
   slotImage: {fileID: 3511759011378095643}
   slotName: {fileID: 620105936585641669}
   equipType: 5
+  slotInUse: 0
   slotShader: {fileID: 3097404389721611088}
   equipSelected: 0
   emptySprite: {fileID: 21300000, guid: 5ac7fff075a6f7c4e82246820603cd78, type: 3}
@@ -7578,6 +7584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3562ab3e18f61545b5b6068aba06421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bag: {fileID: 7569023991679581259}
   panel: {fileID: 8729931729956901177}
   spellsPanel: {fileID: 8241169254869208038}
   spellDetailsPanel: {fileID: 2785467015088301000}
@@ -10570,6 +10577,7 @@ MonoBehaviour:
   slotImage: {fileID: 2050179758278154614}
   slotName: {fileID: 2557536101879228164}
   equipType: 0
+  slotInUse: 0
   slotShader: {fileID: 3690174020933019196}
   equipSelected: 0
   emptySprite: {fileID: 21300000, guid: 5ac7fff075a6f7c4e82246820603cd78, type: 3}
@@ -10668,6 +10676,7 @@ MonoBehaviour:
   slotImage: {fileID: 6117812530581589748}
   slotName: {fileID: 8020604452576487799}
   equipType: 6
+  slotInUse: 0
   slotShader: {fileID: 1539800182116036346}
   equipSelected: 0
   emptySprite: {fileID: 21300000, guid: 5ac7fff075a6f7c4e82246820603cd78, type: 3}

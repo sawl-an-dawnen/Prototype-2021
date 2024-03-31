@@ -19,7 +19,7 @@ public class PlayerStatus : MonoBehaviour
     private GameObject selectedItemImage;
 
     // Start is called before the first frame update
-    void Start()
+    void Update()
     {
         UpdateEquipmentStatus();
     }

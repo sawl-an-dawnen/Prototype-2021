@@ -9,22 +9,22 @@ public class EquippedSlot : MonoBehaviour, IPointerClickHandler
 {
     // Slot Appearance
     [SerializeField]
-    private Image slotImage;
+    public Image slotImage;
 
     [SerializeField]
-    private TMP_Text slotName;
+    public TMP_Text slotName;
 
     // Slot Data
     //[SerializeField]
     public EquipmentType equipType = new EquipmentType();
 
-    private InventoryItem equipment;
+    public InventoryItem equipment;
     private Sprite equipSprite;
     private string equipName;
     private string equipDescription;
 
     // Other Variable
-    private bool slotInUse;
+    public bool slotInUse;
     [SerializeField]
     public GameObject slotShader;
 
@@ -32,7 +32,7 @@ public class EquippedSlot : MonoBehaviour, IPointerClickHandler
     public bool equipSelected;
 
     [SerializeField]
-    private Sprite emptySprite;
+    public Sprite emptySprite;
 
     private SpellsManager spellsManager;
 
