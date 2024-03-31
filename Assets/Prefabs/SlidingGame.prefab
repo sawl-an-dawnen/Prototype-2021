@@ -110,7 +110,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.6, y: 1.6}
   m_EdgeRadius: 0
 --- !u!114 &7056357557804048868
 MonoBehaviour:
@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
+  empty: {fileID: 0}
 --- !u!1 &7056357557831659639
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +351,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.6, y: 1.6}
   m_EdgeRadius: 0
 --- !u!114 &7056357557919531727
 MonoBehaviour:
@@ -365,6 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
+  empty: {fileID: 0}
 --- !u!1 &7056357557954826409
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +477,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.6, y: 1.6}
   m_EdgeRadius: 0
 --- !u!114 &7056357557954826413
 MonoBehaviour:
@@ -490,6 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
+  empty: {fileID: 0}
 --- !u!1 &7056357557973799793
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +603,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.6, y: 1.6}
   m_EdgeRadius: 0
 --- !u!114 &7056357557973799797
 MonoBehaviour:
@@ -615,6 +618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
+  empty: {fileID: 0}
 --- !u!1 &7056357558083639625
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,7 +890,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.6, y: 1.6}
   m_EdgeRadius: 0
 --- !u!114 &7056357558348310803
 MonoBehaviour:
@@ -901,6 +905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
+  empty: {fileID: 0}
 --- !u!1 &7056357558441445779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,7 +1153,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.6, y: 1.6}
   m_EdgeRadius: 0
 --- !u!114 &7056357558824273384
 MonoBehaviour:
@@ -1163,6 +1168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
+  empty: {fileID: 0}
 --- !u!1 &7056357559038968618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,7 +1279,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.6, y: 1.6}
   m_EdgeRadius: 0
 --- !u!114 &7056357559038968622
 MonoBehaviour:
@@ -1288,6 +1294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
+  empty: {fileID: 0}
 --- !u!1 &7056357559363499993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,7 +1405,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.6, y: 1.6}
   m_EdgeRadius: 0
 --- !u!114 &7056357559363499997
 MonoBehaviour:
@@ -1413,6 +1420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
+  empty: {fileID: 0}
 --- !u!1 &7056357559797618225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1524,3 +1532,4 @@ MonoBehaviour:
   Tile6: {fileID: 7056357558348310812}
   Tile7: {fileID: 7056357557973799798}
   Tile8: {fileID: 7056357559038968623}
+  puzzleComplete: {fileID: 0}
