@@ -7,13 +7,19 @@ public class PopUpManager : MonoBehaviour
     public GameObject popUpPrefab;
     public GameObject canvasObject;
     public float speed = 1f;
+    private AudioSource audioSource;
 
+    public void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     public void CreatePopUp(string desc, Sprite icon)
     {
         GameObject createdPopUpObject = Instantiate(popUpPrefab, canvasObject.transform);
         createdPopUpObject.GetComponent<PopUp>().SetUpPopUp(desc, icon);
         RectTransform PopupPosition = createdPopUpObject.GetComponent<RectTransform>();
         StartCoroutine(AnimatePopup(createdPopUpObject, PopupPosition));
+        audioSource.Play();
     }
 
     public IEnumerator AnimatePopup(GameObject createdPopUpObject, RectTransform PopupPosition)
