@@ -10284,7 +10284,8 @@ MonoBehaviour:
   visualCue: {fileID: 1693037246}
   diaSound: {fileID: 0}
   savedDiagIdx: -1
-  finalDiags: []
+  finalDiags:
+  - {fileID: 11400000, guid: 25f25b7020c315f4ebf5461d347d93db, type: 2}
 --- !u!65 &950299351
 BoxCollider:
   m_ObjectHideFlags: 0
