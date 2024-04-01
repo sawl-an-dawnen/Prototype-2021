@@ -845,14 +845,17 @@ public class BattleSystem : MonoBehaviour
         if (fireCount > 0)
         {
 			animator.Play("PlayerThrowFireEle");
+            fireElementSound.Play();
 		}
 		if (waterCount > 0)
 		{
 			animator.Play("PlayerThrowWaterEle");
+            waterElementSound.Play();
 		}
 		if (earthCount > 0)
 		{
 			animator.Play("PlayerThrowEarthEle");
+            earthElementSound.Play();
 		}
 		EleInfluenceDamange = (fireCount + earthCount + waterCount) * 10;
         if (fireCount > 0 && earthCount > 0 && waterCount > 0)
@@ -866,14 +869,17 @@ public class BattleSystem : MonoBehaviour
         if (fireCount > 0)
         {
             animator.Play("PlayerThrowFireEle");
+            fireElementSound.Play();
         }
         if (waterCount > 0)
         {
             animator.Play("PlayerThrowWaterEle");
+            waterElementSound.Play();
         }
         if (earthCount > 0)
         {
             animator.Play("PlayerThrowEarthEle");
+            earthElementSound.Play();
         }
         EleInfluenceDamange = (fireCount + earthCount + waterCount) * 10;
         if (fireCount > 0 && earthCount > 0 && waterCount > 0)
