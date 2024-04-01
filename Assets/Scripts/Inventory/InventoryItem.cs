@@ -46,7 +46,7 @@ public class InventoryItem : ScriptableObject
         PlayerStatus playerStatus = GameObject.Find("StatPanel").GetComponent<PlayerStatus>();
         GameManager.Instance.SetPlayerAttack(GameManager.Instance.GetPlayerAttack() + equipAttack);
         GameManager.Instance.SetPlayerDefense(GameManager.Instance.GetPlayerDefense() + equipDefense);
-
+        GameManager.Instance.SaveCheckpoint();
         playerStatus.UpdateEquipmentStatus();
     }
 
@@ -56,7 +56,7 @@ public class InventoryItem : ScriptableObject
         PlayerStatus playerStatus = GameObject.Find("StatPanel").GetComponent<PlayerStatus>();
         GameManager.Instance.SetPlayerAttack(GameManager.Instance.GetPlayerAttack() - equipAttack);
         GameManager.Instance.SetPlayerDefense(GameManager.Instance.GetPlayerDefense() - equipDefense);
-
+        GameManager.Instance.SaveCheckpoint();
         playerStatus.UpdateEquipmentStatus();
     }
 }
