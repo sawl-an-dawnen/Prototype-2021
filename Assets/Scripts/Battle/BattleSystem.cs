@@ -686,6 +686,14 @@ public class BattleSystem : MonoBehaviour
         ghostAnimator.SetBool("isDamaged", false);
     }
 
+    private IEnumerator enemyDamagedFire()
+    {
+        yield return new WaitForSeconds(0.1f);
+        enemyAnimator.SetBool("isDamaged", true); // enemy damaged anim
+        yield return wait2sec;
+        enemyAnimator.SetBool("isDamaged", false);
+    }
+
     GameObject sendFireball(bool isFromPlayer = true)
     {
         if (isFromPlayer)
@@ -693,6 +701,7 @@ public class BattleSystem : MonoBehaviour
             GameObject fire = GameObject.Instantiate(fireboltAsset);
             fire.transform.position = player.transform.position + new Vector3(1, .5f, 1);
             fire.transform.rotation = new Quaternion(0, 0.70711f, 0, 0.70711f);
+            StartCoroutine(enemyDamagedFire());
         }
         else
         {
@@ -709,15 +718,15 @@ public class BattleSystem : MonoBehaviour
     {
         enemyAnimator.SetBool(anim, true);
         
-        if (enemyReference.name.ToLower().Contains("eye"))
+        if (enemyReference.name.ToLower().Contains("eye")) // eye slam
         {
             yield return new WaitForSeconds(1.9f);
             ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
-            slamSound.Play();
+            slamSound.PlayDelayed(0.5f);
             yield return new WaitForSeconds(1.5f);
             ghostAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("horse"))
+        else if (enemyReference.name.ToLower().Contains("horse")) // horse slam
         {
             yield return new WaitForSeconds(2f);
             ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
@@ -726,10 +735,10 @@ public class BattleSystem : MonoBehaviour
             ghostAnimator.SetBool("isDamaged", false);
         }
         else
-        {
-            yield return new WaitForSeconds(1.5f);
-            animator.Play("PlayerSlammed");
-            slamSound.PlayDelayed(0.4f);
+        { //skel slam
+            yield return new WaitForSeconds(1.7f);
+            animator.Play("PlayerSlammed"); //ghost damaged anim
+            slamSound.PlayDelayed(0.7f);
             yield return new WaitForSeconds(3.6f);
         }
         enemyAnimator.SetBool(anim, false);
@@ -739,7 +748,25 @@ public class BattleSystem : MonoBehaviour
     {
         ghostAnimator.SetBool(anim, true);
         slamSound.PlayDelayed(1f);
-        yield return wait2sec;
+        if (enemyReference.name.ToLower().Contains("eye"))
+        {
+            // check timing later <<<
+            enemyAnimator.SetBool("isDamaged", true); //eye damaged anim
+            yield return wait2sec;
+            enemyAnimator.SetBool("isDamaged", false);
+        }
+        else if (enemyReference.name.ToLower().Contains("skel"))
+        {
+            // check timing later <<<
+            enemyAnimator.SetBool("isDamaged", true); //skel damaged anim
+            yield return wait2sec;
+            enemyAnimator.SetBool("isDamaged", false);
+        }
+        // add horse
+        else
+        {
+            yield return wait2sec;
+        }
         ghostAnimator.SetBool(anim, false);
     }
 
@@ -771,6 +798,13 @@ public class BattleSystem : MonoBehaviour
         ghostAnimator.SetBool("isDamaged", false);
     }
 
+    private IEnumerator enemyhurtLightning()
+    {
+        enemyAnimator.SetBool("isDamaged", true); // enemy damaged anim
+        yield return wait2sec;
+        enemyAnimator.SetBool("isDamaged", false);
+    }
+
     GameObject sendLightning(bool isFromPlayer = true)
     {
         var lightningObj = GameObject.Instantiate(lightningAsset);
@@ -782,7 +816,11 @@ public class BattleSystem : MonoBehaviour
 
         if (!isFromPlayer)
         {
-            StartCoroutine(damagedLightning());
+            StartCoroutine(damagedLightning()); 
+        }
+        else
+        {
+            StartCoroutine(enemyhurtLightning());
         }
 
         return lightningObj;
@@ -794,10 +832,10 @@ public class BattleSystem : MonoBehaviour
         if (!playerDodged)
         {
             enemyAnimator.SetBool(anim, true);
-            knifeSound.PlayDelayed(1f);
+            knifeSound.PlayDelayed(1.1f);
             yield return new WaitForSeconds(1.5f);
             ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.8f);
             ghostAnimator.SetBool("isDamaged", false);
         }
         else
@@ -836,21 +874,49 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    private IEnumerator enemydamagedThrow()
+    {
+        if (enemyReference.name.ToLower().Contains("eye"))
+        {
+            // check timing later <<<
+            yield return new WaitForSeconds(0.2f);
+            enemyAnimator.SetBool("isDamaged", true); //eye damaged anim
+            yield return wait2sec;
+            enemyAnimator.SetBool("isDamaged", false);
+        }
+        else if (enemyReference.name.ToLower().Contains("skel"))
+        {
+            // check timing later <<<
+            yield return new WaitForSeconds(0.2f);
+            enemyAnimator.SetBool("isDamaged", true); //skel damaged anim
+            yield return wait1sec;
+            enemyAnimator.SetBool("isDamaged", false);
+        }
+        else
+        {
+            // check timing later <<<
+            yield return new WaitForSeconds(0.2f);
+            enemyAnimator.SetBool("isDamaged", true); //horse damaged anim
+            yield return wait2sec;
+            enemyAnimator.SetBool("isDamaged", false);
+        }
+    }
+
     GameObject sendKnife(bool isFromPlayer = true)
     {
         if (isFromPlayer)
         {
             animator.Play("PlayerThrowKnife");
             knifeSound.PlayDelayed(0.05f);
+            StartCoroutine(enemydamagedThrow());
         }
         else
         {
             if (enemyReference.name.ToLower().Contains("skel")) // sword throw skeleton
             {
-                knifeSound.PlayDelayed(1);
                 StartCoroutine(animateThrow("isThrow"));
             }
-            else if (enemyReference.name.ToLower().Contains("horse"))
+            else if (enemyReference.name.ToLower().Contains("horse")) // katana throw
             {
                 StartCoroutine(bossThrow("isThrow"));
             }
@@ -879,6 +945,14 @@ public class BattleSystem : MonoBehaviour
         return null;
     }
 
+    private IEnumerator enemyStunned()
+    {
+        //check timing later <<<
+        enemyAnimator.SetBool("isDamaged", true); //enemy damaged anim
+        yield return wait2sec;
+        enemyAnimator.SetBool("isDamaged", false);
+    }
+
     // STUN ANIM
     GameObject sendStun(bool isFromPlayer = true)
     {
@@ -886,6 +960,8 @@ public class BattleSystem : MonoBehaviour
 
         animator.Play("PlayerStun");
         stunSound.PlayDelayed(0.2f);
+        StartCoroutine(enemyStunned());
+        
         try
         {
             stunObj = Instantiate(enemyStunAsset, gameObject.transform);
@@ -901,6 +977,7 @@ public class BattleSystem : MonoBehaviour
     {
 		animator.Play("PlayerThrowFireEle");
         fireElementSound.Play();
+        StartCoroutine(enemydamagedThrow()); //check timing
 		if (fireCount == 0)
 		    fireCount++;
 		return null;
@@ -910,6 +987,7 @@ public class BattleSystem : MonoBehaviour
     {
 		animator.Play("PlayerThrowEarthEle");
         earthElementSound.Play();
+        StartCoroutine(enemydamagedThrow()); //check timing
         if (earthCount == 0)
 		    earthCount++;
 		return null;
@@ -918,7 +996,8 @@ public class BattleSystem : MonoBehaviour
     GameObject sendWaterEle(bool isFromPlayer = true)
     {
 		animator.Play("PlayerThrowWaterEle");
-        waterElementSound.Play();
+        waterElementSound.Play(); 
+        StartCoroutine(enemydamagedThrow()); //check timing
         if (waterCount == 0)
 		    waterCount++;
 		return null;
@@ -946,6 +1025,7 @@ public class BattleSystem : MonoBehaviour
 		{
 			EleInfluenceDamange += 10;
 		}
+        StartCoroutine(enemydamagedThrow()); //check timing
         return null;
 	}
     GameObject sendHydrophere(bool isFromPlayer = true)
@@ -970,6 +1050,7 @@ public class BattleSystem : MonoBehaviour
         {
             EleInfluenceDamange += 10;
         }
+        StartCoroutine(enemydamagedThrow()); //check timing
         return null;
     }
 
