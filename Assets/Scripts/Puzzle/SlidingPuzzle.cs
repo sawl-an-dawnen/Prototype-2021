@@ -28,6 +28,8 @@ public class SlidingPuzzle : MonoBehaviour
     private bool exiting = false;
     float winCheck;
     public GameObject panel;
+    public InventoryItem rewardItem;
+
     void Start()
     {
         T1.Set(820, 870, -1);
@@ -95,6 +97,7 @@ public class SlidingPuzzle : MonoBehaviour
             Debug.Log("Win");
             winUI.SetActive(true);  
             Won = true;
+            GameObject.Find("InventoryManager").GetComponent<InventoryManager>().AddItem(rewardItem);
         }
     }
 
