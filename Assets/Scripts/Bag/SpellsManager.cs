@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class SpellsManager : MonoBehaviour
 {
+	public GameObject bag;
 	public GameObject panel;
 	public GameObject spellsPanel;
 	public GameObject spellDetailsPanel;
@@ -22,6 +24,20 @@ public class SpellsManager : MonoBehaviour
 
 	private ItemMapper itemMapper; // Reference to the ItemMapper script
 
+	private static SpellsManager instance;
+	void Awake()
+	{
+		if (instance == null)
+		{
+			instance = this;
+			DontDestroyOnLoad(gameObject);
+		}
+		else
+		{
+			Destroy(gameObject);
+		}
+	}
+
 	void Start()
 	{
 		panel.SetActive(false);
@@ -34,17 +50,28 @@ public class SpellsManager : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.I))
-		{
-			if (GameIsPaused)
+		string currentSceneName = SceneManager.GetActiveScene().name;
+		if (currentSceneName == "MainMenu")
+        {
+			bag.SetActive(false);
+        }
+        else
+        {
+			bag.SetActive(true);
+			if (Input.GetKeyDown(KeyCode.I))
 			{
-				Resume();
-				ClearPanel();
-			}
-			else
-			{
-				Pause();
-				PopulatePanel();
+				if (GameIsPaused)
+				{
+					Resume();
+					ClearPanel();
+				}
+				else
+				{
+					//PlayerStatus playerStatus = GameObject.Find("SpellsManager").GetComponent<PlayerStatus>();
+					Pause();
+					//playerStatus.UpdateEquipmentStatus();
+					PopulatePanel();
+				}
 			}
 		}
 	}
@@ -105,28 +132,35 @@ public class SpellsManager : MonoBehaviour
 				inventoryButtons.Add(inventoryButton);
 				inventoryButton.onClick.AddListener(() => ShowItemsDetailsPanel(inventory));
 			}
-			// Equipment:
-            else if (inventory.equipped)
-			{
-				foreach (EquippedSlot slot in equippedSlot)
-				{
-					if (slot.equipType == inventory.equipType)
+		}
+	}
+
+	public void ContinuePanel()
+	{
+		GameManager gameManager = GameManager.Instance;
+		List<string> items = gameManager.GetItmes();
+		foreach (var item in items)
+		{
+			InventoryItem inventory = itemMapper.GetInventory(item);
+			if (inventory.isEquip)
+            {
+				if (inventory.equipped)
+                {
+					for (int i = 0; i < equippedSlot.Length; i++)
 					{
-						// Call EquipGear function on the found slot
-						slot.EquipGear(inventory);
-						break; // Once equipped, break the loop
+						equippedSlot[i].slotImage.sprite = inventory.itemIcon;
+						equippedSlot[i].slotInUse = true;
+						equippedSlot[i].slotName.enabled = false;
 					}
 				}
-			}
-			else
-			{
-				if (inventory.equipType == EquipmentType.Unknown)
-				{
-					Debug.LogError("Error: Failed to retrieve equip details for: " + item);
-					continue;
+                else
+                {
+					for (int i = 0; i < equipSlot.Length; i++)
+					{
+						equipSlot[i].equipImage.sprite = inventory.itemIcon;
+						equipSlot[i].isFull = true;
+					}
 				}
-
-				AddEquipment(inventory);
 			}
 		}
 	}
@@ -147,11 +181,24 @@ public class SpellsManager : MonoBehaviour
 		}
 
 		inventoryButtons.Clear();
+	}
 
+	public void ClearEquip()
+    {
 		for (int i = 0; i < equipSlot.Length; i++)
         {
-			equipSlot[i].equipImage.sprite = equipSlot[i].emptySprite;
-			equipSlot[i].isFull = false;
+            equipSlot[i].equipImage.sprite = equipSlot[i].emptySprite;
+            equipSlot[i].isFull = false;
+        }
+		for (int i = 0; i < equippedSlot.Length; i++)
+		{
+			if (equippedSlot[i].slotInUse)
+            {
+				equippedSlot[i].equipment.equipped = false;
+			}
+			equippedSlot[i].slotImage.sprite = equippedSlot[i].emptySprite;
+			equippedSlot[i].slotInUse = false;
+			equippedSlot[i].slotName.enabled = true;
 		}
 	}
 
@@ -195,6 +242,8 @@ public class SpellsManager : MonoBehaviour
             }
         }
     }
+
+
 
 	public void DeselectAllSlots()
     {

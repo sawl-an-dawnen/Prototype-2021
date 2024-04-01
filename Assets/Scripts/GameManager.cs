@@ -245,6 +245,8 @@ public class GameManager : MonoBehaviour
 		sceneChange.Invoke();
 		CanOpen = Checkpoint.CanOpen;
 		items = Checkpoint.items;
+		//SpellsManager spellsManager = GameObject.Find("SpellsManager").GetComponent<SpellsManager>();
+		//spellsManager.ContinuePanel();
 	}
 
 	public void NewGame()
@@ -252,6 +254,9 @@ public class GameManager : MonoBehaviour
 		const string scene = "IntroStory";
 		items.Clear();
 		Checkpoint = new(100, 5, 3, new(), new(), new(), CreateDefaultAvailableSpells(), scene, 0, false, new());
+		SpellsManager spellsManager = GameObject.Find("SpellsManager").GetComponent<SpellsManager>();
+		spellsManager.ClearEquip();
+
 		LoadCheckpoint();
 	}
 

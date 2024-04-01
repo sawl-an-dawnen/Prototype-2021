@@ -33,7 +33,12 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(InventoryItem item)
     {
+        SpellsManager spellsManager = GameObject.Find("SpellsManager").GetComponent<SpellsManager>();
         gameManager.AddItem(item);
+        if (item.isEquip)
+        {
+            spellsManager.AddEquipment(item);
+        }
         pm.CreatePopUp("You Found "+item.itemName+", press 'I' to check your inventory",item.itemIcon);
     }
 
