@@ -14,6 +14,9 @@ public class counterPuzzle : MonoBehaviour
     public TextMeshProUGUI numberText4;
     public TextMeshProUGUI successText;
     public Image successImage;
+    public AudioClip counterTick;
+    //public AudioClip counterPuzzleComplete;
+
     int counter1;
     int counter2;
     int counter3;
@@ -23,6 +26,8 @@ public class counterPuzzle : MonoBehaviour
 
     public string spellToGet;
     private Sprite img;
+    private AudioSource audioSource;
+    
 
     private PopUpManager pm;
 
@@ -43,6 +48,7 @@ public class counterPuzzle : MonoBehaviour
 
         if (counter1 < 10)
         {
+            audioSource.PlayOneShot(counterTick);
             counter1++;
             numberText1.text = counter1.ToString();
         }
@@ -52,6 +58,7 @@ public class counterPuzzle : MonoBehaviour
     {
         if (counter1 > 0)
         {
+            audioSource.PlayOneShot(counterTick);
             counter1--;
             numberText1.text = counter1.ToString();
         }
@@ -60,6 +67,7 @@ public class counterPuzzle : MonoBehaviour
     {
         if (counter2 < 10)
         {
+            audioSource.PlayOneShot(counterTick);
             counter2++;
             numberText2.text = counter2.ToString();
         }
@@ -69,6 +77,7 @@ public class counterPuzzle : MonoBehaviour
     {
         if (counter2 > 0)
         {
+            audioSource.PlayOneShot(counterTick);
             counter2--;
             numberText2.text = counter2.ToString();
         }
@@ -77,6 +86,7 @@ public class counterPuzzle : MonoBehaviour
     {
         if (counter3 < 10)
         {
+            audioSource.PlayOneShot(counterTick);
             counter3++;
             numberText3.text = counter3.ToString();
         }
@@ -86,6 +96,7 @@ public class counterPuzzle : MonoBehaviour
     {
         if (counter3 > 0)
         {
+            audioSource.PlayOneShot(counterTick);
             counter3--;
             numberText3.text = counter3.ToString();
         }
@@ -94,6 +105,7 @@ public class counterPuzzle : MonoBehaviour
     {
         if (counter4 < 10)
         {
+            audioSource.PlayOneShot(counterTick);
             counter4++;
             numberText4.text = counter4.ToString();
         }
@@ -103,6 +115,7 @@ public class counterPuzzle : MonoBehaviour
     {
         if (counter4 > 0)
         {
+            audioSource.PlayOneShot(counterTick);
             counter4--;
             numberText4.text = counter4.ToString();
         }
@@ -110,6 +123,7 @@ public class counterPuzzle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
 		successText.gameObject.SetActive(false);
         successImage.gameObject.SetActive(false);
         pm = GameObject.FindGameObjectWithTag("PopMan").GetComponent<PopUpManager>();
@@ -127,6 +141,7 @@ public class counterPuzzle : MonoBehaviour
             puzzleSolved = true;
             successText.gameObject.SetActive(true);
 			successImage.gameObject.SetActive(true);
+            audioSource.Play();
 
             GameManager.Instance.AvailableSpells[spellToGet] = true;
             foreach (GameManager.Spell spell in GameManager.Instance.spells)
