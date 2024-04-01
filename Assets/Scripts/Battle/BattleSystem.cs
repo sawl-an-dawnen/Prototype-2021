@@ -344,7 +344,7 @@ public class BattleSystem : MonoBehaviour
             }
             else
             {
-                battleDialog.text = "The enemy takes " + action.action.name;
+                battleDialog.text = "The enemy takes " + action.action.name + "!";
                 var gameObj = action.actionFunc(true);
                 yield return new WaitForSeconds(action.waitTime);
                 yield return SpellEffectByEnemy(action);
@@ -523,7 +523,7 @@ public class BattleSystem : MonoBehaviour
         int randomInt = getRandomAbilityBasedOnEnemyType();
         CombatOptions enemyAction = CombatOptions.Knife;
         battleDialog.color = Color.white;
-        string dialogText = "The enemy <harm> you";
+        string dialogText = "The enemy <harm> you!";
 
         if (playerDodged)
         {
@@ -538,41 +538,42 @@ public class BattleSystem : MonoBehaviour
                 sendKnife(false);
                 if (enemyReference.name.ToLower().Contains("skel"))
                 {
-                    battleDialog.text = dialogText.Replace("<harm>", "threw a swinging sword at");
-                    knifeSound.PlayDelayed(1);
+                    battleDialog.text = playerDodged ? "You dodged the swinging sword!" : dialogText.Replace("<harm>", "threw a swinging sword at");
+                    
                 }
                 else if (enemyReference.name.ToLower().Contains("horse"))
                 {
-                    battleDialog.text = dialogText.Replace("<harm>", "threw deadly katanas at");
-                    yield return wait1sec;
+                    battleDialog.text = playerDodged ? "You dodged the deadly katanas!" : dialogText.Replace("<harm>", "threw deadly katanas at");
                 }
                 else
                 {
-                    battleDialog.text = dialogText.Replace("<harm>", "threw a knife at");
-                    knifeSound.PlayDelayed(2);
+                    battleDialog.text = playerDodged ? "You dodged the throwing knife!" : dialogText.Replace("<harm>", "threw a knife at");
+                    
                 }
                 yield return wait1sec;
                 break;
+
             case < 50:
                 enemyAction = CombatOptions.Slam;
-                battleDialog.text = playerDodged ? "You dodged enemy's slam!" : dialogText.Replace("<harm>", "slammed into");
+                battleDialog.text = playerDodged ? "You dodged the enemy's slam!" : dialogText.Replace("<harm>", "slammed");
 
                 if (!playerDodged) { 
                     sendSlam(false);
-                    slamSound.PlayDelayed(2.7f);
-                }
                     yield return wait3sec; // important for animation to finish
+                }
                 break;
+
             case < 75:
                 enemyAction = CombatOptions.Fireball;
-                battleDialog.text = dialogText.Replace("<harm>", "threw a fireball at");
+                battleDialog.text = playerDodged ? "You dodged the fireball!" : dialogText.Replace("<harm>", "threw a fireball at");
                 sendFireball(false);
                 yield return wait1sec; //new WaitForSeconds(1f);
                 break;
+
             default:
                 enemyAction = CombatOptions.Electrocute;
-                battleDialog.text = dialogText.Replace("<harm>", "electrocutes");
-                var lightning = sendLightning();
+                battleDialog.text = playerDodged ? "You're unable to dodge the lightning!" : dialogText.Replace("<harm>", "electrocutes");
+                var lightning = sendLightning(false);
                 yield return wait1sec; //new WaitForSeconds(1f);
                 Destroy(lightning);
                 break;
@@ -672,7 +673,16 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    GameObject sendFireball(bool isFromPlayer = true)//todo: change for enemy
+    // FIRE ANIM
+    private IEnumerator damagedFire()
+    {
+        yield return new WaitForSeconds(0.1f);
+        ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
+        yield return new WaitForSeconds(2f);
+        ghostAnimator.SetBool("isDamaged", false);
+    }
+
+    GameObject sendFireball(bool isFromPlayer = true)
     {
         if (isFromPlayer)
         {
@@ -685,22 +695,39 @@ public class BattleSystem : MonoBehaviour
             GameObject fire = GameObject.Instantiate(fireboltAsset);
             fire.transform.position = GameObject.FindWithTag("enemyReference").transform.position + new Vector3(-2, .5f, -1);
             fire.transform.rotation = new Quaternion(0, 0.70711f, 0, -0.70711f);
+            StartCoroutine(damagedFire());
         }
-        //var currentPrefabObject = GameObject.Instantiate(fireboltAsset);
-        //int fireSrcOffset = isFromPlayer ? 1 : -1;
-        //currentPrefabObject.transform.position = (isFromPlayer ? player : enemy).transform.position + new Vector3(fireSrcOffset, .5f, 0);
-        //currentPrefabObject.transform.rotation = new Quaternion(0, 0.70711f * fireSrcOffset, 0, 0.70711f);
-
         return null;
     }
     
+    // SLAM ANIM
     private IEnumerator animateAndWaitThenDeactivate(string anim)
     {
         enemyAnimator.SetBool(anim, true);
-        yield return new WaitForSeconds(1.5f);
-        animator.Play("PlayerSlammed");
-        slamSound.PlayDelayed(0.4f);
-        yield return new WaitForSeconds(3.6f);
+        
+        if (enemyReference.name.ToLower().Contains("eye"))
+        {
+            yield return new WaitForSeconds(1.9f);
+            ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
+            slamSound.Play();
+            yield return new WaitForSeconds(1.5f);
+            ghostAnimator.SetBool("isDamaged", false);
+        }
+        else if (enemyReference.name.ToLower().Contains("horse"))
+        {
+            yield return new WaitForSeconds(2f);
+            ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
+            slamSound.Play();
+            yield return new WaitForSeconds(1.5f);
+            ghostAnimator.SetBool("isDamaged", false);
+        }
+        else
+        {
+            yield return new WaitForSeconds(1.5f);
+            animator.Play("PlayerSlammed");
+            slamSound.PlayDelayed(0.4f);
+            yield return new WaitForSeconds(3.6f);
+        }
         enemyAnimator.SetBool(anim, false);
     }
 
@@ -720,13 +747,26 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("eye") || enemyReference.name.ToLower().Contains("horse"))
+            if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("eye"))
+            {
+                StartCoroutine(animateAndWaitThenDeactivate("isCombat"));
+            }
+            else if (enemyReference.name.ToLower().Contains("horse"))
             {
                 StartCoroutine(animateAndWaitThenDeactivate("isCombat"));
             }
         }
         return null;
     }
+
+    // LIGHTNING ANIM
+    private IEnumerator damagedLightning()
+    {
+        ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
+        yield return new WaitForSeconds(2f);
+        ghostAnimator.SetBool("isDamaged", false);
+    }
+
     GameObject sendLightning(bool isFromPlayer = true)
     {
         var lightningObj = GameObject.Instantiate(lightningAsset);
@@ -736,23 +776,60 @@ public class BattleSystem : MonoBehaviour
         lightningComp.EndObject = GameObject.FindWithTag("enemyReference");
         lightningComp.Generations = 3;
 
+        if (!isFromPlayer)
+        {
+            StartCoroutine(damagedLightning());
+        }
+
         return lightningObj;
     }
 
+    // THROW ANIM
     private IEnumerator animateThrow(string anim)
     {
-        enemyAnimator.SetBool(anim, true);
-        knifeSound.PlayDelayed(1f);
-        yield return wait2sec;
+        if (!playerDodged)
+        {
+            enemyAnimator.SetBool(anim, true);
+            knifeSound.PlayDelayed(1f);
+            yield return new WaitForSeconds(1.5f);
+            ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
+            yield return new WaitForSeconds(2f);
+            ghostAnimator.SetBool("isDamaged", false);
+        }
+        else
+        {
+            yield return wait2sec;
+        }
         enemyAnimator.SetBool(anim, false);
     }
 
     private IEnumerator bossThrow(string anim)
     {
-        enemyAnimator.SetBool(anim, true);
-        knifeSound.PlayDelayed(3.7f);
-        yield return new WaitForSeconds(5f);
+        if (!playerDodged)
+        {
+            enemyAnimator.SetBool(anim, true);
+            knifeSound.PlayDelayed(3.7f);
+            yield return new WaitForSeconds(3.6f);
+            ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
+            yield return new WaitForSeconds(2f);
+            ghostAnimator.SetBool("isDamaged", false);
+        }
+        else
+        {
+            yield return new WaitForSeconds(5f);
+        }
         enemyAnimator.SetBool(anim, false);
+    }
+
+    private IEnumerator damagedThrow()
+    {
+        if (!playerDodged)
+        {
+            yield return new WaitForSeconds(1f);
+            ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
+            yield return new WaitForSeconds(2f);
+            ghostAnimator.SetBool("isDamaged", false);
+        }
     }
 
     GameObject sendKnife(bool isFromPlayer = true)
@@ -766,6 +843,7 @@ public class BattleSystem : MonoBehaviour
         {
             if (enemyReference.name.ToLower().Contains("skel")) // sword throw skeleton
             {
+                knifeSound.PlayDelayed(1);
                 StartCoroutine(animateThrow("isThrow"));
             }
             else if (enemyReference.name.ToLower().Contains("horse"))
@@ -774,13 +852,16 @@ public class BattleSystem : MonoBehaviour
             }
             else
             {
+                knifeSound.PlayDelayed(2);
                 animator.Play("EnemyThrowKnife");
+                StartCoroutine(damagedThrow());
                 knifeSound.PlayDelayed(0.05f);
             }
         }
         return null;
     }
 
+    // HEAL ANIM
     GameObject selfHeal(bool isFromPlayer = true)
     {
         try
@@ -793,6 +874,8 @@ public class BattleSystem : MonoBehaviour
 
         return null;
     }
+
+    // STUN ANIM
     GameObject sendStun(bool isFromPlayer = true)
     {
         Destroy(stunObj);//remove prev stun effect if any
@@ -809,6 +892,7 @@ public class BattleSystem : MonoBehaviour
 
         return null;
     }
+
     GameObject sendFireEle(bool isFromPlayer = true)
     {
 		animator.Play("PlayerThrowFireEle");
