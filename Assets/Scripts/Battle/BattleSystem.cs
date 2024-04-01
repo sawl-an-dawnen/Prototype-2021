@@ -78,7 +78,11 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] AudioSource healSound;
     [SerializeField] AudioSource stunSound;
     [SerializeField] AudioSource dodgeSound;
-  
+    [SerializeField] AudioSource fireElementSound;
+    [SerializeField] AudioSource waterElementSound;
+    [SerializeField] AudioSource earthElementSound;
+
+
 
     public GameObject fireboltAsset;
     public GameObject lightningAsset;
@@ -896,6 +900,7 @@ public class BattleSystem : MonoBehaviour
     GameObject sendFireEle(bool isFromPlayer = true)
     {
 		animator.Play("PlayerThrowFireEle");
+        fireElementSound.Play();
 		if (fireCount == 0)
 		    fireCount++;
 		return null;
@@ -904,7 +909,8 @@ public class BattleSystem : MonoBehaviour
     GameObject sendEarthEle(bool isFromPlayer = true)
     {
 		animator.Play("PlayerThrowEarthEle");
-		if (earthCount == 0)
+        earthElementSound.Play();
+        if (earthCount == 0)
 		    earthCount++;
 		return null;
     }
@@ -912,7 +918,8 @@ public class BattleSystem : MonoBehaviour
     GameObject sendWaterEle(bool isFromPlayer = true)
     {
 		animator.Play("PlayerThrowWaterEle");
-		if (waterCount == 0)
+        waterElementSound.Play();
+        if (waterCount == 0)
 		    waterCount++;
 		return null;
     }
