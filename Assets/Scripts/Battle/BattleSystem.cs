@@ -12,31 +12,52 @@ using static Rune;
 [Serializable]
 public enum BattleState { START, PLAYER_TURN, ENEMY_TURN, WON, LOST }
 
-//Need to change enum to class, or it needs ot have unique damage
-public enum CombatOptions
+[Serializable]
+public class CombatOptions
 {
-    Stun = 5,
-    Heal = 15,
-    Knife = 10,
-    Slam = 12,
-    Electrocute = 14,
-    Fireball = 16,
-    // element combo spells
-    FireElement = 6,
-    EarthElement = 7,
-    WaterElement = 8,
-    ElementalInfluence = 0
+    public string name;
+    public int damage;
+	public SpellType Type;
+
+	public CombatOptions(string name, int damage, SpellType type)
+    {
+        this.name = name;
+        this.damage = damage;
+		this.Type = type;
+	}
+    public static CombatOptions Stun { get; } = new CombatOptions("Stun", 5, SpellType.Normal);
+    public static CombatOptions Heal { get; } = new CombatOptions("Heal", 15, SpellType.Normal);
+    public static CombatOptions Knife { get; } = new CombatOptions("Knife", 10, SpellType.Normal);
+    public static CombatOptions Slam { get; } = new CombatOptions("Slam", 12, SpellType.Normal);
+    public static CombatOptions Electrocute { get; } = new CombatOptions("Electrocute", 12, SpellType.Normal);
+    public static CombatOptions Fireball { get; } = new CombatOptions("Fireball", 12, SpellType.Fire);
+    public static CombatOptions FireElement { get; } = new CombatOptions("FireElement", 3, SpellType.Fire);
+    public static CombatOptions EarthElement { get; } = new CombatOptions("EarthElement", 3, SpellType.Earth);
+    public static CombatOptions WaterElement { get; } = new CombatOptions("WaterElement", 3, SpellType.Water);
+    public static CombatOptions ElementalInfluence { get; } = new CombatOptions("ElementalInfluence", 0, SpellType.Special);
+    public static CombatOptions Hydrosphere { get; } = new CombatOptions("Hydrosphere", 4, SpellType.Water);
 }
 
-public class TurnActions {
+public enum SpellType
+{
+	Normal,
+	Special,
+	Fire,
+	Earth,
+	Water,
+	Wind
+}
+public class TurnActions
+{
     public CombatOptions action;
     public float waitTime;
     public Func<bool, GameObject> actionFunc;
-    public TurnActions(CombatOptions co, float f, Func<bool, GameObject> a)
+
+    public TurnActions(CombatOptions action, float waitTime, Func<bool, GameObject> actionFunc)
     {
-        action = co;
-        waitTime = f;
-        actionFunc = a;
+        this.action = action;
+        this.waitTime = waitTime;
+        this.actionFunc = actionFunc;
     }
 }
 
@@ -102,15 +123,15 @@ public class BattleSystem : MonoBehaviour
 	private int earthCount;
 	private int waterCount;
 	private int EleInfluenceDamange;
-	private TurnbasedDialogHandler turnbasedDialogHandler;
+    private TurnbasedDialogHandler turnbasedDialogHandler;
 
-	public void StartCombatRound()
+    public void StartCombatRound()
 	{
 		fireCount = 0;
 		earthCount = 0;
 		waterCount = 0;
 		EleInfluenceDamange = 0;
-	}
+    }
 
 	private float playerTurnTimer = 11f;
 	private bool isTimerStarted = false;
@@ -245,6 +266,7 @@ public class BattleSystem : MonoBehaviour
                 "Earth Element" => OnEarthEleButton,
                 "Water Element" => OnWaterEleButton,
                 "Elemental Influence" => OnElementalButton,
+                "Hydrosphere" => OnHydrosphereButton,
                 _             => null
             };
             
@@ -300,7 +322,7 @@ public class BattleSystem : MonoBehaviour
 
         foreach (var action in turnActions)
         {
-            if (action.action == CombatOptions.ElementalInfluence)
+            if (action.action.name == "ElementalInfluence")
             {
                 elementalInfluences.Add(action);
             }
@@ -316,13 +338,13 @@ public class BattleSystem : MonoBehaviour
 
         foreach (var action in turnActions)
         {
-            if (action.action == CombatOptions.Heal)
+            if (action.action.name == "Heal")
             {
                 selfHeal();
             }
             else
             {
-                battleDialog.text = "The enemy takes " + action.action.ToString();
+                battleDialog.text = "The enemy takes " + action.action.name;
                 var gameObj = action.actionFunc(true);
                 yield return new WaitForSeconds(action.waitTime);
                 yield return SpellEffectByEnemy(action);
@@ -355,13 +377,15 @@ public class BattleSystem : MonoBehaviour
     }
 
 
+
+
     //This Function plays goofy dialogues based on the spells used and also updates the enemy health.
     IEnumerator SpellEffectByEnemy(TurnActions action)
     {
         int enemyNewHP;
-        if (action.action == CombatOptions.Slam && enemyReference.name.ToLower().Contains("skel"))
+        if (action.action.name == "Slam" && enemyReference.name.ToLower().Contains("skel"))
         {
-            enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * (int)action.action), false);
+            enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * (int)action.action.damage), false);
             GameManager.Instance.foundWeakness("Slam");
             switch (DialogueCounter)
             {
@@ -391,9 +415,9 @@ public class BattleSystem : MonoBehaviour
                     break;
             }
         }
-        else if (action.action == CombatOptions.Knife && enemyReference.name.ToLower().Contains("eye"))
+        else if (action.action.name == "Knife" && enemyReference.name.ToLower().Contains("eye"))
         {
-            enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * (int)action.action), false);
+            enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * (int)action.action.damage), false);
             switch (DialogueCounter)
             {
                 case 0:
@@ -425,7 +449,7 @@ public class BattleSystem : MonoBehaviour
                     break;
             }
         }
-        else if (action.action == CombatOptions.Fireball && enemyReference.name.ToLower().Contains("horse"))
+        else if (action.action.name == "Fireball" && enemyReference.name.ToLower().Contains("horse"))
         {
             switch (DialogueCounter)
             {
@@ -470,13 +494,14 @@ public class BattleSystem : MonoBehaviour
                     break;
             }
         }
-		else if (action.action == CombatOptions.ElementalInfluence)
-		{
+		else if (action.action.name == "ElementalInfluence")
+
+        {
 			enemyNewHP = enemyHP.TakeDamage(EleInfluenceDamange, false);
 		}
 		else
         {
-            enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * (int)action.action / 2, false);
+            enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * (int)action.action.damage / 2, false);
         }
 	}
 
@@ -552,11 +577,11 @@ public class BattleSystem : MonoBehaviour
                 Destroy(lightning);
                 break;
         }
-        if (!playerDodged || enemyAction is CombatOptions.Electrocute) 
+        if (!playerDodged || enemyAction == CombatOptions.Electrocute) 
         {   
             var enemyName = PlayerPrefs.GetString("ObjectToSpawn").ToLower();
-            var damage = (int)enemyAction * (enemyName.Contains("chess") || enemyName.Contains("horse") ? 2 : 1);//if final boss x2 damage
-            damage = damage / (enemyAction is CombatOptions.Electrocute && playerDodged ? 2 : 1);//id dodging electrocute, only 1/2 damage 
+            var damage = (int)enemyAction.damage * (enemyName.Contains("chess") || enemyName.Contains("horse") ? 2 : 1);//if final boss x2 damage
+            damage = damage / (enemyAction == CombatOptions.Electrocute && playerDodged ? 2 : 1);//id dodging electrocute, only 1/2 damage 
             playerHP.TakeDamage(damage, true);
         }
         playerDodged = false;
@@ -762,8 +787,8 @@ public class BattleSystem : MonoBehaviour
         {
             GameObject.Instantiate(healAsset, GameObject.Find("ghost basic").transform);
         } catch (Exception) { }
-        playerHP.TakeDamage(-(int)CombatOptions.Heal);
-        battleDialog.text = $"You gained {(int)CombatOptions.Heal}HP";
+        playerHP.TakeDamage(-(int)CombatOptions.Heal.damage);
+        battleDialog.text = $"You gained {(int)CombatOptions.Heal.damage}HP";
         healSound.Play();
 
         return null;
@@ -829,6 +854,27 @@ public class BattleSystem : MonoBehaviour
 		}
         return null;
 	}
+    GameObject sendHydrophere(bool isFromPlayer = true)
+    {
+        if (fireCount > 0)
+        {
+            animator.Play("PlayerThrowFireEle");
+        }
+        if (waterCount > 0)
+        {
+            animator.Play("PlayerThrowWaterEle");
+        }
+        if (earthCount > 0)
+        {
+            animator.Play("PlayerThrowEarthEle");
+        }
+        EleInfluenceDamange = (fireCount + earthCount + waterCount) * 10;
+        if (fireCount > 0 && earthCount > 0 && waterCount > 0)
+        {
+            EleInfluenceDamange += 10;
+        }
+        return null;
+    }
 
     private void UpdateDifficulty()
     {
@@ -938,6 +984,13 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.PLAYER_TURN)
         {
             turnActions.Add(new(CombatOptions.ElementalInfluence, 0, sendElemental));
+        }
+    }
+    public void OnHydrosphereButton()
+    {
+        if (state == BattleState.PLAYER_TURN)
+        {
+            turnActions.Add(new(CombatOptions.Hydrosphere, 0, sendHydrophere));
         }
     }
 

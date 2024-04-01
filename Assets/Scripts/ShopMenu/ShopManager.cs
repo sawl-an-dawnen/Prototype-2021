@@ -28,33 +28,18 @@ public class ShopManager : MonoBehaviour
 		shopItems[1, 2] = 2;
 		shopItems[1, 3] = 3;
 		shopItems[1, 4] = 4;
-		shopItems[1, 5] = 5;
-		shopItems[1, 6] = 6;
-		shopItems[1, 7] = 7;
-		shopItems[1, 8] = 8;
-		shopItems[1, 9] = 9;
 
 		//Price
 		shopItems[2, 1] = 10;
 		shopItems[2, 2] = 30;
-		shopItems[2, 3] = 40;
-		shopItems[2, 4] = 0;
-		shopItems[2, 5] = 0;
-		shopItems[2, 6] = 0;
-		shopItems[2, 7] = 0;
-		shopItems[2, 8] = 50;
-		shopItems[2, 9] = 60;
+		shopItems[2, 3] = 50;
+		shopItems[2, 4] = 60;
 
 		//Names
 		itemNames[1] = "Knife Throw";
 		itemNames[2] = "Heal";
-		itemNames[3] = "Stun";
-		itemNames[4] = "Fire Element";
-		itemNames[5] = "Water Element";
-		itemNames[6] = "Earth Element";
-		itemNames[7] = "Elemental Influence";
-		itemNames[8] = "Slam";
-		itemNames[9] = "Fireball";
+		itemNames[3] = "Slam";
+		itemNames[4] = "Fireball";
 		InitializeShop();
 	}
 
@@ -114,8 +99,5 @@ public class ShopManager : MonoBehaviour
 			itemButtons[itemID - 1].gameObject.SetActive(false);
 		}
 	}
-	
-	
-
 
 }

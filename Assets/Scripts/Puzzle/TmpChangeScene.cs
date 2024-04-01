@@ -4,21 +4,22 @@ using UnityEngine.SceneManagement;
 public class TmpChangeScene : MonoBehaviour
 {
     public GameObject activeCue;
-    public string sceneName;
+    public GameObject SlidingCanvas;
 
     private bool playerInTriggerZone = false;
-    private bool puzzleSolved = false;
+    private bool puzzleActivated = false;
 
 
     private void Start()
     {
+        SlidingCanvas.SetActive(false);
         activeCue.SetActive(false);
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("HIIIII");
+        Debug.Log("Sliding in");
         activeCue.SetActive(true);
-        if (other.CompareTag("Player") && !puzzleSolved)
+        if (other.CompareTag("Player") && !puzzleActivated)
         {
             // Player entered the trigger zone
             playerInTriggerZone = true;
@@ -38,19 +39,16 @@ public class TmpChangeScene : MonoBehaviour
     private void Update()
     {
         // Check for Space key press and player in trigger zone
-        if (playerInTriggerZone && Input.GetKeyDown(KeyCode.Space) && !puzzleSolved)
+        if (playerInTriggerZone && Input.GetKeyDown(KeyCode.Space) && !puzzleActivated)
         {
             ActivatePuzzle();
         }
     }
 
-    private void ActivatePuzzle()
+private void ActivatePuzzle()
     {
-        SceneManager.LoadScene(sceneName);
+        SlidingCanvas.SetActive(true);
+        puzzleActivated = true;
     }
 
-    public void ChangeScene(string scene)
-    {
-        SceneManager.LoadScene(scene);
-    }
 }
