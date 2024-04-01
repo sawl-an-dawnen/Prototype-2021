@@ -387,9 +387,12 @@ public class BattleSystem : MonoBehaviour
     IEnumerator SpellEffectByEnemy(TurnActions action)
     {
         int enemyNewHP;
-        if (action.action.name == "Slam" && enemyReference.name.ToLower().Contains("skel"))
+		int playerAttackPower = GameManager.Instance.GetPlayerAttack();
+        int playerAttack = Mathf.CeilToInt(action.action.damage * (1 + playerAttackPower / 100.0f));
+
+		if (action.action.name == "Slam" && enemyReference.name.ToLower().Contains("skel"))
         {
-            enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * (int)action.action.damage), false);
+            enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * playerAttack), false);
             GameManager.Instance.foundWeakness("Slam");
             switch (DialogueCounter)
             {
@@ -421,7 +424,7 @@ public class BattleSystem : MonoBehaviour
         }
         else if (action.action.name == "Knife" && enemyReference.name.ToLower().Contains("eye"))
         {
-            enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * (int)action.action.damage), false);
+            enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * playerAttack), false);
             switch (DialogueCounter)
             {
                 case 0:
@@ -459,7 +462,7 @@ public class BattleSystem : MonoBehaviour
             {
                 case 0:
                     DialogueCounter++;
-                    enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 8, false);
+                    enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 8 * playerAttack, false);
                     battleDialog.color = Color.white;
                     battleDialog.text = "The boss started to glow slightly red";
                     yield return new WaitForSeconds(1.7f);
@@ -469,7 +472,7 @@ public class BattleSystem : MonoBehaviour
                     break;
                 case 1:
                     DialogueCounter++;
-                    enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 9, false);
+                    enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 9 * playerAttack, false);
                     battleDialog.color = Color.white;
                     battleDialog.text = "The boss turned even more red";
                     yield return new WaitForSeconds(1.7f);
@@ -481,7 +484,7 @@ public class BattleSystem : MonoBehaviour
                     break;
                 case 2:
                     DialogueCounter++;
-                    enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 10, false);
+                    enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 10 * playerAttack, false);
                     battleDialog.color = Color.white;
                     battleDialog.text = "The boss started melting";
                     yield return new WaitForSeconds(1f);
@@ -491,7 +494,7 @@ public class BattleSystem : MonoBehaviour
                     break;
                 default:
                     DialogueCounter++;
-                    enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 12, false);
+                    enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 12 * playerAttack, false);
                     battleDialog.color = Color.red;
                     battleDialog.text = "<size=60%> I am about to have a heat stroke!";
                     yield return new WaitForSeconds(2f);
@@ -501,11 +504,11 @@ public class BattleSystem : MonoBehaviour
 		else if (action.action.name == "ElementalInfluence")
 
         {
-			enemyNewHP = enemyHP.TakeDamage(EleInfluenceDamange, false);
+			enemyNewHP = enemyHP.TakeDamage(EleInfluenceDamange * playerAttack, false);
 		}
 		else
         {
-            enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * (int)action.action.damage / 2, false);
+            enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * playerAttack / 2, false);
         }
 	}
 
@@ -528,8 +531,9 @@ public class BattleSystem : MonoBehaviour
         CombatOptions enemyAction = CombatOptions.Knife;
         battleDialog.color = Color.white;
         string dialogText = "The enemy <harm> you";
+		int playerDefensePower = GameManager.Instance.GetPlayerDefense();
 
-        if (playerDodged)
+		if (playerDodged)
         {
             animator.Play("PlayerDodge");
             dodgeSound.Play();
@@ -586,7 +590,7 @@ public class BattleSystem : MonoBehaviour
             var enemyName = PlayerPrefs.GetString("ObjectToSpawn").ToLower();
             var damage = (int)enemyAction.damage * (enemyName.Contains("chess") || enemyName.Contains("horse") ? 2 : 1);//if final boss x2 damage
             damage = damage / (enemyAction == CombatOptions.Electrocute && playerDodged ? 2 : 1);//id dodging electrocute, only 1/2 damage 
-            playerHP.TakeDamage(damage, true);
+            playerHP.TakeDamage(Mathf.CeilToInt(damage * (1 - playerDefensePower / 100.0f)), true);
         }
         playerDodged = false;
 
