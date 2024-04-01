@@ -20,6 +20,6 @@ MonoBehaviour:
     up by obsession."'
   - '"And here''s something you may need."'
   responses:
-  - responseText: Pick up the coin from the flames
+  - responseText: Pick up the coin and the axe
     dialogueObject: {fileID: 11400000, guid: c509576bd4c5d2044b89cf6d8733af1e, type: 2}
   needCondition: 0

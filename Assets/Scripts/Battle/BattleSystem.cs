@@ -25,12 +25,12 @@ public class CombatOptions
         this.damage = damage;
 		this.Type = type;
 	}
-    public static CombatOptions Stun { get; } = new CombatOptions("Stun", 5, SpellType.Normal);
+    public static CombatOptions Stun { get; } = new CombatOptions("Stun", 6, SpellType.Normal);
     public static CombatOptions Heal { get; } = new CombatOptions("Heal", 15, SpellType.Normal);
-    public static CombatOptions Knife { get; } = new CombatOptions("Knife", 10, SpellType.Normal);
-    public static CombatOptions Slam { get; } = new CombatOptions("Slam", 12, SpellType.Normal);
-    public static CombatOptions Electrocute { get; } = new CombatOptions("Electrocute", 12, SpellType.Normal);
-    public static CombatOptions Fireball { get; } = new CombatOptions("Fireball", 12, SpellType.Fire);
+    public static CombatOptions Knife { get; } = new CombatOptions("Knife", 9, SpellType.Normal);
+    public static CombatOptions Slam { get; } = new CombatOptions("Slam", 14, SpellType.Normal);
+    public static CombatOptions Electrocute { get; } = new CombatOptions("Electrocute", 14, SpellType.Normal);
+    public static CombatOptions Fireball { get; } = new CombatOptions("Fireball", 16, SpellType.Fire);
     public static CombatOptions FireElement { get; } = new CombatOptions("FireElement", 3, SpellType.Fire);
     public static CombatOptions EarthElement { get; } = new CombatOptions("EarthElement", 3, SpellType.Earth);
     public static CombatOptions WaterElement { get; } = new CombatOptions("WaterElement", 3, SpellType.Water);
@@ -504,7 +504,7 @@ public class BattleSystem : MonoBehaviour
 		else if (action.action.name == "ElementalInfluence")
 
         {
-			enemyNewHP = enemyHP.TakeDamage(EleInfluenceDamange * playerAttack, false);
+			enemyNewHP = enemyHP.TakeDamage(Mathf.CeilToInt(EleInfluenceDamange * (1 + playerAttackPower / 100.0f)), false);
 		}
 		else
         {

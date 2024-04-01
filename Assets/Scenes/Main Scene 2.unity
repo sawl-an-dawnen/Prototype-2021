@@ -10223,18 +10223,6 @@ MonoBehaviour:
           m_MethodName: AddItem
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 84ac411d0e622294792da63419a2b473, type: 2}
-            m_ObjectArgumentAssemblyTypeName: InventoryItem, Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 785907792}
-          m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-          m_MethodName: AddItem
-          m_Mode: 2
-          m_Arguments:
             m_ObjectArgument: {fileID: 11400000, guid: 767e05e4a8f51314b891920f9c48f75f, type: 2}
             m_ObjectArgumentAssemblyTypeName: InventoryItem, Assembly-CSharp
             m_IntArgument: 0
@@ -10254,13 +10242,13 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 785907792}
-          m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-          m_MethodName: AddItem
+        - m_Target: {fileID: 950299350}
+          m_TargetAssemblyTypeName: DialogueActivator, Assembly-CSharp
+          m_MethodName: UpdateDialogueObject
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 17d5ff9b7fb46a541a7a71ecd3ec4e3f, type: 2}
-            m_ObjectArgumentAssemblyTypeName: InventoryItem, Assembly-CSharp
+            m_ObjectArgument: {fileID: 11400000, guid: b9369455ccdfc834eb4aece4b028b081, type: 2}
+            m_ObjectArgumentAssemblyTypeName: DialogueObject, Assembly-CSharp
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -10285,7 +10273,7 @@ MonoBehaviour:
   diaSound: {fileID: 0}
   savedDiagIdx: -1
   finalDiags:
-  - {fileID: 11400000, guid: 25f25b7020c315f4ebf5461d347d93db, type: 2}
+  - {fileID: 11400000, guid: b9369455ccdfc834eb4aece4b028b081, type: 2}
 --- !u!65 &950299351
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12754,6 +12742,10 @@ PrefabInstance:
       propertyPath: panel
       value: 
       objectReference: {fileID: 864172523}
+    - target: {fileID: 3109763986245254408, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
+      propertyPath: rewardItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 17d5ff9b7fb46a541a7a71ecd3ec4e3f, type: 2}
     - target: {fileID: 3109763986536556800, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
