@@ -647,7 +647,8 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-             loseSound.Play();
+            loseSound.Play();
+            ghostAnimator.SetBool("isDead", true);
             battleDialog.text = "You were vanquished!";
             //move back to checkpoint
             yield return new WaitForSecondsRealtime(3f);
