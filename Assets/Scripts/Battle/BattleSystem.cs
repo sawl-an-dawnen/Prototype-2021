@@ -617,6 +617,7 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.WON)
         {
             winSound.Play();
+            ghostAnimator.SetBool("isWin", true); //win anim
             battleDialog.color = Color.white;
             battleDialog.text = "You have prevailed!";
             var lowerCaseEnemyName = PlayerPrefs.GetString("ObjectToSpawn").ToLower();
@@ -648,7 +649,7 @@ public class BattleSystem : MonoBehaviour
         else
         {
             loseSound.Play();
-            ghostAnimator.SetBool("isDead", true);
+            ghostAnimator.SetBool("isDead", true); //death anim
             battleDialog.text = "You were vanquished!";
             //move back to checkpoint
             yield return new WaitForSecondsRealtime(3f);
