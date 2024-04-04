@@ -658,6 +658,11 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator DeathDialogues()
     {
+        if (state == BattleState.WON)
+        {
+            enemyAnimator.SetBool("isDead", true); // death anim
+        }
+
         if (enemyReference.name.ToLower().Contains("skel"))
         {
             battleDialog.color = Color.red;
@@ -672,10 +677,6 @@ public class BattleSystem : MonoBehaviour
         }
         else if (enemyReference.name.ToLower().Contains("horse"))
         {
-            if(state == BattleState.WON)
-            {
-                enemyAnimator.SetBool("isDead", true); // death anim
-            }
             battleDialog.color = Color.red;
             battleDialog.text = "This is just the beginning";
             yield return new WaitForSeconds(2f);
