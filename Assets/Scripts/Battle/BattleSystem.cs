@@ -672,6 +672,10 @@ public class BattleSystem : MonoBehaviour
         }
         else if (enemyReference.name.ToLower().Contains("horse"))
         {
+            if(state == BattleState.WON)
+            {
+                enemyAnimator.SetBool("isDead", true); // death anim
+            }
             battleDialog.color = Color.red;
             battleDialog.text = "This is just the beginning";
             yield return new WaitForSeconds(2f);
