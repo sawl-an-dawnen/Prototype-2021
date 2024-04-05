@@ -839,7 +839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2484672045249358923, guid: 7e307e91895514354a1de91f7f67546b, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2484672045249358923, guid: 7e307e91895514354a1de91f7f67546b, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2717,6 +2717,7 @@ MonoBehaviour:
   - {fileID: 477157573640264512, guid: 9089bb920bd88f342a0b26715dc92cd5, type: 3}
   - {fileID: 3124537134492634221, guid: 711c0ee44df329f45b20811ec4bae2b6, type: 3}
   - {fileID: 7093917440301500035, guid: fa3ca4bac36767e498ebe40281da452b, type: 3}
+  - {fileID: 7950771442120256487, guid: f381d8c28d6b7384c8f667343f3bf7e9, type: 3}
 --- !u!1 &1677652188
 GameObject:
   m_ObjectHideFlags: 0
