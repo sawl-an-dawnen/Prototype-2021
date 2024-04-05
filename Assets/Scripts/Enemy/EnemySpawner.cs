@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
 	public GameObject[] enemyPrefabs; // Array of enemy prefabs to choose from
+	[SerializeField] TMP_Text enemyNameText; // Text to display the enemy name
 
 	void Start()
 	{
@@ -31,6 +33,9 @@ public class EnemySpawner : MonoBehaviour
             var enemyObjTransform = GameObject.Find("Enemi").transform;
 
             Instantiate(enemyToSpawn, transform.position, transform.rotation);
+
+			//Changes the name on the enemy HP bar
+			enemyNameText.text = enemyToSpawn.name;
         }
 		else
 		{
