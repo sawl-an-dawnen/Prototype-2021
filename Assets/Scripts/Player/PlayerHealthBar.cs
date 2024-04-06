@@ -70,7 +70,7 @@ using UnityEngine;
 public class PlayerHealthBar : MonoBehaviour
 {
 	public int maxHealth = 100;
-	public HPBar healthBar;
+	public HealthBar healthBar;
 	public int currentHealth;
 	private bool isPlayer;
 

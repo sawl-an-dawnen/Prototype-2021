@@ -29,14 +29,31 @@ public class EnemySpawner : MonoBehaviour
 
 		if (enemyToSpawn != null)
 		{
-            // Instantiate the enemy
-            var enemyObjTransform = GameObject.Find("Enemi").transform;
+			var enemyObjTransform = GameObject.Find("Enemi").transform;
+			Instantiate(enemyToSpawn, transform.position, transform.rotation);
 
-            Instantiate(enemyToSpawn, transform.position, transform.rotation);
+			string enemyName = "";
+			switch (enemyToSpawn.name)
+			{
+				case "Skeleton NLA w_Lights":
+					enemyName = "Skeleton";
+					break;
+				case "MonsterEye":
+					enemyName = "Soul Stare";
+					break;
+				case "horseBoss":
+					enemyName = "Chess Guardian";
+					break;
+				case "EnemyGhost":
+					enemyName = "Ghost";
+					break;
+				default:
+					enemyName = enemyToSpawn.name;
+					break;
+			}
 
-			//Changes the name on the enemy HP bar
-			enemyNameText.text = enemyToSpawn.name;
-        }
+			enemyNameText.text = enemyName;
+		}
 		else
 		{
 			// Handle the case where the enemy prefab with the stored name is not found

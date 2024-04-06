@@ -518,6 +518,7 @@ public class BattleSystem : MonoBehaviour
 
         return lowerCaseEnemyName switch
         {
+            string enemyName when enemyName.Contains("enemyghost") => Time.renderedFrameCount % 50,
             string enemyName when enemyName.Contains("skeleton") => Time.renderedFrameCount % 50, //skeleton lower 2 abilities: knife or slam
             string enemyName when enemyName.Contains("monster") => Time.renderedFrameCount % 50 + 25, //monster middle 2: slam or fire
             string enemyName when enemyName.Contains("chess") || enemyName.Contains("horse") => Time.renderedFrameCount % 100, //final boss can do all 4 
@@ -553,6 +554,10 @@ public class BattleSystem : MonoBehaviour
                 {
                     battleDialog.text = playerDodged ? "You dodged the deadly katanas!" : dialogText.Replace("<harm>", "threw deadly katanas at");
                 }
+                else if (enemyReference.name.ToLower().Contains("enemyghost"))
+                {
+                    battleDialog.text = playerDodged ? "You dodged the strange hat!" : dialogText.Replace("<harm>", "threw a spinning hat at");
+                }
                 else
                 {
                     battleDialog.text = playerDodged ? "You dodged the throwing knife!" : dialogText.Replace("<harm>", "threw a knife at");
@@ -567,7 +572,7 @@ public class BattleSystem : MonoBehaviour
 
                 if (!playerDodged) { 
                     sendSlam(false);
-                    yield return wait3sec; // important for animation to finish
+                    yield return wait1sec;
                 }
                 break;
 
@@ -631,6 +636,11 @@ public class BattleSystem : MonoBehaviour
 				battleDialog.text += " Coin + 30";
 				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 30);
 			}
+            else if (lowerCaseEnemyName.Contains("enemyghost"))
+            {
+                battleDialog.text += " Coin + 20";
+                GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 20);
+            }
             // This can be replaced with a confirmation UI when we're ready
             yield return new WaitForSecondsRealtime(2f);
 
@@ -685,6 +695,12 @@ public class BattleSystem : MonoBehaviour
             battleDialog.color = Color.white;
             battleDialog.text = "The Boss disappeared into the ground";
             yield return new WaitForSeconds(2f);
+        }
+        else if (enemyReference.name.ToLower().Contains("enemyghost"))
+        {
+            battleDialog.color = Color.red;
+            battleDialog.text = "What... are you...?";
+            yield return new WaitForSeconds(2.5f);
         }
     }
 
@@ -745,6 +761,14 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             ghostAnimator.SetBool("isDamaged", false);
         }
+        else if (enemyReference.name.ToLower().Contains("enemyghost")) // enemyghost slam
+        {
+            yield return new WaitForSeconds(1f);
+            ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
+            slamSound.Play();
+            yield return new WaitForSeconds(1.5f);
+            ghostAnimator.SetBool("isDamaged", false);
+        }
         else
         { //skel slam
             yield return new WaitForSeconds(1.7f);
@@ -773,6 +797,13 @@ public class BattleSystem : MonoBehaviour
             yield return wait2sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
+        else if (enemyReference.name.ToLower().Contains("enemyghost"))
+        {
+            // check timing later <<<
+            enemyAnimator.SetBool("isDamaged", true); //enemyghost damaged anim
+            yield return wait2sec;
+            enemyAnimator.SetBool("isDamaged", false);
+        }
         // add horse
         else
         {
@@ -789,14 +820,7 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("eye"))
-            {
-                StartCoroutine(animateAndWaitThenDeactivate("isCombat"));
-            }
-            else if (enemyReference.name.ToLower().Contains("horse"))
-            {
-                StartCoroutine(animateAndWaitThenDeactivate("isCombat"));
-            }
+         StartCoroutine(animateAndWaitThenDeactivate("isCombat"));
         }
         return null;
     }
@@ -843,7 +867,15 @@ public class BattleSystem : MonoBehaviour
         if (!playerDodged)
         {
             enemyAnimator.SetBool(anim, true);
-            knifeSound.PlayDelayed(1.1f);
+            //check timing later
+            if (enemyReference.name.ToLower().Contains("enemyghost")) // enemy ghost hat throw sound
+            {
+                knifeSound.PlayDelayed(1.2f);
+            }
+            else
+            {
+                knifeSound.PlayDelayed(1.1f);
+            }
             yield return new WaitForSeconds(1.5f);
             ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
             yield return new WaitForSeconds(1.8f);
@@ -903,6 +935,14 @@ public class BattleSystem : MonoBehaviour
             yield return wait1sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
+        else if (enemyReference.name.ToLower().Contains("enemyghost"))
+        {
+            // check timing later <<<
+            yield return new WaitForSeconds(0.2f);
+            enemyAnimator.SetBool("isDamaged", true); //enemyghost damaged anim
+            yield return wait1sec;
+            enemyAnimator.SetBool("isDamaged", false);
+        }
         else
         {
             // check timing later <<<
@@ -924,6 +964,10 @@ public class BattleSystem : MonoBehaviour
         else
         {
             if (enemyReference.name.ToLower().Contains("skel")) // sword throw skeleton
+            {
+                StartCoroutine(animateThrow("isThrow"));
+            }
+            else if (enemyReference.name.ToLower().Contains("enemyghost")) // enemy ghost hat throw
             {
                 StartCoroutine(animateThrow("isThrow"));
             }
