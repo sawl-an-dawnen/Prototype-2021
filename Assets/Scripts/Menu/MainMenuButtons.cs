@@ -15,10 +15,10 @@ public class MainMenuButtons : MonoBehaviour
 
 
 
-    Renderer m_Renderer;
+    MeshRenderer m_Renderer;
     void Start()
     {
-        m_Renderer = GetComponent<Renderer>();
+        m_Renderer = GetComponent<MeshRenderer>();
         //customCallback = new UnityEvent();
     }
 
