@@ -8969,7 +8969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3736514195767739710, guid: cc2e61f16d1e597469db1bb9edac25c2, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3736514195767739710, guid: cc2e61f16d1e597469db1bb9edac25c2, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
