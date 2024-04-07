@@ -223,6 +223,16 @@ public class BattleSystem : MonoBehaviour
             enemyHP.healthBar.SetMaxHealth(75);
             enemyHP.currentHealth = 75;
         }
+        else if(enemyReference.name.ToLower().Contains("horse"))
+        {
+            enemyHP.healthBar.SetMaxHealth(150);
+            enemyHP.currentHealth = 150;            
+        }
+        else if(enemyReference.name.ToLower().Contains("enemyghost"))
+        {
+            enemyHP.healthBar.SetMaxHealth(50);
+            enemyHP.currentHealth = 50;            
+        }
 
         enemyAnimator = enemyReference.GetComponent<Animator>(); // enemy animation controller
         ghostBasic = GameObject.Find("ghost basic");
@@ -351,8 +361,8 @@ public class BattleSystem : MonoBehaviour
                 battleDialog.text = "The enemy takes " + action.action.name + "!";
                 var gameObj = action.actionFunc(true);
                 yield return new WaitForSeconds(action.waitTime);
-                yield return SpellEffectByEnemy(action);
                 GameObject.Destroy(gameObj);
+                yield return SpellEffectByEnemy(action);
             }
 
             yield return new WaitForSeconds(dialogWaitTime);
@@ -422,6 +432,13 @@ public class BattleSystem : MonoBehaviour
                     break;
             }
         }
+        else if (action.action.name == "Electrocute" && enemyReference.name.ToLower().Contains("skel"))
+        {
+            enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 4), false);
+            battleDialog.color = Color.red;
+            battleDialog.text = "<size=60%> was that supposed to hurt?";
+            yield return new WaitForSeconds(2.5f);
+        }
         else if (action.action.name == "Knife" && enemyReference.name.ToLower().Contains("eye"))
         {
             enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * playerAttack), false);
@@ -456,13 +473,20 @@ public class BattleSystem : MonoBehaviour
                     break;
             }
         }
-        else if (action.action.name == "Fireball" && enemyReference.name.ToLower().Contains("horse"))
+        else if (action.action.name == "slam" && enemyReference.name.ToLower().Contains("eye"))
+        {
+            enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 4), false);
+            battleDialog.color = Color.red;
+            battleDialog.text = "<size=60%> I won't go easy on you just cause you offer hugs!";
+            yield return new WaitForSeconds(2.5f);
+        }
+        else if ((action.action.name == "Fireball" || action.action.name == "Fire Element") && enemyReference.name.ToLower().Contains("horse"))
         {
             switch (DialogueCounter)
             {
                 case 0:
                     DialogueCounter++;
-                    enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 8 * playerAttack, false);
+                    enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * 1.2 * playerAttack), false);
                     battleDialog.color = Color.white;
                     battleDialog.text = "The boss started to glow slightly red";
                     yield return new WaitForSeconds(1.7f);
@@ -472,7 +496,7 @@ public class BattleSystem : MonoBehaviour
                     break;
                 case 1:
                     DialogueCounter++;
-                    enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 9 * playerAttack, false);
+                    enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * 1.4 * playerAttack), false);
                     battleDialog.color = Color.white;
                     battleDialog.text = "The boss turned even more red";
                     yield return new WaitForSeconds(1.7f);
@@ -484,7 +508,7 @@ public class BattleSystem : MonoBehaviour
                     break;
                 case 2:
                     DialogueCounter++;
-                    enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 10 * playerAttack, false);
+                    enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * 1.6 * playerAttack), false);
                     battleDialog.color = Color.white;
                     battleDialog.text = "The boss started melting";
                     yield return new WaitForSeconds(1f);
@@ -494,15 +518,70 @@ public class BattleSystem : MonoBehaviour
                     break;
                 default:
                     DialogueCounter++;
-                    enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 12 * playerAttack, false);
+                    enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * 1.8 * playerAttack), false);
                     battleDialog.color = Color.red;
                     battleDialog.text = "<size=60%> I am about to have a heat stroke!";
                     yield return new WaitForSeconds(2f);
                     break;
             }
         }
+        else if (action.action.name == "Knife" && enemyReference.name.ToLower().Contains("horse"))
+        {
+            enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 4), false);
+            battleDialog.color = Color.red;
+            battleDialog.text = "<size=60%> Who brings a knife to a sword fight?";
+            yield return new WaitForSeconds(2.5f);
+        }
+        else if ((action.action.name == "Slam" || action.action.name == "Water Element" || action.action.name == "Earth Element") && enemyReference.name.ToLower().Contains("horse"))
+        {
+            enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 4), false);
+            battleDialog.color = Color.red;
+            battleDialog.text = "<size=60%> You Call that an attack?";
+            yield return new WaitForSeconds(2.5f);
+        }
+        else if (action.action.name == "Electrocute" && enemyReference.name.ToLower().Contains("horse"))
+        {
+            enemyNewHP = enemyHP.TakeDamage((int)(-1 * playerPowerBoost * playerAttack / 4), false);
+            battleDialog.color = Color.red;
+            battleDialog.text = "<size=60%> That gets my blood pumping!";
+            yield return new WaitForSeconds(2.5f);
+        }
+        else if (action.action.name == "Electrocute" && enemyReference.name.ToLower().Contains("enemyghost"))
+        {
+            enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * playerAttack), false);
+            switch (DialogueCounter)
+            {
+                case 0:
+                    DialogueCounter++;
+                    battleDialog.color = Color.white;
+                    battleDialog.text = "Enemy Ghost's figure started to flicker";
+                    yield return new WaitForSeconds(1.5f);
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> I thought i saw my afterlife for a second there, oh wait...";
+                    yield return new WaitForSeconds(2.5f);
+                    break;
+                case 1:
+                    DialogueCounter++;
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> I think i just saw an old man waving to me from the other side of the river";
+                    yield return new WaitForSeconds(2.5f);
+                    break;
+                case 2:
+                    DialogueCounter++;
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> I thought ghost's being weak to electric moves was a propaganda by pokemon!!";
+                    yield return new WaitForSeconds(2.5f);
+                    break;
+            }
+        }
+        else if ((action.action.name == "Earth Element" || action.action.name == "Water Element" || action.action.name == "Knife" || action.action.name == "Slam") && enemyReference.name.ToLower().Contains("enemyghost"))
+        {
+            enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 8), false);
+            battleDialog.color = Color.red;
+            battleDialog.text = "<size=60%> That went right through!";
+            yield return new WaitForSeconds(1.5f);
+        }
 		else if (action.action.name == "ElementalInfluence")
-
         {
 			enemyNewHP = enemyHP.TakeDamage(Mathf.CeilToInt(EleInfluenceDamange * (1 + playerAttackPower / 100.0f)), false);
 		}
@@ -848,6 +927,7 @@ public class BattleSystem : MonoBehaviour
         lightningComp.StartObject = GameObject.Find("ghost basic");
         lightningComp.EndObject = GameObject.FindWithTag("enemyReference");
         lightningComp.Generations = 3;
+        Debug.Log("here");
 
         if (!isFromPlayer)
         {
@@ -857,7 +937,7 @@ public class BattleSystem : MonoBehaviour
         {
             StartCoroutine(enemyhurtLightning());
         }
-
+        
         return lightningObj;
     }
 
@@ -1165,7 +1245,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.PLAYER_TURN)
         {
-            turnActions.Add(new(CombatOptions.Electrocute, 2f, sendLightning));
+            turnActions.Add(new(CombatOptions.Electrocute, 3.5f, sendLightning));
         }
     }
 
