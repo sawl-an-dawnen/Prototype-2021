@@ -473,20 +473,20 @@ public class BattleSystem : MonoBehaviour
                     break;
             }
         }
-        else if (action.action.name == "slam" && enemyReference.name.ToLower().Contains("eye"))
+        else if (action.action.name == "Slam" && enemyReference.name.ToLower().Contains("eye"))
         {
             enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 4), false);
             battleDialog.color = Color.red;
             battleDialog.text = "<size=60%> I won't go easy on you just cause you offer hugs!";
             yield return new WaitForSeconds(2.5f);
         }
-        else if ((action.action.name == "Fireball" || action.action.name == "Fire Element") && enemyReference.name.ToLower().Contains("horse"))
+        else if ((action.action.name == "Fireball" || action.action.name == "FireElement") && enemyReference.name.ToLower().Contains("horse"))
         {
             switch (DialogueCounter)
             {
                 case 0:
                     DialogueCounter++;
-                    enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * 1.2 * playerAttack), false);
+                    enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost/2 * 1.2 * playerAttack), false);
                     battleDialog.color = Color.white;
                     battleDialog.text = "The boss started to glow slightly red";
                     yield return new WaitForSeconds(1.7f);
@@ -496,7 +496,7 @@ public class BattleSystem : MonoBehaviour
                     break;
                 case 1:
                     DialogueCounter++;
-                    enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * 1.4 * playerAttack), false);
+                    enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost/2 * 1.4 * playerAttack), false);
                     battleDialog.color = Color.white;
                     battleDialog.text = "The boss turned even more red";
                     yield return new WaitForSeconds(1.7f);
@@ -508,7 +508,7 @@ public class BattleSystem : MonoBehaviour
                     break;
                 case 2:
                     DialogueCounter++;
-                    enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * 1.6 * playerAttack), false);
+                    enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost/2 * 1.6 * playerAttack), false);
                     battleDialog.color = Color.white;
                     battleDialog.text = "The boss started melting";
                     yield return new WaitForSeconds(1f);
@@ -518,7 +518,7 @@ public class BattleSystem : MonoBehaviour
                     break;
                 default:
                     DialogueCounter++;
-                    enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * 1.8 * playerAttack), false);
+                    enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost/2 * 1.8 * playerAttack), false);
                     battleDialog.color = Color.red;
                     battleDialog.text = "<size=60%> I am about to have a heat stroke!";
                     yield return new WaitForSeconds(2f);
@@ -532,7 +532,7 @@ public class BattleSystem : MonoBehaviour
             battleDialog.text = "<size=60%> Who brings a knife to a sword fight?";
             yield return new WaitForSeconds(2.5f);
         }
-        else if ((action.action.name == "Slam" || action.action.name == "Water Element" || action.action.name == "Earth Element") && enemyReference.name.ToLower().Contains("horse"))
+        else if ((action.action.name == "Slam" || action.action.name == "WaterElement" || action.action.name == "EarthElement") && enemyReference.name.ToLower().Contains("horse"))
         {
             enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 4), false);
             battleDialog.color = Color.red;
@@ -574,7 +574,7 @@ public class BattleSystem : MonoBehaviour
                     break;
             }
         }
-        else if ((action.action.name == "Earth Element" || action.action.name == "Water Element" || action.action.name == "Knife" || action.action.name == "Slam") && enemyReference.name.ToLower().Contains("enemyghost"))
+        else if ((action.action.name == "EarthElement" || action.action.name == "WaterElement" || action.action.name == "Knife" || action.action.name == "Slam") && enemyReference.name.ToLower().Contains("enemyghost"))
         {
             enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 8), false);
             battleDialog.color = Color.red;
