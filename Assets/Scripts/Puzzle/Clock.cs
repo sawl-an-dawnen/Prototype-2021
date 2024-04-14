@@ -9,7 +9,6 @@ public class Clock : MonoBehaviour
     public float targetHourAngle = -30f; // Target angle for 10:30
     public float targetMinuteAngle = 180f; // Target angle for 10:30
     public string spellToGet;
-    private Sprite img;
 
     private bool isWinningConditionMet = false;
     private bool exiting = false;
@@ -19,8 +18,6 @@ public class Clock : MonoBehaviour
     public TextMeshProUGUI resultText1; // Reference to the UI Text component
     public TextMeshProUGUI resultText2;
     public GameObject panel;
-
-    private PopUpManager pm;
 
     public void Resume()
 	{
@@ -43,7 +40,6 @@ public class Clock : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        pm = GameObject.FindGameObjectWithTag("PopMan").GetComponent<PopUpManager>();
     }
 
     private void Update()
@@ -104,15 +100,7 @@ public class Clock : MonoBehaviour
             resultText1.text = "Congratulations, this is the right time";
             resultText2.text = "Get " + spellToGet + " Spell!";
             isWinningConditionMet = true;
-            GameManager.Instance.AvailableSpells[spellToGet] = true;
-            foreach (GameManager.Spell spell in GameManager.Instance.spells)
-            {
-                if (spell.name == spellToGet)
-                {
-                    img = spell.prefabButton.image.sprite;
-                }
-            }
-            pm.CreatePopUp("You Found " + spellToGet + ", press 'I' to check your inventory", img);
+            GameManager.Instance.AddSpell(spellToGet);
         }
         else
         {
