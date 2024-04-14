@@ -1,71 +1,4 @@
-/*using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
-public class PlayerHealthBar : MonoBehaviour
-{
-	public int maxHealth = 100;
-	public int currentHealth;
-	public HealthBar healthBar;
-	private RectTransform canvasRectTransform;
-
-    private bool isPlayer; // Indicate if it's the player
-
-    private void Start()
-    {
-        isPlayer = CompareTag("Player"); // Check if this is the player
-
-        // Check if the initial health value is already set in PlayerPrefs
-        if (isPlayer && PlayerPrefs.HasKey("InitialHealth"))
-        {
-            currentHealth = PlayerPrefs.GetInt("InitialHealth");
-        }
-        else
-        {
-            // If not set or not the player, initialize health to the maximum
-            currentHealth = maxHealth;
-
-            if (isPlayer)
-            {
-                // Store the initial health value only for the player
-                PlayerPrefs.SetInt("InitialHealth", currentHealth);
-            }
-        }
-
-        healthBar.SetHealth(currentHealth);
-    }
-
-    // Rest of the script remains the same...
-
-    public int TakeDamage(int damage, bool isPlayer)
-    {
-        Debug.Log("Taking damage: " + damage);
-        currentHealth = damage >= currentHealth ? 0 : (currentHealth - damage);
-
-        // Store the updated health in PlayerPrefs only for the player
-        if (isPlayer)
-        {
-            PlayerPrefs.SetInt("InitialHealth", currentHealth);
-            PlayerPrefs.Save();
-        }
-
-        // Update the health bar
-        healthBar.SetHealth(currentHealth);
-
-        return currentHealth;
-    }
-
-    public void HPManager(int damage)
-	{
-		TakeDamage(damage, true);
-	}
-
-}
-*/
-
-using UnityEngine;
-
 
 public class PlayerHealthBar : MonoBehaviour
 {
@@ -73,25 +6,121 @@ public class PlayerHealthBar : MonoBehaviour
 	public HealthBar healthBar;
 	public int currentHealth;
 	private bool isPlayer;
+	public const int sortingOrderDefault = 5000;
+
+	private class FunctionUpdater
+	{
+		private class MonoBehaviourHook : MonoBehaviour
+		{
+			public System.Action OnUpdate;
+
+			private void Update()
+			{
+				if (OnUpdate != null) OnUpdate();
+			}
+		}
+
+		private static GameObject initGameObject;
+		private static void InitIfNeeded()
+		{
+			if (initGameObject == null)
+			{
+				initGameObject = new GameObject("FunctionUpdater_Global");
+			}
+		}
+
+		public static FunctionUpdater Create(System.Func<bool> updateFunc, string functionName, bool active, bool stopAllWithSameName)
+		{
+			InitIfNeeded();
+
+			GameObject gameObject = new GameObject("FunctionUpdater Object " + functionName, typeof(MonoBehaviourHook));
+			FunctionUpdater functionUpdater = new FunctionUpdater();
+			gameObject.GetComponent<MonoBehaviourHook>().OnUpdate = () =>
+			{
+				if (active && updateFunc())
+				{
+					UnityEngine.Object.Destroy(gameObject);
+				}
+			};
+
+			return functionUpdater;
+		}
+	}
 
 	private void Start()
 	{
 		isPlayer = CompareTag("Player");
 		if (isPlayer)
-        {
+		{
 			currentHealth = GameManager.Instance.GetPlayerHealth();
 			healthBar.SetHealth(currentHealth);
 		}
-        else
-        {
+		else
+		{
 			healthBar.SetHealth(maxHealth);
 		}
+	}
 
+	public static void TextPopup(string text, Vector3 position, float popupTime = 0.5f)
+	{
+		CreateWorldTextPopup(text, position, popupTime);
+	}
+
+	public static void CreateWorldTextPopup(string text, Vector3 localPosition, float popupTime = 0.5f)
+	{
+		CreateWorldTextPopup(null, text, localPosition, 5, Color.red, localPosition + new Vector3(0, 2f, 0), popupTime);
+	}
+
+
+	public static void CreateWorldTextPopup(Transform parent, string text, Vector3 localPosition, int fontSize, Color color, Vector3 finalPopupPosition, float popupTime)
+	{
+		TextMesh textMesh = CreateWorldText(parent, text, localPosition, fontSize, color, TextAnchor.LowerLeft, TextAlignment.Left, sortingOrderDefault);
+		Transform transform = textMesh.transform;
+		Vector3 moveAmount = (finalPopupPosition - localPosition) / popupTime;
+		FunctionUpdater.Create(() =>
+		{
+			transform.position += moveAmount * Time.unscaledDeltaTime;
+			popupTime -= Time.unscaledDeltaTime;
+			if (popupTime <= 0f)
+			{
+				UnityEngine.Object.Destroy(transform.gameObject);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}, "WorldTextPopup", true, false);
+	}
+
+	public static TextMesh CreateWorldText(string text, Transform parent = null, Vector3 localPosition = default(Vector3), int fontSize = 1, Color? color = null, TextAnchor textAnchor = TextAnchor.UpperLeft, TextAlignment textAlignment = TextAlignment.Left, int sortingOrder = sortingOrderDefault)
+	{
+		if (color == null) color = Color.white;
+		TextMesh textMesh = CreateWorldText(parent, text, localPosition, fontSize, (Color)color, textAnchor, textAlignment, sortingOrder);
+		textMesh.characterSize = 0.1f;
+		return textMesh;
+	}
+
+	public static TextMesh CreateWorldText(Transform parent, string text, Vector3 localPosition, int fontSize, Color color, TextAnchor textAnchor, TextAlignment textAlignment, int sortingOrder)
+	{
+		GameObject gameObject = new GameObject("World_Text", typeof(TextMesh));
+		Transform transform = gameObject.transform;
+		transform.SetParent(parent, false);
+		transform.localPosition = localPosition;
+		TextMesh textMesh = gameObject.GetComponent<TextMesh>();
+		textMesh.anchor = textAnchor;
+		textMesh.alignment = textAlignment;
+		textMesh.text = text;
+		textMesh.fontSize = fontSize;
+		textMesh.color = color;
+		textMesh.GetComponent<MeshRenderer>().sortingOrder = sortingOrder;
+		return textMesh;
 	}
 
 	public int TakeDamage(int damage, bool isPlayer = true)
 	{
 		Debug.Log("Taking damage: " + damage);
+		TextPopup(damage.ToString(), transform.position - new Vector3(0f, -1f, 0f));
 		int oldHealth = currentHealth;
 		currentHealth = Mathf.Min(Mathf.Max(0, currentHealth - damage), 100);
 
@@ -110,11 +139,10 @@ public class PlayerHealthBar : MonoBehaviour
 	}
 
 	/*
-	 * This should be moved somewhere else but I'm too tired now to create a new script
+	* This should be move to somewhere else later
 	*/
 	public void AddCoins(float coin)
 	{
-		//coins += coin;
 		GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + coin);
 	}
 }
