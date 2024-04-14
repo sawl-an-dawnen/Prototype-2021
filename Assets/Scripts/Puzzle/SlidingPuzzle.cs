@@ -97,7 +97,7 @@ public class SlidingPuzzle : MonoBehaviour
             Debug.Log("Win");
             winUI.SetActive(true);  
             Won = true;
-            GameObject.Find("InventoryManager").GetComponent<InventoryManager>().AddItem(rewardItem);
+            GameObject.Find("InventoryManager").GetComponent<InventoryManager>().AddItem(rewardItem, false);
         }
     }
 

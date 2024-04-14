@@ -625,20 +625,23 @@ public class BattleSystem : MonoBehaviour
             ghostAnimator.SetBool("isWin", true); //win anim
             battleDialog.color = Color.white;
             battleDialog.text = "You have prevailed!";
+            // give random equipment
+            String equip = GameObject.Find("InventoryManager").GetComponent<InventoryManager>().GiveRandomEquipment();
+            battleDialog.text += "\nGet " + equip;
             var lowerCaseEnemyName = PlayerPrefs.GetString("ObjectToSpawn").ToLower();
             if (lowerCaseEnemyName.Contains("skeleton"))
             {
-				battleDialog.text += " Coin + 30";
+				battleDialog.text += "\nCoin + 30";
 				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 30);
 			}
             else if (lowerCaseEnemyName.Contains("monster"))
             {
-				battleDialog.text += " Coin + 30";
+				battleDialog.text += "\nCoin + 30";
 				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 30);
 			}
             else if (lowerCaseEnemyName.Contains("enemyghost"))
             {
-                battleDialog.text += " Coin + 20";
+                battleDialog.text += "\nCoin + 20";
                 GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 20);
             }
             // This can be replaced with a confirmation UI when we're ready
