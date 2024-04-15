@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc55b6631176d6f4f99583ea64810bf1, type: 3}
+  m_Name: Golden Grail
+  m_EditorClassIdentifier: 
+  isEquip: 1
+  itemName: Golden Grail
+  itemIcon: {fileID: 21300000, guid: 701c353fe4d8a274b8036329eafa60f4, type: 3}
+  itemButtonPrefab: {fileID: 0}
+  itemInfo: 
+  equipped: 0
+  equipType: 3
+  equipRarity: 1
+  equipAttack: 15
+  equipDefense: 15
+  specialInfo: R

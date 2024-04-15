@@ -768,7 +768,7 @@ public class BattleSystem : MonoBehaviour
             }
             else if (lowerCaseEnemyName.Contains("mushr"))
             {
-                battleDialog.text += " Coin + 10";
+                battleDialog.text += "\nCoin + 10";
                 GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 10);
             }
             // This can be replaced with a confirmation UI when we're ready

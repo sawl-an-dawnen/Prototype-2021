@@ -10,7 +10,7 @@ public class PlayerStatus : MonoBehaviour
     private TMP_Text hpText, attackText, defenseText;
 
     [SerializeField]
-    private TMP_Text attackPreText, defensePreText, descriptionPreText;
+    private TMP_Text namePreText, attackPreText, defensePreText, descriptionPreText;
     [SerializeField]
     private Image previewImage;
     [SerializeField]
@@ -32,8 +32,9 @@ public class PlayerStatus : MonoBehaviour
         defenseText.text = GameManager.Instance.GetPlayerDefense().ToString();
     }
 
-    public void PreviewEquipmentStatus(Sprite equipSprite,  int attack, int defense, string description)
+    public void PreviewEquipmentStatus(Sprite equipSprite, string name,  int attack, int defense, string description)
     {
+        namePreText.text = name;
         attackPreText.text = attack.ToString();
         defensePreText.text = defense.ToString();
         descriptionPreText.text = description.ToString();
