@@ -2749,6 +2749,7 @@ MonoBehaviour:
   maxHealth: 500
   healthBar: {fileID: 1390503111}
   currentHealth: 500
+  floatingDamage: {fileID: 6349645014437641891, guid: 5aa00954d4f94a444a79d58bf1a303e0, type: 3}
 --- !u!114 &1662389404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9419,6 +9420,7 @@ MonoBehaviour:
   maxHealth: 100
   healthBar: {fileID: 415954969}
   currentHealth: 100
+  floatingDamage: {fileID: 6349645014437641891, guid: 5aa00954d4f94a444a79d58bf1a303e0, type: 3}
 --- !u!114 &4588520314567333479
 MonoBehaviour:
   m_ObjectHideFlags: 0
