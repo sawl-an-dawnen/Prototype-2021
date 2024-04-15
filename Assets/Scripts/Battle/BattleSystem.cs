@@ -237,6 +237,11 @@ public class BattleSystem : MonoBehaviour
             enemyHP.healthBar.SetMaxHealth(50);
             enemyHP.currentHealth = 50;            
         }
+        else if (enemyReference.name.ToLower().Contains("mushr"))
+        {
+            enemyHP.healthBar.SetMaxHealth(75);
+            enemyHP.currentHealth = 75;
+        }
 
         enemyAnimator = enemyReference.GetComponent<Animator>(); // enemy animation controller
         ghostBasic = GameObject.Find("ghost basic");
@@ -625,6 +630,7 @@ public class BattleSystem : MonoBehaviour
 
         return lowerCaseEnemyName switch
         {
+            string enemyName when enemyName.Contains("mushr") => Time.renderedFrameCount % 50,
             string enemyName when enemyName.Contains("enemyghost") => Time.renderedFrameCount % 50,
             string enemyName when enemyName.Contains("skeleton") => Time.renderedFrameCount % 50, //skeleton lower 2 abilities: knife or slam
             string enemyName when enemyName.Contains("monster") => Time.renderedFrameCount % 50 + 25, //monster middle 2: slam or fire
@@ -665,6 +671,10 @@ public class BattleSystem : MonoBehaviour
                 else if (enemyReference.name.ToLower().Contains("enemyghost"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the strange hat!" : dialogText.Replace("<harm>", "threw a spinning hat at");
+                }
+                else if (enemyReference.name.ToLower().Contains("mushr"))
+                {
+                    battleDialog.text = playerDodged ? "You dodged the wild mushroom!" : dialogText.Replace("<harm>", "threw a poisonous spin at");
                 }
                 else
                 {
@@ -753,6 +763,11 @@ public class BattleSystem : MonoBehaviour
                 battleDialog.text += " Coin + 20";
                 GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 20);
             }
+            else if (lowerCaseEnemyName.Contains("mushr"))
+            {
+                battleDialog.text += " Coin + 10";
+                GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 10);
+            }
             // This can be replaced with a confirmation UI when we're ready
             yield return new WaitForSecondsRealtime(2f);
 
@@ -812,6 +827,12 @@ public class BattleSystem : MonoBehaviour
         {
             battleDialog.color = Color.red;
             battleDialog.text = "What... are you...?";
+            yield return new WaitForSeconds(2.5f);
+        }
+        else if (enemyReference.name.ToLower().Contains("mushr"))
+        {
+            battleDialog.color = Color.red;
+            battleDialog.text = "I thought my poison was deadly...";
             yield return new WaitForSeconds(2.5f);
         }
     }
@@ -881,6 +902,14 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             ghostAnimator.SetBool("isDamaged", false);
         }
+        else if (enemyReference.name.ToLower().Contains("mushr")) // mushroom slam
+        {
+            yield return new WaitForSeconds(1f);
+            ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
+            slamSound.Play();
+            yield return new WaitForSeconds(0.4f);
+            ghostAnimator.SetBool("isDamaged", false);
+        }
         else
         { //skel slam
             yield return new WaitForSeconds(1.7f);
@@ -910,6 +939,13 @@ public class BattleSystem : MonoBehaviour
             enemyAnimator.SetBool("isDamaged", false);
         }
         else if (enemyReference.name.ToLower().Contains("enemyghost"))
+        {
+            // check timing later <<<
+            enemyAnimator.SetBool("isDamaged", true); //enemyghost damaged anim
+            yield return wait2sec;
+            enemyAnimator.SetBool("isDamaged", false);
+        }
+        else if (enemyReference.name.ToLower().Contains("mushr"))
         {
             // check timing later <<<
             enemyAnimator.SetBool("isDamaged", true); //enemyghost damaged anim
@@ -983,12 +1019,19 @@ public class BattleSystem : MonoBehaviour
             if (enemyReference.name.ToLower().Contains("enemyghost")) // enemy ghost hat throw sound
             {
                 knifeSound.PlayDelayed(1.2f);
+                yield return new WaitForSeconds(1.5f);
+            }
+            else if (enemyReference.name.ToLower().Contains("mushr")) // mushr throw sound
+            {
+                knifeSound.PlayDelayed(0.7f);
+                yield return new WaitForSeconds(1f);
+                enemyAnimator.SetBool(anim, false);
             }
             else
             {
+                yield return new WaitForSeconds(1.5f);
                 knifeSound.PlayDelayed(1.1f);
             }
-            yield return new WaitForSeconds(1.5f);
             ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
             yield return new WaitForSeconds(1.8f);
             ghostAnimator.SetBool("isDamaged", false);
@@ -1055,6 +1098,14 @@ public class BattleSystem : MonoBehaviour
             yield return wait1sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
+        else if (enemyReference.name.ToLower().Contains("mushr"))
+        {
+            // check timing later <<<
+            yield return new WaitForSeconds(0.2f);
+            enemyAnimator.SetBool("isDamaged", true); //mushroom damaged anim
+            yield return wait1sec;
+            enemyAnimator.SetBool("isDamaged", false);
+        }
         else
         {
             // check timing later <<<
@@ -1080,6 +1131,10 @@ public class BattleSystem : MonoBehaviour
                 StartCoroutine(animateThrow("isThrow"));
             }
             else if (enemyReference.name.ToLower().Contains("enemyghost")) // enemy ghost hat throw
+            {
+                StartCoroutine(animateThrow("isThrow"));
+            }
+            else if (enemyReference.name.ToLower().Contains("mushr")) // mushroom throw
             {
                 StartCoroutine(animateThrow("isThrow"));
             }

@@ -2766,6 +2766,7 @@ MonoBehaviour:
   - {fileID: 3124537134492634221, guid: 711c0ee44df329f45b20811ec4bae2b6, type: 3}
   - {fileID: 7093917440301500035, guid: fa3ca4bac36767e498ebe40281da452b, type: 3}
   - {fileID: 7950771442120256487, guid: f381d8c28d6b7384c8f667343f3bf7e9, type: 3}
+  - {fileID: 4788247745073655787, guid: c690a3ac7a9522f48890cceaeef2a656, type: 3}
   enemyNameText: {fileID: 361218002}
 --- !u!1 &1677652188
 GameObject:
