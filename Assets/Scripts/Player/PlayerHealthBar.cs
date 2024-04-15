@@ -8,6 +8,8 @@ public class PlayerHealthBar : MonoBehaviour
 	public int currentHealth;
 	private bool isPlayer;
 	public GameObject floatingDamage;
+	public AudioClip coinCollectSFX;
+	private AudioSource audioSource;
 
 	private void Start()
 	{
@@ -21,6 +23,8 @@ public class PlayerHealthBar : MonoBehaviour
 		{
 			healthBar.SetHealth(maxHealth);
 		}
+		
+		audioSource = GetComponent<AudioSource>();
 	}
 	public int TakeDamage(int damage, bool isPlayer = true)
 	{
@@ -63,5 +67,6 @@ public class PlayerHealthBar : MonoBehaviour
 	public void AddCoins(float coin)
 	{
 		GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + coin);
+		audioSource.PlayOneShot(coinCollectSFX);
 	}
 }

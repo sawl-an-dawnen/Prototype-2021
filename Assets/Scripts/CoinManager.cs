@@ -15,5 +15,5 @@ public class CoinManager : MonoBehaviour
 	public void UpdateCoinText()
 	{
 		coinText.text = GameManager.Instance.GetCoins().ToString();
-	}
+    }
 }
