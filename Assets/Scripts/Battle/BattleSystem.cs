@@ -738,8 +738,8 @@ public class BattleSystem : MonoBehaviour
             battleDialog.color = Color.white;
             battleDialog.text = "You have prevailed!";
             // give random equipment
-            String equip = GameObject.Find("InventoryManager").GetComponent<InventoryManager>().GiveRandomEquipment();
-            battleDialog.text += "\nGet " + equip;
+            InventoryItem equip = GameObject.Find("InventoryManager").GetComponent<InventoryManager>().GiveRandomEquipment();
+            battleDialog.text += "\nGet " + equip.itemName + " (" + equip.specialInfo + ")";
             var lowerCaseEnemyName = PlayerPrefs.GetString("ObjectToSpawn").ToLower();
             if (lowerCaseEnemyName.Contains("skeleton"))
             {

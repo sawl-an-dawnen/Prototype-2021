@@ -29,7 +29,6 @@ public class InventoryManager : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         spellsManager = GameObject.Find("SpellsManager").GetComponent<SpellsManager>();
-        pm = GameObject.FindGameObjectWithTag("PopMan").GetComponent<PopUpManager>();
         gameManager.RegisterInventoryManager(this);
     }
 
@@ -40,6 +39,7 @@ public class InventoryManager : MonoBehaviour
         {
             spellsManager.AddEquipment(item);
         }
+        pm = GameObject.FindGameObjectWithTag("PopMan").GetComponent<PopUpManager>();
         pm.CreatePopUp("You Found " + item.itemName + ", press 'I' to check your inventory", item.itemIcon);
     }
 
@@ -52,7 +52,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public string GiveRandomEquipment()
+    public InventoryItem GiveRandomEquipment()
     {
         // Array of available equipment
         InventoryItem[] equipmentArray = { helmet, boots, axe, sword };
@@ -89,7 +89,7 @@ public class InventoryManager : MonoBehaviour
         {
             AddEquipFromBattle(chosenEquipment);
             Debug.Log("Chosen Equipment: " + chosenEquipment.itemName);
-            return chosenEquipment.itemName;
+            return chosenEquipment;
         }
         else
         {
