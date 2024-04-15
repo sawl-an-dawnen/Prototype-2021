@@ -24296,7 +24296,7 @@ PrefabInstance:
     - target: {fileID: 6957958040399178567, guid: 700ff031308e7264aa35bc26c58c9df4, type: 3}
       propertyPath: coinCollectSFX
       value: 
-      objectReference: {fileID: 8300000, guid: fe8bcc40323270d4b9a93384ce2b1341, type: 3}
+      objectReference: {fileID: 8300000, guid: 0b06378e5d67cfb44a669b2df629265c, type: 3}
     - target: {fileID: 6957958040399178585, guid: 700ff031308e7264aa35bc26c58c9df4, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -26358,7 +26358,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: eaad244b1d6e0a54d8b1801adef8c745, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a4cfd8dd815d8364984c55932de44588, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
