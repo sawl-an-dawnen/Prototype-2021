@@ -8,6 +8,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static Rune;
+using Cinemachine;
 
 [Serializable]
 public enum BattleState { START, PLAYER_TURN, ENEMY_TURN, WON, LOST }
@@ -87,6 +88,9 @@ public class BattleSystem : MonoBehaviour
     public GameObject fireboltAsset;
     public GameObject lightningAsset;
     public GameObject knifeAsset;
+    public CinemachineVirtualCamera primaryCamera;
+    public CinemachineVirtualCamera mcCamera;
+    public CinemachineVirtualCamera enemyCamera;
 
   
     public GameObject enemyStunAsset;
@@ -223,10 +227,25 @@ public class BattleSystem : MonoBehaviour
             enemyHP.healthBar.SetMaxHealth(75);
             enemyHP.currentHealth = 75;
         }
+        else if(enemyReference.name.ToLower().Contains("horse"))
+        {
+            enemyHP.healthBar.SetMaxHealth(150);
+            enemyHP.currentHealth = 150;            
+        }
+        else if(enemyReference.name.ToLower().Contains("enemyghost"))
+        {
+            enemyHP.healthBar.SetMaxHealth(50);
+            enemyHP.currentHealth = 50;            
+        }
 
         enemyAnimator = enemyReference.GetComponent<Animator>(); // enemy animation controller
         ghostBasic = GameObject.Find("ghost basic");
         ghostAnimator = ghostBasic.GetComponent<Animator>();
+
+        //enable primary camera and disable other cameras
+        primaryCamera.enabled = true;
+        mcCamera.enabled = false;
+        enemyCamera.enabled = false;
 
     }
 
@@ -316,6 +335,11 @@ public class BattleSystem : MonoBehaviour
     IEnumerator ProcessTurn()
     {
         StartCombatRound();
+        // enable player camera and disable other cameras
+        primaryCamera.enabled = false;
+        mcCamera.enabled = true;
+        enemyCamera.enabled = false;
+
         foreach (var fun in playerTurnEndListeners)
         {
             fun();
@@ -342,6 +366,7 @@ public class BattleSystem : MonoBehaviour
 
         foreach (var action in turnActions)
         {
+
             if (action.action.name == "Heal")
             {
                 selfHeal();
@@ -351,8 +376,8 @@ public class BattleSystem : MonoBehaviour
                 battleDialog.text = "The enemy takes " + action.action.name + "!";
                 var gameObj = action.actionFunc(true);
                 yield return new WaitForSeconds(action.waitTime);
-                yield return SpellEffectByEnemy(action);
                 GameObject.Destroy(gameObj);
+                yield return SpellEffectByEnemy(action);
             }
 
             yield return new WaitForSeconds(dialogWaitTime);
@@ -369,6 +394,11 @@ public class BattleSystem : MonoBehaviour
         }
         else if (remaningStunTurns < 1)
         {
+            // enable enemy camera and disable other cameras
+            primaryCamera.enabled = false;
+            mcCamera.enabled = false;
+            enemyCamera.enabled = true;
+
             state = BattleState.ENEMY_TURN;
             StartCoroutine(EnemyTurn());
         }
@@ -422,6 +452,13 @@ public class BattleSystem : MonoBehaviour
                     break;
             }
         }
+        else if (action.action.name == "Electrocute" && enemyReference.name.ToLower().Contains("skel"))
+        {
+            enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 4), false);
+            battleDialog.color = Color.red;
+            battleDialog.text = "<size=60%> was that supposed to hurt?";
+            yield return new WaitForSeconds(2.5f);
+        }
         else if (action.action.name == "Knife" && enemyReference.name.ToLower().Contains("eye"))
         {
             enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * playerAttack), false);
@@ -456,53 +493,123 @@ public class BattleSystem : MonoBehaviour
                     break;
             }
         }
-        else if (action.action.name == "Fireball" && enemyReference.name.ToLower().Contains("horse"))
+        else if (action.action.name == "Slam" && enemyReference.name.ToLower().Contains("eye"))
         {
+            enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 4), false);
+            battleDialog.color = Color.red;
+            battleDialog.text = "<size=60%> I won't go easy on you just cause you offer hugs!";
+            yield return new WaitForSeconds(2.5f);
+        }
+        else if (enemyReference.name.ToLower().Contains("horse"))
+        {
+            Debug.Log("about to deal horse some damage");
+            if ((action.action.name == "Fireball" || action.action.name == "FireElement") && enemyReference.name.ToLower().Contains("horse"))
+            {
+                switch (DialogueCounter)
+                {
+                    case 0:
+                        DialogueCounter++;
+                        enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost/2 * 1.1 * playerAttack), false);
+                        battleDialog.color = Color.white;
+                        battleDialog.text = "The boss started to glow slightly red";
+                        yield return new WaitForSeconds(1.7f);
+                        battleDialog.color = Color.red;
+                        battleDialog.text = "<size=60%> Who turned on the heater?";
+                        yield return new WaitForSeconds(2f);
+                        break;
+                    case 1:
+                        DialogueCounter++;
+                        enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost/2 * 1.2 * playerAttack), false);
+                        battleDialog.color = Color.white;
+                        battleDialog.text = "The boss turned even more red";
+                        yield return new WaitForSeconds(1.7f);
+                        battleDialog.color = Color.red;
+                        battleDialog.text = "<size=60%>  Somebody! Turn on the A/C!";
+                        yield return new WaitForSeconds(2f);
+                        battleDialog.text = "<size=60%>  Oh wait... Our utility bills have been due for ages";
+                        yield return new WaitForSeconds(2f);
+                        break;
+                    case 2:
+                        DialogueCounter++;
+                        enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost/2 * 1.3 * playerAttack), false);
+                        battleDialog.color = Color.white;
+                        battleDialog.text = "The boss started melting";
+                        yield return new WaitForSeconds(1f);
+                        battleDialog.color = Color.red;
+                        battleDialog.text = "<size=60%> Go be a pyromaniac somewhere else!";
+                        yield return new WaitForSeconds(2.5f);
+                        break;
+                    default:
+                        DialogueCounter++;
+                        enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost/2 * 1.5 * playerAttack), false);
+                        battleDialog.color = Color.red;
+                        battleDialog.text = "<size=60%> I am about to have a heat stroke!";
+                        yield return new WaitForSeconds(2f);
+                        break;
+                }
+            }
+            else if (action.action.name == "Knife")
+            {
+                enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 4), false);
+                battleDialog.color = Color.red;
+                battleDialog.text = "<size=60%> Who brings a knife to a sword fight?";
+                yield return new WaitForSeconds(2.5f);
+            }
+            else if ((action.action.name == "Slam" || action.action.name == "WaterElement" || action.action.name == "EarthElement"))
+            {
+                enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 4), false);
+                battleDialog.color = Color.red;
+                battleDialog.text = "<size=60%> You Call that an attack?";
+                yield return new WaitForSeconds(2.5f);
+            }
+            else if (action.action.name == "Electrocute")
+            {
+                enemyNewHP = enemyHP.TakeDamage((int)(-1 * playerPowerBoost * playerAttack / 4), false);
+                battleDialog.color = Color.red;
+                battleDialog.text = "<size=60%> That gets my blood pumping!";
+                yield return new WaitForSeconds(2.5f);
+            }
+            else
+            {
+                enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * playerAttack / 2, false);
+            }
+        }
+        else if (action.action.name == "Electrocute" && enemyReference.name.ToLower().Contains("enemyghost"))
+        {
+            enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * playerAttack), false);
             switch (DialogueCounter)
             {
                 case 0:
                     DialogueCounter++;
-                    enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 8 * playerAttack, false);
                     battleDialog.color = Color.white;
-                    battleDialog.text = "The boss started to glow slightly red";
-                    yield return new WaitForSeconds(1.7f);
+                    battleDialog.text = "Enemy Ghost's figure started to flicker";
+                    yield return new WaitForSeconds(1.5f);
                     battleDialog.color = Color.red;
-                    battleDialog.text = "<size=60%> Who turned on the heater?";
-                    yield return new WaitForSeconds(2f);
+                    battleDialog.text = "<size=60%> I thought i saw my afterlife for a second there, oh wait...";
+                    yield return new WaitForSeconds(2.5f);
                     break;
                 case 1:
                     DialogueCounter++;
-                    enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 9 * playerAttack, false);
-                    battleDialog.color = Color.white;
-                    battleDialog.text = "The boss turned even more red";
-                    yield return new WaitForSeconds(1.7f);
                     battleDialog.color = Color.red;
-                    battleDialog.text = "<size=60%>  Somebody! Turn on the A/C!";
-                    yield return new WaitForSeconds(2f);
-                    battleDialog.text = "<size=60%>  Oh wait... Our utility bills have been due for ages";
-                    yield return new WaitForSeconds(2f);
+                    battleDialog.text = "<size=60%> I think i just saw an old man waving to me from the other side of the river";
+                    yield return new WaitForSeconds(2.5f);
                     break;
                 case 2:
                     DialogueCounter++;
-                    enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 10 * playerAttack, false);
-                    battleDialog.color = Color.white;
-                    battleDialog.text = "The boss started melting";
-                    yield return new WaitForSeconds(1f);
                     battleDialog.color = Color.red;
-                    battleDialog.text = "<size=60%> Go be a pyromaniac somewhere else!";
+                    battleDialog.text = "<size=60%> I thought ghost's being weak to electric moves was a propaganda by pokemon!!";
                     yield return new WaitForSeconds(2.5f);
-                    break;
-                default:
-                    DialogueCounter++;
-                    enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * 12 * playerAttack, false);
-                    battleDialog.color = Color.red;
-                    battleDialog.text = "<size=60%> I am about to have a heat stroke!";
-                    yield return new WaitForSeconds(2f);
                     break;
             }
         }
+        else if ((action.action.name == "EarthElement" || action.action.name == "WaterElement" || action.action.name == "Knife" || action.action.name == "Slam") && enemyReference.name.ToLower().Contains("enemyghost"))
+        {
+            enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 8), false);
+            battleDialog.color = Color.red;
+            battleDialog.text = "<size=60%> That went right through!";
+            yield return new WaitForSeconds(1.5f);
+        }
 		else if (action.action.name == "ElementalInfluence")
-
         {
 			enemyNewHP = enemyHP.TakeDamage(Mathf.CeilToInt(EleInfluenceDamange * (1 + playerAttackPower / 100.0f)), false);
 		}
@@ -528,6 +635,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
+
         int randomInt = getRandomAbilityBasedOnEnemyType();
         CombatOptions enemyAction = CombatOptions.Knife;
         battleDialog.color = Color.white;
@@ -609,6 +717,10 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
+            // enable the primary camera after the curernt turn is over
+            primaryCamera.enabled = true;
+            mcCamera.enabled = false;
+            enemyCamera.enabled = false;
             state = BattleState.PLAYER_TURN;
             PlayerTurn();
         }
@@ -860,7 +972,7 @@ public class BattleSystem : MonoBehaviour
         {
             StartCoroutine(enemyhurtLightning());
         }
-
+        
         return lightningObj;
     }
 
@@ -1168,7 +1280,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.PLAYER_TURN)
         {
-            turnActions.Add(new(CombatOptions.Electrocute, 2f, sendLightning));
+            turnActions.Add(new(CombatOptions.Electrocute, 3.5f, sendLightning));
         }
     }
 
