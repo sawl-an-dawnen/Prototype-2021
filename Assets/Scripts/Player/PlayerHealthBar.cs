@@ -8,7 +8,6 @@ public class PlayerHealthBar : MonoBehaviour
 	public int currentHealth;
 	private bool isPlayer;
 	public GameObject floatingDamage;
-	public TextMeshProUGUI textMeshProPrefab;
 
 	private void Start()
 	{
