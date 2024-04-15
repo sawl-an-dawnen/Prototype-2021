@@ -15,7 +15,6 @@ public class InventoryManager : MonoBehaviour
     public InventoryItem sword;
     public DialogueUI dialogueUI;
     public GameObject toDestroy;
-    private PopUpManager pm;
 
     private bool hasNews1;
     private bool hasNews2;
@@ -23,25 +22,33 @@ public class InventoryManager : MonoBehaviour
     private bool condition;
 
     private GameManager gameManager;
+    private PopUpManager pm;
+    private SpellsManager spellsManager;
 
     private void Start()
     {
         gameManager = GameManager.Instance;
+        spellsManager = GameObject.Find("SpellsManager").GetComponent<SpellsManager>();
+        pm = GameObject.FindGameObjectWithTag("PopMan").GetComponent<PopUpManager>();
         gameManager.RegisterInventoryManager(this);
     }
 
-    public void AddItem(InventoryItem item, bool fromBattle)
+    public void AddItem(InventoryItem item)
     {
-        SpellsManager spellsManager = GameObject.Find("SpellsManager").GetComponent<SpellsManager>();
         gameManager.AddItem(item);
         if (item.isEquip)
         {
             spellsManager.AddEquipment(item);
         }
-        if (!fromBattle)
+        pm.CreatePopUp("You Found " + item.itemName + ", press 'I' to check your inventory", item.itemIcon);
+    }
+
+    public void AddEquipFromBattle(InventoryItem item)
+    {
+        gameManager.AddItem(item);
+        if (item.isEquip)
         {
-            pm = GameObject.FindGameObjectWithTag("PopMan").GetComponent<PopUpManager>();
-            pm.CreatePopUp("You Found " + item.itemName + ", press 'I' to check your inventory", item.itemIcon);
+            spellsManager.AddEquipment(item);
         }
     }
 
@@ -80,7 +87,7 @@ public class InventoryManager : MonoBehaviour
         // Give the chosen equipment to the player
         if (chosenEquipment != null)
         {
-            AddItem(chosenEquipment, true);
+            AddEquipFromBattle(chosenEquipment);
             Debug.Log("Chosen Equipment: " + chosenEquipment.itemName);
             return chosenEquipment.itemName;
         }
