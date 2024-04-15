@@ -2474,6 +2474,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 404984594}
+    - target: {fileID: 6957958040399178567, guid: 700ff031308e7264aa35bc26c58c9df4, type: 3}
+      propertyPath: coinCollectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 0b06378e5d67cfb44a669b2df629265c, type: 3}
     - target: {fileID: 6957958040399178585, guid: 700ff031308e7264aa35bc26c58c9df4, type: 3}
       propertyPath: m_RootOrder
       value: 1
