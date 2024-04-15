@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealthBar : MonoBehaviour
 {
@@ -24,12 +25,14 @@ public class PlayerHealthBar : MonoBehaviour
 	}
 	public int TakeDamage(int damage, bool isPlayer = true)
 	{
+		string currentSceneName = SceneManager.GetActiveScene().name;
 		Debug.Log("Taking damage: " + damage);
-		GameObject damageInstance = Instantiate(floatingDamage, transform.position + new Vector3(0f, 500f, 0f), Quaternion.identity, transform);
-		TextMeshProUGUI textMeshPro = damageInstance.GetComponentInChildren<TextMeshProUGUI>();
-		textMeshPro.text = damage.ToString();
-		if (damage > 0)
+
+		if (damage > 0 && currentSceneName == "Combat Arena")
 		{
+			GameObject damageInstance = Instantiate(floatingDamage, transform.position + new Vector3(0f, 500f, 0f), Quaternion.identity, transform);
+			TextMeshProUGUI textMeshPro = damageInstance.GetComponentInChildren<TextMeshProUGUI>();
+			textMeshPro.text = damage.ToString();
 			if (!isPlayer)
 			{
 				textMeshPro.rectTransform.localPosition = new Vector3(605f, 500f, 0f);

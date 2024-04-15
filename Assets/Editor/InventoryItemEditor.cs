@@ -11,6 +11,7 @@ public class InventoryItemEditor : Editor
     private SerializedProperty itemInfoProp;
     private SerializedProperty equippedProp;
     private SerializedProperty equipTypeProp;
+    private SerializedProperty equipRarityProp;
     private SerializedProperty equipAttackProp;
     private SerializedProperty equipDefenseProp;
     private SerializedProperty specialInfoProp;
@@ -24,6 +25,7 @@ public class InventoryItemEditor : Editor
         itemInfoProp = serializedObject.FindProperty("itemInfo");
         equippedProp = serializedObject.FindProperty("equipped");
         equipTypeProp = serializedObject.FindProperty("equipType");
+        equipRarityProp = serializedObject.FindProperty("equipRarity");
         equipAttackProp = serializedObject.FindProperty("equipAttack");
         equipDefenseProp = serializedObject.FindProperty("equipDefense");
         specialInfoProp = serializedObject.FindProperty("specialInfo");
@@ -41,6 +43,7 @@ public class InventoryItemEditor : Editor
         {
             EditorGUILayout.PropertyField(equippedProp);
             EditorGUILayout.PropertyField(equipTypeProp);
+            EditorGUILayout.PropertyField(equipRarityProp);
             EditorGUILayout.PropertyField(equipAttackProp);
             EditorGUILayout.PropertyField(equipDefenseProp);
             EditorGUILayout.PropertyField(specialInfoProp);

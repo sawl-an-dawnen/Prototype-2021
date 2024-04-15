@@ -19,6 +19,7 @@ MonoBehaviour:
   itemInfo: 
   equipped: 0
   equipType: 0
+  equipRarity: 2
   equipAttack: 2
   equipDefense: 10
-  specialInfo: R
+  specialInfo: SR

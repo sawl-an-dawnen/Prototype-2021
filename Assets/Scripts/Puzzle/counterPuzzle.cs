@@ -27,9 +27,6 @@ public class counterPuzzle : MonoBehaviour
     public string spellToGet;
     private Sprite img;
     private AudioSource audioSource;
-    
-
-    private PopUpManager pm;
 
     public void Resume()
 	{
@@ -126,7 +123,6 @@ public class counterPuzzle : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 		successText.gameObject.SetActive(false);
         successImage.gameObject.SetActive(false);
-        pm = GameObject.FindGameObjectWithTag("PopMan").GetComponent<PopUpManager>();
     }
 
 	void Update()
@@ -143,15 +139,7 @@ public class counterPuzzle : MonoBehaviour
 			successImage.gameObject.SetActive(true);
             audioSource.Play();
 
-            GameManager.Instance.AvailableSpells[spellToGet] = true;
-            foreach (GameManager.Spell spell in GameManager.Instance.spells)
-            {
-                if (spell.name == spellToGet)
-                {
-                    img = spell.prefabButton.image.sprite;
-                }
-            }
-            pm.CreatePopUp("You Found " + spellToGet + ", press 'I' to check your inventory", img);
+            GameManager.Instance.AddSpell(spellToGet);
         }
 	}
 

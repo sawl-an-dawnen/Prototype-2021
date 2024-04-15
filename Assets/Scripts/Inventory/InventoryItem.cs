@@ -15,6 +15,14 @@ public enum EquipmentType
     Unknown
 }
 
+public enum Rarity
+{
+    N,
+    R,
+    SR,
+    UR
+}
+
 [CreateAssetMenu(menuName = "Inventory/Item")]
 public class InventoryItem : ScriptableObject
 {
@@ -30,6 +38,7 @@ public class InventoryItem : ScriptableObject
     [Header("Equipment")]
     public bool equipped;
     public EquipmentType equipType;
+    public Rarity equipRarity;
     public int equipAttack;
     public int equipDefense;
     public string specialInfo;

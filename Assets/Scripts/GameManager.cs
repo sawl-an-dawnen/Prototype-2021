@@ -96,6 +96,20 @@ public class GameManager : MonoBehaviour
 		return 0;
 	}
 
+	public void AddSpell(string spellToAdd)
+    {
+		AvailableSpells[spellToAdd] = true;
+		foreach (Spell spell in spells)
+		{
+			if (spell.name == spellToAdd)
+			{
+				Sprite img = spell.prefabButton.image.sprite;
+				GameObject.Find("PopUpManager").GetComponent<PopUpManager>().CreatePopUp("You Found " + spellToAdd + ", press 'I' to check your inventory", img);
+			}
+		}
+		SaveCheckpoint();
+	}
+
 	public void SetPlayerHealth(int i)
 	{
 		playerHealth = i;
