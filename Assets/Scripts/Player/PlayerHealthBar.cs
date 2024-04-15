@@ -41,7 +41,7 @@ public class PlayerHealthBar : MonoBehaviour
 		}
 
 		int oldHealth = currentHealth;
-		currentHealth = Mathf.Min(Mathf.Max(0, currentHealth - damage), 100);
+		currentHealth = Mathf.Min(Mathf.Max(0, currentHealth - damage), 500);
 
 		if (isPlayer)
 		{

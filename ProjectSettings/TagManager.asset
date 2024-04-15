@@ -16,6 +16,7 @@ TagManager:
   - PopMan
   - EmptyTile
   - SlidingPuzzle
+  - vcam2
   layers:
   - Default
   - TransparentFX
