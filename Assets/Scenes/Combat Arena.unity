@@ -2500,6 +2500,8 @@ MonoBehaviour:
   maxHealth: 45
   healthBar: {fileID: 1390503111}
   currentHealth: 45
+  floatingDamage: {fileID: 6349645014437641891, guid: 5aa00954d4f94a444a79d58bf1a303e0, type: 3}
+  textMeshProPrefab: {fileID: 3570673415712380573, guid: 52b43af90f6625a489989ba26d23809b, type: 3}
 --- !u!114 &1662389404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8609,6 +8611,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3736514195767739697, guid: cc2e61f16d1e597469db1bb9edac25c2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3736514195767739697, guid: cc2e61f16d1e597469db1bb9edac25c2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3736514195767739697, guid: cc2e61f16d1e597469db1bb9edac25c2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3736514195767739697, guid: cc2e61f16d1e597469db1bb9edac25c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -8659,6 +8673,14 @@ PrefabInstance:
     - target: {fileID: 3736514195767739709, guid: cc2e61f16d1e597469db1bb9edac25c2, type: 3}
       propertyPath: m_Name
       value: BattleCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3736514195767739710, guid: cc2e61f16d1e597469db1bb9edac25c2, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3736514195767739711, guid: cc2e61f16d1e597469db1bb9edac25c2, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3854815291559714170, guid: cc2e61f16d1e597469db1bb9edac25c2, type: 3}
       propertyPath: bs
@@ -9145,6 +9167,8 @@ MonoBehaviour:
   maxHealth: 100
   healthBar: {fileID: 415954969}
   currentHealth: 100
+  floatingDamage: {fileID: 6349645014437641891, guid: 5aa00954d4f94a444a79d58bf1a303e0, type: 3}
+  textMeshProPrefab: {fileID: 3570673415712380573, guid: 52b43af90f6625a489989ba26d23809b, type: 3}
 --- !u!114 &4588520314567333479
 MonoBehaviour:
   m_ObjectHideFlags: 0
