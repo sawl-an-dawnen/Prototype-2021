@@ -79,17 +79,17 @@ public class EquipmentSlot : MonoBehaviour, IPointerClickHandler
             headSlot.EquipGear(equipment);
         if (equipType == EquipmentType.Body)
             bodySlot.EquipGear(equipment);
-        if (equipType == EquipmentType.Shirt)
+        if (equipType == EquipmentType.Belt)
             shirtSlot.EquipGear(equipment);
-        if (equipType == EquipmentType.Legs)
+        if (equipType == EquipmentType.Relic)
             legsSlot.EquipGear(equipment);
         if (equipType == EquipmentType.MainHand)
             mainHandSlot.EquipGear(equipment);
         if (equipType == EquipmentType.OffHand)
             offHandSlot.EquipGear(equipment);
-        if (equipType == EquipmentType.Relic)
+        if (equipType == EquipmentType.Neck)
             relicSlot.EquipGear(equipment);
-        if (equipType == EquipmentType.Feet)
+        if (equipType == EquipmentType.Ring)
             feetSlot.EquipGear(equipment);
 
         EmptySlot();

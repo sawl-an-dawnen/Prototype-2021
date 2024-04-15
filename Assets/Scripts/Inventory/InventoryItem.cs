@@ -6,12 +6,12 @@ public enum EquipmentType
 {
     Head,
     Body,
-    Shirt,
-    Legs,
+    Belt,
+    Relic,
     MainHand,
     OffHand,
-    Relic,
-    Feet,
+    Neck,
+    Ring,
     Unknown
 }
 
@@ -46,7 +46,7 @@ public class InventoryItem : ScriptableObject
     public void PreviewEquipment()
     {
         PlayerStatus playerStatus = GameObject.Find("StatPanel").GetComponent<PlayerStatus>();
-        playerStatus.PreviewEquipmentStatus(itemIcon, equipAttack, equipDefense, specialInfo);
+        playerStatus.PreviewEquipmentStatus(itemIcon, itemName, equipAttack, equipDefense, specialInfo);
     }
 
     public void Equip()

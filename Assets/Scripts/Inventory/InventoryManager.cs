@@ -15,6 +15,7 @@ public class InventoryManager : MonoBehaviour
     public InventoryItem sword;
     public DialogueUI dialogueUI;
     public GameObject toDestroy;
+    public InventoryItem[] equipmentArray;
 
     private bool hasNews1;
     private bool hasNews2;
@@ -55,7 +56,7 @@ public class InventoryManager : MonoBehaviour
     public InventoryItem GiveRandomEquipment()
     {
         // Array of available equipment
-        InventoryItem[] equipmentArray = { helmet, boots, axe, sword };
+        //InventoryItem[] equipmentArray = { helmet, boots, axe, sword };
 
         // Calculate total weights based on rarity
         int totalWeight = 0;
