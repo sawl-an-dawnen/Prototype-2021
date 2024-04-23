@@ -73,6 +73,16 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	private float gametime = 0;
+
+	void Update()
+	{
+		if(SceneName != "MainMenu" && SceneName != "IntroStory" && SceneName != "EndingStory")
+		{
+			gametime += Time.deltaTime;
+		}
+	}
+
 	private Dictionary<int, int> playerInventory = new Dictionary<int, int>();
 
 	public void AddToInventory(int itemID, int quantity)
@@ -108,6 +118,10 @@ public class GameManager : MonoBehaviour
 			}
 		}
 		SaveCheckpoint();
+	}
+	public float GetGameTime()
+	{
+		return gametime;
 	}
 
 	public void SetPlayerHealth(int i)

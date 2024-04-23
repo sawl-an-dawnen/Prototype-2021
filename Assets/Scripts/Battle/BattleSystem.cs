@@ -132,6 +132,7 @@ public class BattleSystem : MonoBehaviour
 	private int waterCount;
 	private int EleInfluenceDamange;
     private TurnbasedDialogHandler turnbasedDialogHandler;
+    private float enemyDifficulty = 1f;
 
     public void StartCombatRound()
 	{
@@ -200,6 +201,7 @@ public class BattleSystem : MonoBehaviour
 
 	void Start()
     {
+        float gametime = GameManager.Instance.GetGameTime();
 		animator = GetComponent<Animator>();
         state = BattleState.START;
         player = GameObject.FindWithTag("Player");
@@ -216,32 +218,39 @@ public class BattleSystem : MonoBehaviour
 
         enemyReference.GetComponent<Rigidbody>().constraints = (RigidbodyConstraints)122;
 
+        //set enemy difficulty
+        int timeslot = (int)(gametime/120);
+        float currentDifficulty = timeslot * 0.05f;
+        enemyDifficulty = enemyDifficulty + currentDifficulty;
+        int enemyhealth;
+
         // Adjust the enemy health based on enemy type
         if (enemyReference.name.ToLower().Contains("skel"))
         {
-            enemyHP.healthBar.SetMaxHealth(45);
-            enemyHP.currentHealth = 45;
+            enemyhealth = (int)(45*enemyDifficulty);
         }
         else if (enemyReference.name.ToLower().Contains("eye"))
         {
-            enemyHP.healthBar.SetMaxHealth(75);
-            enemyHP.currentHealth = 75;
+            enemyhealth = (int)(75*enemyDifficulty);
         }
         else if(enemyReference.name.ToLower().Contains("horse"))
         {
-            enemyHP.healthBar.SetMaxHealth(150);
-            enemyHP.currentHealth = 150;            
+            enemyhealth = (int)(150*enemyDifficulty);      
         }
         else if(enemyReference.name.ToLower().Contains("enemyghost"))
         {
-            enemyHP.healthBar.SetMaxHealth(50);
-            enemyHP.currentHealth = 50;            
+            enemyhealth = (int)(50*enemyDifficulty);      
         }
         else if (enemyReference.name.ToLower().Contains("mushr"))
         {
-            enemyHP.healthBar.SetMaxHealth(75);
-            enemyHP.currentHealth = 75;
+            enemyhealth = (int)(75*enemyDifficulty);
         }
+        else
+        {
+            enemyhealth = (int)(100*enemyDifficulty);
+        }
+        enemyHP.healthBar.SetMaxHealth(enemyhealth);
+        enemyHP.currentHealth = enemyhealth;
 
         enemyAnimator = enemyReference.GetComponent<Animator>(); // enemy animation controller
         ghostBasic = GameObject.Find("ghost basic");
@@ -424,10 +433,11 @@ public class BattleSystem : MonoBehaviour
         int enemyNewHP;
 		int playerAttackPower = GameManager.Instance.GetPlayerAttack();
         int playerAttack = Mathf.CeilToInt(action.action.damage * (1 + playerAttackPower / 100.0f));
+        Debug.Log("got" + playerAttack);
 
 		if (action.action.name == "Slam" && enemyReference.name.ToLower().Contains("skel"))
         {
-            enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * playerAttack), false);
+            enemyNewHP = enemyHP.TakeDamage((int)(1.5f * playerPowerBoost/2 * playerAttack), false);
             GameManager.Instance.foundWeakness("Slam");
             switch (DialogueCounter)
             {
@@ -466,7 +476,7 @@ public class BattleSystem : MonoBehaviour
         }
         else if (action.action.name == "Knife" && enemyReference.name.ToLower().Contains("eye"))
         {
-            enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * playerAttack), false);
+            enemyNewHP = enemyHP.TakeDamage((int)(1.5f * playerPowerBoost/2 * playerAttack), false);
             switch (DialogueCounter)
             {
                 case 0:
@@ -574,9 +584,13 @@ public class BattleSystem : MonoBehaviour
                 battleDialog.text = "<size=60%> That gets my blood pumping!";
                 yield return new WaitForSeconds(2.5f);
             }
+            else if (action.action.name == "ElementalInfluence")
+            {
+			    enemyNewHP = enemyHP.TakeDamage(Mathf.CeilToInt(EleInfluenceDamange * (1 + playerAttackPower / 100.0f)), false);
+		    }
             else
             {
-                enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * playerAttack / 2, false);
+                enemyNewHP = enemyHP.TakeDamage(playerPowerBoost/2 * playerAttack, false);
             }
         }
         else if (action.action.name == "Electrocute" && enemyReference.name.ToLower().Contains("enemyghost"))
@@ -620,7 +634,7 @@ public class BattleSystem : MonoBehaviour
 		}
 		else
         {
-            enemyNewHP = enemyHP.TakeDamage(playerPowerBoost * playerAttack / 2, false);
+            enemyNewHP = enemyHP.TakeDamage(playerPowerBoost/2 * playerAttack, false);
         }
 	}
 
@@ -679,7 +693,6 @@ public class BattleSystem : MonoBehaviour
                 else
                 {
                     battleDialog.text = playerDodged ? "You dodged the throwing knife!" : dialogText.Replace("<harm>", "threw a knife at");
-                    
                 }
                 yield return wait1sec;
                 break;
@@ -714,7 +727,7 @@ public class BattleSystem : MonoBehaviour
             var enemyName = PlayerPrefs.GetString("ObjectToSpawn").ToLower();
             var damage = (int)enemyAction.damage * (enemyName.Contains("chess") || enemyName.Contains("horse") ? 2 : 1);//if final boss x2 damage
             damage = damage / (enemyAction == CombatOptions.Electrocute && playerDodged ? 2 : 1);//id dodging electrocute, only 1/2 damage 
-            playerHP.TakeDamage(Mathf.CeilToInt(damage * (1 - playerDefensePower / 100.0f)), true);
+            playerHP.TakeDamage(Mathf.CeilToInt(enemyDifficulty * damage * (1 - playerDefensePower / 100.0f)), true);
         }
         playerDodged = false;
 
@@ -1163,8 +1176,17 @@ public class BattleSystem : MonoBehaviour
         {
             GameObject.Instantiate(healAsset, GameObject.Find("ghost basic").transform);
         } catch (Exception) { }
-        playerHP.TakeDamage(-(int)CombatOptions.Heal.damage);
-        battleDialog.text = $"You gained {(int)CombatOptions.Heal.damage}HP";
+        if (playerHP.currentHealth <= 85)
+        {
+            playerHP.TakeDamage(-(int)CombatOptions.Heal.damage);
+            battleDialog.text = $"You gained {(int)CombatOptions.Heal.damage}HP";
+        }
+        else
+        {
+            int healing = 100 - playerHP.currentHealth;
+            playerHP.TakeDamage(-healing);
+            battleDialog.text = $"You gained {healing}HP";
+        }
         healSound.Play();
 
         return null;
