@@ -17,8 +17,11 @@ public class SceneChangeInvokable : MonoBehaviour, Invokable
 	public RawImage image;
 	//Video To Play [Assign from the Editor]
 	public VideoClip videoToPlay;
+	public VideoClip videoToEnd;
 
 	private VideoPlayer videoPlayer;
+	private VideoPlayer videoPlayer2;
+
 	private VideoSource videoSource;
 
 	IEnumerator ChangeScene()
@@ -52,9 +55,34 @@ public class SceneChangeInvokable : MonoBehaviour, Invokable
 
 		transitionAnim.SetTrigger("Start");
 		yield return new WaitForSeconds(1);
-		SceneManager.LoadScene(sceneName);
 		Resources.UnloadUnusedAssets();
-        transitionAnim.SetTrigger("End");
+
+		//Add VideoPlayer to the GameObject
+		Destroy(videoPlayer);
+		videoPlayer2 = gameObject.AddComponent<VideoPlayer>();
+		//Disable Play on Awake for Video
+		videoPlayer2.playOnAwake = false;
+		videoPlayer2.skipOnDrop = false;
+		//We want to play from video clip not from url
+		videoPlayer2.source = VideoSource.VideoClip;
+		videoPlayer2.clip = videoToEnd;
+		videoPlayer2.Prepare();
+		//Wait until video is prepared
+		while (!videoPlayer2.isPrepared)
+		{
+			yield return null;
+		}
+		//Assign the Texture from Video to RawImage to be displayed
+		image.texture = videoPlayer2.texture;
+		SceneManager.LoadScene(sceneName);
+		transitionAnim.SetTrigger("End");
+		videoPlayer2.Play();
+		while (videoPlayer2.isPlaying)
+		{
+			yield return null;
+		}
+		Destroy(videoPlayer);
+
 	}
 	public void Exit()
 	{
