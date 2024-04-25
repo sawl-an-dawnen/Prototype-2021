@@ -59,7 +59,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 1000
   m_TargetDisplay: 0
 --- !u!114 &5787465785834772653
 MonoBehaviour:
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1380216606349970578}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2147483647
 --- !u!1 &6013862213860267870
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,8 +291,7 @@ MonoBehaviour:
   IsDoor: 0
   CanEnter: 0
   image: {fileID: 972456561790633588}
-  videoToPlay: {fileID: 32900000, guid: 4aab6cd6c419d27448e759b83d9fa845, type: 3}
-  videoToEnd: {fileID: 32900000, guid: 7702b66349bb3a34bbe893e903549534, type: 3}
+  videoToPlay: {fileID: 32900000, guid: 9a328f23ea97992479514f40c205f973, type: 3}
 --- !u!95 &2551489439692984317
 Animator:
   serializedVersion: 5

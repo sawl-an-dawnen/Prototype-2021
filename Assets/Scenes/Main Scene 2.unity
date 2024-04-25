@@ -14524,6 +14524,7 @@ GameObject:
   - component: {fileID: 1567320495}
   - component: {fileID: 1567320494}
   - component: {fileID: 1567320493}
+  - component: {fileID: 1567320496}
   m_Layer: 5
   m_Name: Canvas door
   m_TagString: Untagged
@@ -14559,7 +14560,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1567320491}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
@@ -14611,8 +14612,33 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 1000
   m_TargetDisplay: 0
+--- !u!114 &1567320496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567320491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcdf6c616326c4aaeb610b335fbb67fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useDefaultBackgroundColor: 0
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4278190335
+  useDefaultTextColor: 0
+  textColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  font: {fileID: 0}
+  fontSize: 12
+  fontStyle: 2
+  alignment: 0
+  textDropShadow: 0
 --- !u!1001 &1575556412
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25263,8 +25289,7 @@ MonoBehaviour:
   IsDoor: 1
   CanEnter: 1
   image: {fileID: 322107867}
-  videoToPlay: {fileID: 32900000, guid: 4aab6cd6c419d27448e759b83d9fa845, type: 3}
-  videoToEnd: {fileID: 32900000, guid: 7702b66349bb3a34bbe893e903549534, type: 3}
+  videoToPlay: {fileID: 32900000, guid: 9a328f23ea97992479514f40c205f973, type: 3}
 --- !u!114 &7890197201192915556
 MonoBehaviour:
   m_ObjectHideFlags: 0
