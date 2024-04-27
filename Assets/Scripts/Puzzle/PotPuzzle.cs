@@ -50,7 +50,7 @@ public class PotPuzzle : MonoBehaviour
 	void ApplyColorToGhostPrefab(Color color)
 	{
 		Renderer ghostRenderer = ghostPrefab.GetComponent<Renderer>();
-		Material ghostMaterial = ghostRenderer.material;
+		Material ghostMaterial = ghostRenderer.sharedMaterial;
 
 		ghostMaterial.SetColor("_Color_Me", color);
 	}
