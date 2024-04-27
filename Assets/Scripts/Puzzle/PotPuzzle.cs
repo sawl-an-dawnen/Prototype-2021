@@ -35,23 +35,28 @@ public class PotPuzzle : MonoBehaviour
 			Pause();
 		}
 	}
-		public void OnMixButtonClick()
-	{
-		float redValue = redSlider.value;
-		float greenValue = greenSlider.value;
-		float blueValue = blueSlider.value;
 
-		Color mixedColor = new Color(redValue, greenValue, blueValue);
+	public void OnMixButtonClick()
+	{
+		float redValue = redSlider.value / 255f;
+		float greenValue = greenSlider.value / 255f;
+		float blueValue = blueSlider.value / 255f;
+
+		Color mixedColor = new Color(redValue, greenValue, blueValue, 0f);
 
 		ApplyColorToGhostPrefab(mixedColor);
 		Resume();
 	}
 
+
 	void ApplyColorToGhostPrefab(Color color)
 	{
+		var gm = GameManager.Instance;
 		Renderer ghostRenderer = ghostPrefab.GetComponent<Renderer>();
 		Material ghostMaterial = ghostRenderer.sharedMaterial;
 
 		ghostMaterial.SetColor("_Color_Me", color);
+		gm.SetPlayerColor(color);
+		gm.SaveCheckpoint();
 	}
 }

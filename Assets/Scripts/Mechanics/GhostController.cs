@@ -24,8 +24,9 @@ namespace Platformer.Mechanics
         private float keyVert = 0f;
         private bool upPressed = false;
         private bool jumpPending = false;
-        /*internal new*/
-        public Collider _collider;
+		public GameObject ghostPrefab;
+		/*internal new*/
+		public Collider _collider;
 
         public Rigidbody _rigidbody;
         [SerializeField] AudioSource jumpSound;
@@ -61,7 +62,13 @@ namespace Platformer.Mechanics
                 {
                     transform.position = pos;
                 }
-            }
+				Color color = gm.GetPlayerColor();
+				Debug.Log(color);
+				Renderer ghostRenderer = ghostPrefab.GetComponent<Renderer>();
+				Material ghostMaterial = ghostRenderer.sharedMaterial;
+				ghostMaterial.SetColor("_Color_Me", color);
+				gm.SetPlayerColor(color);
+			}
 
             if (shopManager == null)
             {

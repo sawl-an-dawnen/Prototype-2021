@@ -271,6 +271,7 @@ MonoBehaviour:
   dialogueUI: {fileID: 0}
   jump: 3
   controlEnabled: 1
+  ghostPrefab: {fileID: 3734104273929046798, guid: 6b150e376631e5d4390f6a6a5cf91a12, type: 3}
   _collider: {fileID: 6957958040399178564}
   _rigidbody: {fileID: 6957958040399178565}
   jumpSound: {fileID: 6957958040399178584}
