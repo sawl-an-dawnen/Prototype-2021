@@ -376,6 +376,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 60857436}
   m_CullTransparentMesh: 1
+--- !u!114 &84668085 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8142451650061072202, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+  m_PrefabInstance: {fileID: 1752244109452913949}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a490ff8746eae9447a7eab8d0dc44369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &86554247 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8950806255565733741, guid: ece772f912916044dbf0b06c3fba0d89, type: 3}
@@ -11628,6 +11639,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d827419e139a7994d8a36d3550d9860b, type: 3}
   m_PrefabInstance: {fileID: 1858609844}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1236083176 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8524753723871229271, guid: 700ff031308e7264aa35bc26c58c9df4, type: 3}
+  m_PrefabInstance: {fileID: 6957958041905200215}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1241851139
 GameObject:
   m_ObjectHideFlags: 0
@@ -19714,6 +19730,34 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3889926660444873228, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926660444873228, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926660444873228, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 84668085}
+    - target: {fileID: 3889926660444873228, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926660444873228, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMixButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926660444873228, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PotPuzzle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926660444873228, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3889926660521262906, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -19854,6 +19898,10 @@ PrefabInstance:
       propertyPath: m_Texture
       value: 
       objectReference: {fileID: 2800000, guid: 6168cc12fc85cba428a9381d546f91a0, type: 3}
+    - target: {fileID: 8142451650061072202, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: ghostPrefab
+      value: 
+      objectReference: {fileID: 1236083176}
     - target: {fileID: 8632345416304633822, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
       propertyPath: m_IsActive
       value: 1

@@ -9,9 +9,33 @@ public class PotPuzzle : MonoBehaviour
 	public Button mixButton;
 
 	public GameObject ghostPrefab;
+	public GameObject panel;
 
+	public void Resume()
+	{
+		panel.SetActive(false);
+		Time.timeScale = 1f;
+	}
 
-	public void OnMixButtonClick()
+	public void Pause()
+	{
+		panel.SetActive(true);
+		Time.timeScale = 0f;
+	}
+
+	void Start()
+	{
+		panel.SetActive(false);
+	}
+
+	void Update()
+	{
+		if (panel.activeSelf)
+		{
+			Pause();
+		}
+	}
+		public void OnMixButtonClick()
 	{
 		float redValue = redSlider.value;
 		float greenValue = greenSlider.value;
@@ -20,6 +44,7 @@ public class PotPuzzle : MonoBehaviour
 		Color mixedColor = new Color(redValue, greenValue, blueValue);
 
 		ApplyColorToGhostPrefab(mixedColor);
+		Resume();
 	}
 
 	void ApplyColorToGhostPrefab(Color color)
