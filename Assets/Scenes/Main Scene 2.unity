@@ -19710,6 +19710,62 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3889926660160057749, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926660521262906, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926660521262907, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926660521262907, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926660521262907, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926660521262907, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1386.0789
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926660521262907, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 774.2426
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926660521262907, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 998
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926660521262907, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 532
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926660524206396, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926661178396871, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926661638738667, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926661801126209, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889926662010076217, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4077129456834412114, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
       propertyPath: m_text
       value: 
@@ -19817,6 +19873,10 @@ PrefabInstance:
     - target: {fileID: 8953620764867363398, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: ClockPuzzleTrigger, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001173622263089635, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9066093415785074391, guid: b08381ebf613ff34fa0bfba72ebd21f4, type: 3}
       propertyPath: m_IsActive
