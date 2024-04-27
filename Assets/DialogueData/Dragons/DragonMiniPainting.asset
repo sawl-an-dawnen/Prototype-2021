@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - ...find my resting place...
-  - Return me to my rightful place...
   responses:
-  - responseText: Pick it up.
-    dialogueObject: {fileID: 11400000, guid: 34242b722c2b3ce4c96619d1b12c541d, type: 2}
+  - responseText: Interact
+    dialogueObject: {fileID: 11400000, guid: 49b494c41ed497f4db0250ef2aa0ae41, type: 2}
   needCondition: 0

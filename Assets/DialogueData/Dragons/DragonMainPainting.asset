@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - Where is my other half?
-  - Wait, did you find it? This feels so familiar
+  - 'Wait, did you find it? '
   responses: []
   needCondition: 0
