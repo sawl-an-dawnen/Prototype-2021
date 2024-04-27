@@ -318,6 +318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c0360db46dc4b60993d0cdc46f3f55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 0}
+  videoToPlay: {fileID: 32900000, guid: 9a328f23ea97992479514f40c205f973, type: 3}
 --- !u!114 &6957958040399178567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,6 +335,8 @@ MonoBehaviour:
   maxHealth: 100
   healthBar: {fileID: 0}
   currentHealth: 0
+  floatingDamage: {fileID: 0}
+  coinCollectSFX: {fileID: 0}
 --- !u!82 &6957958040399178584
 AudioSource:
   m_ObjectHideFlags: 0

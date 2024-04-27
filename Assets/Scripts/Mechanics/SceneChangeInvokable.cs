@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Platformer.Core;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 
 public class SceneChangeInvokable : MonoBehaviour, Invokable
@@ -11,26 +13,69 @@ public class SceneChangeInvokable : MonoBehaviour, Invokable
 	public bool IsDoor = true;
 	public bool CanEnter;
 
+	//Raw Image to Show Video Images [Assign from the Editor]
+	public RawImage image;
+	//Video To Play [Assign from the Editor]
+	public VideoClip videoToPlay;
+
+	private VideoPlayer videoPlayer;
+
+	private VideoSource videoSource;
+
+
     IEnumerator ChangeScene()
 	{
+		if (SceneManager.GetActiveScene().name != "Combat Arena")
+		{
+			//videoPlayer = GameObject.Find("GameManager").AddComponent<VideoPlayer>();
+			//videoPlayer.playOnAwake = false;
+			//videoPlayer.skipOnDrop = false;
+			//videoPlayer.source = VideoSource.VideoClip;
+			//videoPlayer.clip = videoToPlay;
+
+			videoPlayer = GameObject.Find("GameManager").GetComponent<VideoPlayer>();
+			videoPlayer.source = VideoSource.VideoClip;
+			videoPlayer.clip = videoToPlay;
+			videoPlayer.Prepare();
+			while (!videoPlayer.isPrepared)
+			{
+				yield return null;
+			}
+			image.texture = videoPlayer.texture;
+			videoPlayer.Play();
+		}
+
 		Debug.Log("Changing Scene");
 
 		var gm = GameManager.Instance;
 		gm.PlayDoorSound[sceneName] = IsDoor;
 
-		transitionAnim.SetTrigger("Start");
-		yield return new WaitForSeconds(1);
-		SceneManager.LoadScene(sceneName);
+		if (SceneManager.GetActiveScene().name != "Combat Arena")
+		{
+			DontDestroyOnLoad(videoPlayer);
+		}
+
+		yield return new WaitForSeconds(1.5f);
 		Resources.UnloadUnusedAssets();
-        transitionAnim.SetTrigger("End");
+		AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
+
+		/*
+		if (SceneManager.GetActiveScene().name != "Combat Arena")
+		{
+			Destroy(videoPlayer, 6);
+		}
+		*/
 	}
-	public void Exit()
+	
+
+    public void Exit()
 	{
 		Application.Quit();
 	}
 
 	public void Invoke()
 	{
+		Application.runInBackground = true;
 		string currentScene = SceneManager.GetActiveScene().name;
 		if (currentScene == "Main Scene 1" || currentScene == "Main Scene 2")
         {

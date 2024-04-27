@@ -106,7 +106,7 @@ public class Enemy : MonoBehaviour
 
             animator.SetBool("isChasing", true); // CHASE ANIM
 
-            Debug.Log("Chase");
+            //Debug.Log("Chase");
 			agent.SetDestination(player.transform.position);
 			agent.speed = 3.5f;
 
@@ -118,7 +118,7 @@ public class Enemy : MonoBehaviour
     // function does not seem to be executing ? 
     void Attack()
     {
-		Debug.Log("Attack");
+		//Debug.Log("Attack");
    
 	}
 
