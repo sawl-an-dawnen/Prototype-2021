@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
+using UnityEngine.UI;
 
 public class SceneSwitcher : MonoBehaviour
 {
@@ -12,6 +14,13 @@ public class SceneSwitcher : MonoBehaviour
 			StartCoroutine(SwitchSceneWithDelay(collision.gameObject));
 		}
 	}
+
+	//Raw Image to Show Video Images [Assign from the Editor]
+	public RawImage image;
+	//Video To Play [Assign from the Editor]
+	public VideoClip videoToPlay;
+	private VideoPlayer videoPlayer;
+	private VideoSource videoSource;
 
 	private IEnumerator SwitchSceneWithDelay(GameObject enemyToSpawn)
 	{
@@ -43,11 +52,37 @@ public class SceneSwitcher : MonoBehaviour
 		// We need to save the scene we're using before switching so we know what to return to
 		GameManager.Instance.PrepareForCombatSceneEnter(transform.position, enemyToSpawn.GetComponent<Enemy>().uID);
 		// Load the combat scene. Make sure you have this scene created in your Unity project.
-		SceneManager.LoadScene(newScene);
+
+
+		Debug.Log("enemy!!!");
+
+		//videoPlayer = GameObject.Find("GameManager").AddComponent<VideoPlayer>();
+		//videoPlayer.playOnAwake = false;
+		//videoPlayer.skipOnDrop = false;
+		//videoPlayer.source = VideoSource.VideoClip;
+		//videoPlayer.clip = videoToPlay;
+
+		videoPlayer = GameObject.Find("GameManager").GetComponent<VideoPlayer>();
+		videoPlayer.source = VideoSource.VideoClip;
+		videoPlayer.clip = videoToPlay;
+		videoPlayer.Prepare();
+		while (!videoPlayer.isPrepared)
+		{
+			yield return null;
+		}
+		image.texture = videoPlayer.texture;
+		videoPlayer.Play();
+
+		DontDestroyOnLoad(videoPlayer);
+		DontDestroyOnLoad(image);
+			
+		yield return new WaitForSeconds(2);
+		AsyncOperation op = SceneManager.LoadSceneAsync(newScene);
+		//Destroy(videoPlayer, 6);
 
 	}
-	
-	public void SwitchCombatSceneWithDelay(GameObject enemyToSpawn)
+
+    public void SwitchCombatSceneWithDelay(GameObject enemyToSpawn)
 	{
 		// Store the enemy to spawn and player health in the GameManager script
 		GameManager.Instance.enemyToSpawn = enemyToSpawn;

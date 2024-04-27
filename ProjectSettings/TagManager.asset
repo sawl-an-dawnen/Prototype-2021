@@ -17,6 +17,7 @@ TagManager:
   - EmptyTile
   - SlidingPuzzle
   - vcam2
+  - transitionstuff
   layers:
   - Default
   - TransparentFX

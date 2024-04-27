@@ -47,6 +47,9 @@ public class EnemySpawner : MonoBehaviour
 				case "EnemyGhost":
 					enemyName = "Ghost";
 					break;
+				case "Mushroom en":
+					enemyName = "Poisonous Mushroom";
+					break;
 				default:
 					enemyName = enemyToSpawn.name;
 					break;

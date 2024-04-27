@@ -639,6 +639,7 @@ GameObject:
   - component: {fileID: 5288112910513388516}
   - component: {fileID: 5288112910513388518}
   - component: {fileID: 5288112910513388517}
+  - component: {fileID: 7039547626258046386}
   m_Layer: 5
   m_Name: PotPuzzle
   m_TagString: Untagged
@@ -709,6 +710,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7039547626258046386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5288112910513388523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a490ff8746eae9447a7eab8d0dc44369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redSlider: {fileID: 5288112910510555113}
+  greenSlider: {fileID: 5288112911854821366}
+  blueSlider: {fileID: 5288112911303339006}
+  mixButton: {fileID: 5288112910187177683}
+  ghostPrefab: {fileID: 3734104273929046798, guid: 6b150e376631e5d4390f6a6a5cf91a12, type: 3}
 --- !u!1 &5288112910862799903
 GameObject:
   m_ObjectHideFlags: 0
