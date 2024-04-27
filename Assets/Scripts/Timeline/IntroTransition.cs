@@ -12,6 +12,7 @@ public class IntroTransition : MonoBehaviour
     public VideoClip videoToPlay;
 
     private VideoPlayer videoPlayer;
+    private VideoPlayer videoPlayerIN;
 
     private VideoSource videoSource;
 
@@ -25,9 +26,8 @@ public class IntroTransition : MonoBehaviour
 
     IEnumerator changeScene()
     {
+
         videoPlayer = gameObject.AddComponent<VideoPlayer>();
-        videoPlayer.playOnAwake = false;
-        videoPlayer.skipOnDrop = false;
         videoPlayer.source = VideoSource.VideoClip;
         videoPlayer.clip = videoToPlay;
         videoPlayer.Prepare();
@@ -39,7 +39,7 @@ public class IntroTransition : MonoBehaviour
         videoPlayer.Play();
         //Debug.Log("intro transition out");
 
-        yield return new WaitForSeconds(1.35f);
+        yield return new WaitForSeconds(2.35f);
         SceneManager.LoadScene(sceneToChange);
     }
 }

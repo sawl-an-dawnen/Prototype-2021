@@ -23,13 +23,17 @@ public class SceneChangeInvokable : MonoBehaviour, Invokable
 	private VideoSource videoSource;
 
 
-	IEnumerator ChangeScene()
+    IEnumerator ChangeScene()
 	{
 		if (SceneManager.GetActiveScene().name != "Combat Arena")
 		{
-			videoPlayer = GameObject.Find("GameManager").AddComponent<VideoPlayer>();
-			videoPlayer.playOnAwake = false;
-			videoPlayer.skipOnDrop = false;
+			//videoPlayer = GameObject.Find("GameManager").AddComponent<VideoPlayer>();
+			//videoPlayer.playOnAwake = false;
+			//videoPlayer.skipOnDrop = false;
+			//videoPlayer.source = VideoSource.VideoClip;
+			//videoPlayer.clip = videoToPlay;
+
+			videoPlayer = GameObject.Find("GameManager").GetComponent<VideoPlayer>();
 			videoPlayer.source = VideoSource.VideoClip;
 			videoPlayer.clip = videoToPlay;
 			videoPlayer.Prepare();
@@ -51,14 +55,16 @@ public class SceneChangeInvokable : MonoBehaviour, Invokable
 			DontDestroyOnLoad(videoPlayer);
 		}
 
-		yield return new WaitForSeconds(1.35f);
+		yield return new WaitForSeconds(1.5f);
 		Resources.UnloadUnusedAssets();
 		AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
 
+		/*
 		if (SceneManager.GetActiveScene().name != "Combat Arena")
 		{
 			Destroy(videoPlayer, 6);
 		}
+		*/
 	}
 	
 

@@ -16208,6 +16208,10 @@ PrefabInstance:
       value: Dodge
       objectReference: {fileID: 0}
     - target: {fileID: 6013862213860267869, guid: 21d886e05eef9f5498028605a617fe97, type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 322107867}
+    - target: {fileID: 6013862213860267869, guid: 21d886e05eef9f5498028605a617fe97, type: 3}
       propertyPath: transitionAnim
       value: 
       objectReference: {fileID: 1885970771}
@@ -23556,6 +23560,10 @@ PrefabInstance:
       propertyPath: dialogueUI
       value: 
       objectReference: {fileID: 909992398}
+    - target: {fileID: 6957958040399178566, guid: 700ff031308e7264aa35bc26c58c9df4, type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 322107867}
     - target: {fileID: 6957958040399178567, guid: 700ff031308e7264aa35bc26c58c9df4, type: 3}
       propertyPath: healthBar
       value: 

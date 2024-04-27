@@ -13509,6 +13509,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6013862213860267869, guid: 21d886e05eef9f5498028605a617fe97, type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 1332109939}
     - target: {fileID: 6013862213860267870, guid: 21d886e05eef9f5498028605a617fe97, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -21551,8 +21555,8 @@ GameObject:
   - component: {fileID: 5682205331049368074}
   - component: {fileID: 5682205331049368078}
   - component: {fileID: 5682205331049368077}
-  - component: {fileID: 5682205331049368076}
   - component: {fileID: 5682205331049368075}
+  - component: {fileID: 5682205331049368076}
   m_Layer: 0
   m_Name: Door_1
   m_TagString: Untagged
@@ -24599,6 +24603,10 @@ PrefabInstance:
       propertyPath: dialogueUI
       value: 
       objectReference: {fileID: 909992398}
+    - target: {fileID: 6957958040399178566, guid: 700ff031308e7264aa35bc26c58c9df4, type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 1332109939}
     - target: {fileID: 6957958040399178567, guid: 700ff031308e7264aa35bc26c58c9df4, type: 3}
       propertyPath: healthBar
       value: 
