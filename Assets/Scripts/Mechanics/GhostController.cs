@@ -63,7 +63,6 @@ namespace Platformer.Mechanics
                     transform.position = pos;
                 }
 				Color color = gm.GetPlayerColor();
-				Debug.Log(color);
 				Renderer ghostRenderer = ghostPrefab.GetComponent<Renderer>();
 				Material ghostMaterial = ghostRenderer.sharedMaterial;
 				ghostMaterial.SetColor("_Color_Me", color);
