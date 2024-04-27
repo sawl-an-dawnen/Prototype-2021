@@ -20,6 +20,7 @@ namespace Platformer.Mechanics
         public float coins;
         public bool CanOpen;
         [SerializeField] public List<string> items;
+		public Color playerColor;
 
         public Checkpoint(
             int playerHealth,
@@ -32,8 +33,9 @@ namespace Platformer.Mechanics
             string SceneName,
             float coins,
             bool CanOpen,
-            List<string> items
-            )
+            List<string> items,
+            Color playerColor
+			)
         {
             //this.playerHealth = Math.Min(100, playerHealth + 30);        
             this.playerHealth = playerHealth;
@@ -47,7 +49,8 @@ namespace Platformer.Mechanics
             this.coins = coins;
             this.CanOpen = CanOpen;
             this.items = items;
-        }
+            this.playerColor = playerColor;
+	}
 
         [Serializable]
         public class SceneSpawnsDict : SerializedDictionary<string, int>

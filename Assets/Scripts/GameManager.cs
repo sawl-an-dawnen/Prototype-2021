@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] public List<string> items;
 	[SerializeField] public int[,] shopItems = new int[5, 5];
 	[SerializeField] public string[] itemNames = new string[5];
+	[SerializeField] private Color playerColor;
 	public Checkpoint.SpawnsDict Spawns = new();
 	public Checkpoint.PlayDoorSoundDict PlayDoorSound = new();
 	public Checkpoint.PlayerPosDict PlayerPos = new();
@@ -164,6 +165,18 @@ public class GameManager : MonoBehaviour
 		return coins;
 	}
 
+	public Color GetPlayerColor()
+	{
+		return playerColor;
+	}
+
+	public Color SetPlayerColor(Color color)
+	{
+		playerColor = color;
+		return playerColor;
+	}
+
+
 	//public void AddCoins(float coin)
 	//{
 	//	//coins += coin;
@@ -250,7 +263,8 @@ public class GameManager : MonoBehaviour
 			SceneName,
 			coins,
 			CanOpen,
-			items
+			items,
+			playerColor
 		);
 		SaveFileManager.WriteToSaveFile(SaveFilePath, Checkpoint);
 	}
@@ -273,6 +287,7 @@ public class GameManager : MonoBehaviour
 		sceneChange.Invoke();
 		CanOpen = Checkpoint.CanOpen;
 		items = Checkpoint.items;
+		playerColor = Checkpoint.playerColor;
 		//SpellsManager spellsManager = GameObject.Find("SpellsManager").GetComponent<SpellsManager>();
 		//spellsManager.ContinuePanel();
 	}
@@ -281,7 +296,7 @@ public class GameManager : MonoBehaviour
 	{
 		const string scene = "IntroStory";
 		items.Clear();
-		Checkpoint = new(100, 5, 3, new(), new(), new(), CreateDefaultAvailableSpells(), scene, 0, false, new());
+		Checkpoint = new(100, 5, 3, new(), new(), new(), CreateDefaultAvailableSpells(), scene, 0, false, new(), new Color(1f, 1f, 1f, 0f));
 		SpellsManager spellsManager = GameObject.Find("SpellsManager").GetComponent<SpellsManager>();
 		spellsManager.ClearEquip();
 
