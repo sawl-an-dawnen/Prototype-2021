@@ -25,30 +25,40 @@ public class SceneChangeInvokable : MonoBehaviour, Invokable
 
 	IEnumerator ChangeScene()
 	{
-		videoPlayer = GameObject.Find("GameManager").AddComponent<VideoPlayer>();
-		videoPlayer.playOnAwake = false;
-		videoPlayer.skipOnDrop = false;
-		videoPlayer.source = VideoSource.VideoClip;
-		videoPlayer.clip = videoToPlay;
-		videoPlayer.Prepare();
-		while (!videoPlayer.isPrepared)
+		if (SceneManager.GetActiveScene().name != "Combat Arena")
 		{
-			yield return null;
+			videoPlayer = GameObject.Find("GameManager").AddComponent<VideoPlayer>();
+			videoPlayer.playOnAwake = false;
+			videoPlayer.skipOnDrop = false;
+			videoPlayer.source = VideoSource.VideoClip;
+			videoPlayer.clip = videoToPlay;
+			videoPlayer.Prepare();
+			while (!videoPlayer.isPrepared)
+			{
+				yield return null;
+			}
+			image.texture = videoPlayer.texture;
+			videoPlayer.Play();
 		}
-		image.texture = videoPlayer.texture;
-		videoPlayer.Play();
 
 		Debug.Log("Changing Scene");
 
 		var gm = GameManager.Instance;
 		gm.PlayDoorSound[sceneName] = IsDoor;
-		DontDestroyOnLoad(videoPlayer);
+
+		if (SceneManager.GetActiveScene().name != "Combat Arena")
+		{
+			DontDestroyOnLoad(videoPlayer);
+		}
 
 		yield return new WaitForSeconds(1.35f);
 		Resources.UnloadUnusedAssets();
 		AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
-		
-		Destroy(videoPlayer, 6);
+
+		if (SceneManager.GetActiveScene().name != "Combat Arena")
+		{
+			Destroy(videoPlayer, 6);
+		}
 	}
 	
 
