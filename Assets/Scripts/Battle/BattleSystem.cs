@@ -574,7 +574,7 @@ public class BattleSystem : MonoBehaviour
             {
                 enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 4), false);
                 battleDialog.color = Color.red;
-                battleDialog.text = "<size=60%> You Call that an attack?";
+                battleDialog.text = "<size=60%> You call that an attack?";
                 yield return new WaitForSeconds(2.5f);
             }
             else if (action.action.name == "Electrocute")
@@ -651,13 +651,13 @@ public class BattleSystem : MonoBehaviour
                 case 2:
                     DialogueCounter++;
                     battleDialog.color = Color.red;
-                    battleDialog.text = "<size=60%> you tring to master the art of cooking shrooms??";
+                    battleDialog.text = "<size=60%> you trying to master the art of cooking shrooms??";
                     yield return new WaitForSeconds(2.5f);
                     break;    
                 case 3:
                     DialogueCounter++;
                     battleDialog.color = Color.red;
-                    battleDialog.text = "<size=60%> any more and ther would be less room in this room!!";
+                    battleDialog.text = "<size=60%> I am not some gourmet mushroom!!";
                     yield return new WaitForSeconds(2.5f);
                     break;           
             }
@@ -717,25 +717,28 @@ public class BattleSystem : MonoBehaviour
                 if (enemyReference.name.ToLower().Contains("skel"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the swinging sword!" : dialogText.Replace("<harm>", "threw a swinging sword at");
-                    
+                    yield return wait1sec;
                 }
                 else if (enemyReference.name.ToLower().Contains("horse"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the deadly katanas!" : dialogText.Replace("<harm>", "threw deadly katanas at");
+                    yield return wait3sec;
                 }
                 else if (enemyReference.name.ToLower().Contains("enemyghost"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the strange hat!" : dialogText.Replace("<harm>", "threw a spinning hat at");
+                    yield return wait1sec;
                 }
                 else if (enemyReference.name.ToLower().Contains("mushr"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the wild mushroom!" : dialogText.Replace("<harm>", "threw a poisonous spin at");
+                    yield return wait1sec;
                 }
                 else
                 {
                     battleDialog.text = playerDodged ? "You dodged the throwing knife!" : dialogText.Replace("<harm>", "threw a knife at");
+                    yield return wait1sec;
                 }
-                yield return wait1sec;
                 break;
 
             case < 50:
@@ -1110,7 +1113,7 @@ public class BattleSystem : MonoBehaviour
             knifeSound.PlayDelayed(3.7f);
             yield return new WaitForSeconds(3.6f);
             ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
             ghostAnimator.SetBool("isDamaged", false);
         }
         else
