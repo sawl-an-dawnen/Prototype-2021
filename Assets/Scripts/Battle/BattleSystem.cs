@@ -628,6 +628,47 @@ public class BattleSystem : MonoBehaviour
             battleDialog.text = "<size=60%> That went right through!";
             yield return new WaitForSeconds(1.5f);
         }
+        else if(enemyReference.name.ToLower().Contains("mushr") && (action.action.name == "FireElement" || action.action.name == "Fireball"))
+        {
+            enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * playerAttack), false);
+            switch(DialogueCounter)
+            {
+                case 0:
+                    DialogueCounter++;
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "Enemy's body started to smoke";
+                    yield return new WaitForSeconds(1.5f);
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> Something smells good... oh wait, thats me!!";
+                    yield return new WaitForSeconds(2.5f);
+                    break;
+                case 1:
+                    DialogueCounter++;
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> Why are you trying to roast me? you can't even eat!!";
+                    yield return new WaitForSeconds(2.5f);
+                    break;         
+                case 2:
+                    DialogueCounter++;
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> you tring to master the art of cooking shrooms??";
+                    yield return new WaitForSeconds(2.5f);
+                    break;    
+                case 3:
+                    DialogueCounter++;
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> any more and ther would be less room in this room!!";
+                    yield return new WaitForSeconds(2.5f);
+                    break;           
+            }
+        }
+        else if(enemyReference.name.ToLower().Contains("mushr") && (action.action.name == "WaterElement"))
+        {
+            enemyNewHP = enemyHP.TakeDamage((int)(-1 * playerPowerBoost * playerAttack / 8), false);
+            battleDialog.color = Color.white;
+            battleDialog.text = "<size=60%> Thanks for the free drink!";
+            yield return new WaitForSeconds(1.5f);
+        }
 		else if (action.action.name == "ElementalInfluence")
         {
 			enemyNewHP = enemyHP.TakeDamage(Mathf.CeilToInt(EleInfluenceDamange * (1 + playerAttackPower / 100.0f)), false);
@@ -848,8 +889,10 @@ public class BattleSystem : MonoBehaviour
         else if (enemyReference.name.ToLower().Contains("mushr"))
         {
             battleDialog.color = Color.red;
-            battleDialog.text = "I thought my poison was deadly...";
-            yield return new WaitForSeconds(2.5f);
+            battleDialog.text = "I am...";
+            yield return new WaitForSeconds(1f);
+            battleDialog.text = "Inedible.....";
+            yield return new WaitForSeconds(1.5f);
         }
     }
 
