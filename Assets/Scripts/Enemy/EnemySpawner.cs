@@ -50,6 +50,9 @@ public class EnemySpawner : MonoBehaviour
 				case "Mushroom en":
 					enemyName = "Poisonous Mushroom";
 					break;
+				case "witch":
+					enemyName = "Wicked Witch";
+					break;
 				default:
 					enemyName = enemyToSpawn.name;
 					break;
