@@ -245,6 +245,10 @@ public class BattleSystem : MonoBehaviour
         {
             enemyhealth = (int)(75*enemyDifficulty);
         }
+        else if (enemyReference.name.ToLower().Contains("witch"))
+        {
+            enemyhealth = (int)(100 * enemyDifficulty);
+        }
         else
         {
             enemyhealth = (int)(100*enemyDifficulty);
@@ -433,7 +437,7 @@ public class BattleSystem : MonoBehaviour
         int enemyNewHP;
 		int playerAttackPower = GameManager.Instance.GetPlayerAttack();
         int playerAttack = Mathf.CeilToInt(action.action.damage * (1 + playerAttackPower / 100.0f));
-        Debug.Log("got" + playerAttack);
+        //Debug.Log("got" + playerAttack);
 
 		if (action.action.name == "Slam" && enemyReference.name.ToLower().Contains("skel"))
         {
@@ -471,7 +475,7 @@ public class BattleSystem : MonoBehaviour
         {
             enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 4), false);
             battleDialog.color = Color.red;
-            battleDialog.text = "<size=60%> was that supposed to hurt?";
+            battleDialog.text = "<size=60%> Was that supposed to hurt?";
             yield return new WaitForSeconds(2.5f);
         }
         else if (action.action.name == "Knife" && enemyReference.name.ToLower().Contains("eye"))
@@ -574,7 +578,7 @@ public class BattleSystem : MonoBehaviour
             {
                 enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 4), false);
                 battleDialog.color = Color.red;
-                battleDialog.text = "<size=60%> You Call that an attack?";
+                battleDialog.text = "<size=60%> You call that an attack?";
                 yield return new WaitForSeconds(2.5f);
             }
             else if (action.action.name == "Electrocute")
@@ -604,7 +608,7 @@ public class BattleSystem : MonoBehaviour
                     battleDialog.text = "Enemy Ghost's figure started to flicker";
                     yield return new WaitForSeconds(1.5f);
                     battleDialog.color = Color.red;
-                    battleDialog.text = "<size=60%> I thought i saw my afterlife for a second there, oh wait...";
+                    battleDialog.text = "<size=60%> I thought I saw my afterlife for a second there, oh wait...";
                     yield return new WaitForSeconds(2.5f);
                     break;
                 case 1:
@@ -628,6 +632,47 @@ public class BattleSystem : MonoBehaviour
             battleDialog.text = "<size=60%> That went right through!";
             yield return new WaitForSeconds(1.5f);
         }
+        else if(enemyReference.name.ToLower().Contains("mushr") && (action.action.name == "FireElement" || action.action.name == "Fireball"))
+        {
+            enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * playerAttack), false);
+            switch(DialogueCounter)
+            {
+                case 0:
+                    DialogueCounter++;
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "Enemy's body started to smoke";
+                    yield return new WaitForSeconds(1.5f);
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> Something smells good... oh wait, thats me!!";
+                    yield return new WaitForSeconds(2.5f);
+                    break;
+                case 1:
+                    DialogueCounter++;
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> Why are you trying to roast me? You can't even eat!!";
+                    yield return new WaitForSeconds(2.5f);
+                    break;         
+                case 2:
+                    DialogueCounter++;
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> You trying to master the art of cooking shrooms??";
+                    yield return new WaitForSeconds(2.5f);
+                    break;    
+                case 3:
+                    DialogueCounter++;
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> I am not some gourmet mushroom!!";
+                    yield return new WaitForSeconds(2.5f);
+                    break;           
+            }
+        }
+        else if(enemyReference.name.ToLower().Contains("mushr") && (action.action.name == "WaterElement"))
+        {
+            enemyNewHP = enemyHP.TakeDamage((int)(-1 * playerPowerBoost * playerAttack / 8), false);
+            battleDialog.color = Color.white;
+            battleDialog.text = "<size=60%> Thanks for the free drink!";
+            yield return new WaitForSeconds(1.5f);
+        }
 		else if (action.action.name == "ElementalInfluence")
         {
 			enemyNewHP = enemyHP.TakeDamage(Mathf.CeilToInt(EleInfluenceDamange * (1 + playerAttackPower / 100.0f)), false);
@@ -644,6 +689,7 @@ public class BattleSystem : MonoBehaviour
 
         return lowerCaseEnemyName switch
         {
+            string enemyName when enemyName.Contains("witch") => Time.renderedFrameCount % 50 + 28, //slam, fire, lightning 
             string enemyName when enemyName.Contains("mushr") => Time.renderedFrameCount % 50,
             string enemyName when enemyName.Contains("enemyghost") => Time.renderedFrameCount % 50,
             string enemyName when enemyName.Contains("skeleton") => Time.renderedFrameCount % 50, //skeleton lower 2 abilities: knife or slam
@@ -676,31 +722,60 @@ public class BattleSystem : MonoBehaviour
                 if (enemyReference.name.ToLower().Contains("skel"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the swinging sword!" : dialogText.Replace("<harm>", "threw a swinging sword at");
-                    
+                    yield return wait1sec;
                 }
                 else if (enemyReference.name.ToLower().Contains("horse"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the deadly katanas!" : dialogText.Replace("<harm>", "threw deadly katanas at");
+                    yield return wait3sec;
                 }
                 else if (enemyReference.name.ToLower().Contains("enemyghost"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the strange hat!" : dialogText.Replace("<harm>", "threw a spinning hat at");
+                    yield return wait1sec;
                 }
                 else if (enemyReference.name.ToLower().Contains("mushr"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the wild mushroom!" : dialogText.Replace("<harm>", "threw a poisonous spin at");
+                    yield return wait1sec;
+                }
+                else if (enemyReference.name.ToLower().Contains("witch")) // no throw anim implemented/added for witch
+                {
+                    battleDialog.text = playerDodged ? "You dodged the witch's wrath!" : dialogText.Replace("<harm>", "threw a surprise attack at");
                 }
                 else
                 {
                     battleDialog.text = playerDodged ? "You dodged the throwing knife!" : dialogText.Replace("<harm>", "threw a knife at");
+                    yield return wait1sec;
                 }
-                yield return wait1sec;
                 break;
 
             case < 50:
                 enemyAction = CombatOptions.Slam;
-                battleDialog.text = playerDodged ? "You dodged the enemy's slam!" : dialogText.Replace("<harm>", "slammed");
+                if (enemyReference.name.ToLower().Contains("skel"))
+                {
+                    battleDialog.text = playerDodged ? "You dodged the skeleton's slash!" : dialogText.Replace("<harm>", "unleashes a deadly slash at");
 
+                }
+                else if (enemyReference.name.ToLower().Contains("horse"))
+                {
+                    battleDialog.text = playerDodged ? "You dodged the knight's slam!" : dialogText.Replace("<harm>", "unleashes a furious slam at");
+                }
+                else if (enemyReference.name.ToLower().Contains("enemyghost"))
+                {
+                    battleDialog.text = playerDodged ? "You dodged a quick attack!" : dialogText.Replace("<harm>", "unleashes a quick attack at");
+                }
+                else if (enemyReference.name.ToLower().Contains("mushr"))
+                {
+                    battleDialog.text = playerDodged ? "You dodged the mushroom's squish!" : dialogText.Replace("<harm>", "unleashes a huge squish at");
+                }
+                else if (enemyReference.name.ToLower().Contains("witch"))
+                {
+                    battleDialog.text = playerDodged ? "You dodged the witch's wrath!" : dialogText.Replace("<harm>", "unleashes a wicked orb at");
+                }
+                else {
+                    battleDialog.text = playerDodged ? "You dodged the enemy's slam!" : dialogText.Replace("<harm>", "slammed");
+                }
                 if (!playerDodged) { 
                     sendSlam(false);
                     yield return wait1sec;
@@ -753,9 +828,10 @@ public class BattleSystem : MonoBehaviour
     {
         player.GetComponentInChildren<Rigidbody>().constraints = playerRBConstraints;//restore ability to move/rotate
         DialogueCounter = 0;    //Set the dialogue counter back to initial value
-        yield return DeathDialogues();
+        
         if (state == BattleState.WON)
         {
+            yield return DeathDialogues();
             winSound.Play();
             ghostAnimator.SetBool("isWin", true); //win anim
             battleDialog.color = Color.white;
@@ -766,12 +842,12 @@ public class BattleSystem : MonoBehaviour
             var lowerCaseEnemyName = PlayerPrefs.GetString("ObjectToSpawn").ToLower();
             if (lowerCaseEnemyName.Contains("skeleton"))
             {
-				battleDialog.text += "\nCoin + 30";
+				battleDialog.text += "\nCoin + 20";
 				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 30);
 			}
             else if (lowerCaseEnemyName.Contains("monster"))
             {
-				battleDialog.text += "\nCoin + 30";
+				battleDialog.text += "\nCoin + 10";
 				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 30);
 			}
             else if (lowerCaseEnemyName.Contains("enemyghost"))
@@ -783,6 +859,11 @@ public class BattleSystem : MonoBehaviour
             {
                 battleDialog.text += "\nCoin + 10";
                 GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 10);
+            }
+            else if (lowerCaseEnemyName.Contains("witch"))
+            {
+                battleDialog.text += "\nCoin + 20";
+                GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 20);
             }
             // This can be replaced with a confirmation UI when we're ready
             yield return new WaitForSecondsRealtime(2f);
@@ -848,7 +929,15 @@ public class BattleSystem : MonoBehaviour
         else if (enemyReference.name.ToLower().Contains("mushr"))
         {
             battleDialog.color = Color.red;
-            battleDialog.text = "I thought my poison was deadly...";
+            battleDialog.text = "I am...";
+            yield return new WaitForSeconds(1f);
+            battleDialog.text = "Inedible.....";
+            yield return new WaitForSeconds(1.5f);
+        }
+        else if (enemyReference.name.ToLower().Contains("witch"))
+        {
+            battleDialog.color = Color.red;
+            battleDialog.text = "May we meet again, J-";
             yield return new WaitForSeconds(2.5f);
         }
     }
@@ -926,6 +1015,15 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(0.4f);
             ghostAnimator.SetBool("isDamaged", false);
         }
+        else if (enemyReference.name.ToLower().Contains("witch")) // witch slam 
+        {
+            //check timing
+            yield return new WaitForSeconds(1.5f);
+            ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
+            slamSound.Play();
+            yield return new WaitForSeconds(2.5f);
+            ghostAnimator.SetBool("isDamaged", false);
+        }
         else
         { //skel slam
             yield return new WaitForSeconds(1.7f);
@@ -964,11 +1062,24 @@ public class BattleSystem : MonoBehaviour
         else if (enemyReference.name.ToLower().Contains("mushr"))
         {
             // check timing later <<<
-            enemyAnimator.SetBool("isDamaged", true); //enemyghost damaged anim
+            enemyAnimator.SetBool("isDamaged", true); //mushr damaged anim
             yield return wait2sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
-        // add horse
+        else if (enemyReference.name.ToLower().Contains("witch"))
+        {
+            // check timing later <<<
+            enemyAnimator.SetBool("isDamaged", true); //witch damaged anim
+            yield return wait2sec;
+            enemyAnimator.SetBool("isDamaged", false);
+        }
+        else if (enemyReference.name.ToLower().Contains("horse"))
+        {
+            // check timing later <<<
+            enemyAnimator.SetBool("isDamaged", true); //witch damaged anim
+            yield return wait2sec;
+            enemyAnimator.SetBool("isDamaged", false);
+        }
         else
         {
             yield return wait2sec;
@@ -1036,19 +1147,29 @@ public class BattleSystem : MonoBehaviour
             {
                 knifeSound.PlayDelayed(1.2f);
                 yield return new WaitForSeconds(1.5f);
+                ghostAnimator.SetBool("isDamaged", true); 
             }
             else if (enemyReference.name.ToLower().Contains("mushr")) // mushr throw sound
             {
                 knifeSound.PlayDelayed(0.7f);
                 yield return new WaitForSeconds(1f);
                 enemyAnimator.SetBool(anim, false);
+                ghostAnimator.SetBool("isDamaged", true); 
+            }
+            else if (enemyReference.name.ToLower().Contains("skel")) // skel throw sound
+            {
+                knifeSound.PlayDelayed(1f);
+                yield return new WaitForSeconds(1.6f);
+                ghostAnimator.SetBool("isDamaged", true);
+                yield return new WaitForSeconds(0.4f);
+                enemyAnimator.SetBool(anim, false);
             }
             else
             {
                 yield return new WaitForSeconds(1.5f);
                 knifeSound.PlayDelayed(1.1f);
+                ghostAnimator.SetBool("isDamaged", true); 
             }
-            ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
             yield return new WaitForSeconds(1.8f);
             ghostAnimator.SetBool("isDamaged", false);
         }
@@ -1067,7 +1188,7 @@ public class BattleSystem : MonoBehaviour
             knifeSound.PlayDelayed(3.7f);
             yield return new WaitForSeconds(3.6f);
             ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
             ghostAnimator.SetBool("isDamaged", false);
         }
         else

@@ -30,7 +30,7 @@ public class PlayerHealthBar : MonoBehaviour
 	public int TakeDamage(int damage, bool isPlayer = true)
 	{
 		string currentSceneName = SceneManager.GetActiveScene().name;
-		Debug.Log("Taking damage: " + damage);
+		//Debug.Log("Taking damage: " + damage);
 
 		if (damage > 0 && currentSceneName == "Combat Arena")
 		{

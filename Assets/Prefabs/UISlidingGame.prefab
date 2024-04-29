@@ -262,6 +262,8 @@ MonoBehaviour:
   Tile7: {fileID: 3109763986180222385}
   Tile8: {fileID: 3109763988171364278}
   puzzleComplete: {fileID: 8300000, guid: addbbd061f390a5409a7d5c46704d7ef, type: 3}
+  panel: {fileID: 0}
+  rewardItem: {fileID: 0}
 --- !u!82 &3109763986245254409
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1219,7 +1221,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Drawer Unlocked:
 
-    Got Research Files.'
+    Got Equipment!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
