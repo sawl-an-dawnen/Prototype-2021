@@ -59,6 +59,9 @@ public class EnemySpawner : MonoBehaviour
 				case "variEye":
 					enemyName = "Hollow Soul";
 					break;
+				case "variHat":
+					enemyName = "Mystery Ghost";
+					break;
 				default:
 					enemyName = enemyToSpawn.name;
 					break;
