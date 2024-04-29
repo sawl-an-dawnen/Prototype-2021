@@ -13,6 +13,11 @@ TagManager:
   - Event
   - anchorTag
   - enemyReference
+  - PopMan
+  - EmptyTile
+  - SlidingPuzzle
+  - vcam2
+  - transitionstuff
   layers:
   - Default
   - TransparentFX

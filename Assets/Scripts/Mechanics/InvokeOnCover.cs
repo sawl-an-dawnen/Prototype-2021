@@ -55,6 +55,7 @@ namespace Platformer.Mechanics
         {
             yield return new WaitForSeconds(ActiveWaitTime);
             isReady = true;
+
         }
     }
 }

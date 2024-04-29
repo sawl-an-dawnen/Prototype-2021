@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc55b6631176d6f4f99583ea64810bf1, type: 3}
+  m_Name: News3
+  m_EditorClassIdentifier: 
+  itemName: News3
+  itemIcon: {fileID: 21300000, guid: fc2dda2ebb282a945bb0422b2f1b5836, type: 3}
+  itemButtonPrefab: {fileID: 2330410019291914215, guid: 9bd034cfc433d6641a234ac9f725a3af, type: 3}
+  itemInfo: Guests share their experiences of an intriguing tea time anomaly precisely
+    at 10:30, offering a critical clue to those attempting to decipher the mansion's
+    temporal puzzle.

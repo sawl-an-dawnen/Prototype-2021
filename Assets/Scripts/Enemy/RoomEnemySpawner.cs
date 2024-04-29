@@ -10,6 +10,7 @@ public class RoomEnemySpawner : RoomSpawner
     public override void Start()
     {
         base.Start();
+        
         GetComponentInChildren<Enemy>().uID = uID;
         if (!GameManager.Instance.CanSpawn(uID))
         {

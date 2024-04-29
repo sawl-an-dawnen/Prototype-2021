@@ -1,5 +1,106 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1380216606349970578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7135040938723974171}
+  - component: {fileID: 7860520745307184532}
+  - component: {fileID: 5787465785834772653}
+  - component: {fileID: 6218642007449356693}
+  m_Layer: 5
+  m_Name: Canvas
+  m_TagString: transitionstuff
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7135040938723974171
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380216606349970578}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1624552769938881158}
+  m_Father: {fileID: 6013862213860267867}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!223 &7860520745307184532
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380216606349970578}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 1000
+  m_TargetDisplay: 0
+--- !u!114 &5787465785834772653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380216606349970578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!114 &6218642007449356693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380216606349970578}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 2147483647
 --- !u!1 &6013862213860267870
 GameObject:
   m_ObjectHideFlags: 0
@@ -14,6 +115,7 @@ GameObject:
   - component: {fileID: 2551489439692984317}
   - component: {fileID: 2767644550855343835}
   - component: {fileID: 8654621077096372546}
+  - component: {fileID: 8523526895417963443}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -32,7 +134,8 @@ Transform:
   m_LocalPosition: {x: -6.050367, y: 3.9400465, z: 13.423413}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7135040938723974171}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -50,10 +153,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Spellmanager: {fileID: 2767644550855343835}
   inputManager: {fileID: 8654621077096372546}
+  inventoryManager: {fileID: 0}
   enemyToSpawn: {fileID: 0}
   playerHealth: 0
+  playerAttack: 0
+  playerDefense: 0
   coins: 0
   CanOpen: 0
+  items: []
   itemNames:
   - 
   - 
@@ -74,6 +181,8 @@ MonoBehaviour:
     m_Values: 
   Checkpoint:
     playerHealth: 0
+    playerAttack: 0
+    playerDefense: 0
     spawns:
       m_Keys: []
       m_Values: []
@@ -89,35 +198,83 @@ MonoBehaviour:
     SceneName: 
     coins: 0
     CanOpen: 0
+    items: []
   sceneChange: {fileID: 6013862213860267869}
   SaveFilePath: 
   DefaultSpells:
-  - Slam
-  - Dodge
-  - Fireball
+  - Fire Element
+  - Earth Element
+  - Water Element
   - Electrocute
+  - Dodge
   spells:
   - name: Dodge
     prefabButton: {fileID: 7313625124187144831, guid: 93c78d886e4da4cef997f5d82b6092c5, type: 3}
     cost: 00000000000000000200000001000000
+    description: Avoid the next enemy attack.
+    strongAgainst: 
+    weaknessIsFound: 0
   - name: Electrocute
     prefabButton: {fileID: 7313625124187144831, guid: 450f000e58d2241d08f966eaaa11d930, type: 3}
     cost: 01000000010000000000000001000000
+    description: Deal 14 damage to an enemy.
+    strongAgainst: 
+    weaknessIsFound: 0
   - name: Fireball
     prefabButton: {fileID: 7313625124187144831, guid: e19c2675809564a30b2c2c9fbf908b4a, type: 3}
     cost: 00000000020000000000000001000000
+    description: Deal 16 damage to an enemy.
+    strongAgainst: Knight
+    weaknessIsFound: 0
   - name: Heal
     prefabButton: {fileID: 7313625124187144831, guid: c0586a6f781804850932d5d6b0e70876, type: 3}
     cost: 02000000000000000000000000000000
+    description: Recover 15 HP.
+    strongAgainst: 
+    weaknessIsFound: 0
   - name: Slam
     prefabButton: {fileID: 7313625124187144831, guid: 0c3ab464326ec4633b9552892ceeb4f8, type: 3}
     cost: 00000000000000000100000002000000
+    description: Deal 14 damage to an enemy.
+    strongAgainst: Skeleton
+    weaknessIsFound: 0
   - name: Stun
     prefabButton: {fileID: 7313625124187144831, guid: 9d62408400cb24a8dbaaba553797282a, type: 3}
     cost: 00000000010000000100000002000000
+    description: Deal 6 damage and delay next enemy attack.
+    strongAgainst: 
+    weaknessIsFound: 0
   - name: Knife Throw
     prefabButton: {fileID: 7313625124187144831, guid: e1eb69a7264a44ad8bb484cebc52a106, type: 3}
     cost: 00000000000000000100000001000000
+    description: Deal 9 damage to an enemy.
+    strongAgainst: Eye Monster
+    weaknessIsFound: 0
+  - name: Fire Element
+    prefabButton: {fileID: 7313625124187144831, guid: 3dbf97a75ea7e42769aeb95281e1e417, type: 3}
+    cost: 00000000010000000000000000000000
+    description: Unleash a flicker of flames.
+    strongAgainst: 
+    weaknessIsFound: 0
+  - name: Earth Element
+    prefabButton: {fileID: 7313625124187144831, guid: 2755ecf8b88b0483fbebc1cd27df8f5c, type: 3}
+    cost: 00000000000000000100000000000000
+    description: Hurl a green round spell.
+    strongAgainst: 
+    weaknessIsFound: 0
+  - name: Water Element
+    prefabButton: {fileID: 7313625124187144831, guid: 47bd9a9f2f5184761afe134998d8fd8d, type: 3}
+    cost: 01000000000000000000000000000000
+    description: Summon a gentle wave.
+    strongAgainst: 
+    weaknessIsFound: 0
+  - name: Elemental Influence
+    prefabButton: {fileID: 7313625124187144831, guid: 1ae16947774c04ac29c091559fdf6645, type: 3}
+    cost: 01000000010000000100000000000000
+    description: Combine feeble fire, meager water, and brittle earth, amplifying
+      their influence
+    strongAgainst: 
+    weaknessIsFound: 0
 --- !u!114 &6013862213860267869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,10 +287,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75c1f89380ea724d8e1a7d9e19a2367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionAnim: {fileID: 0}
+  transitionAnim: {fileID: 2551489439692984317}
   sceneName: 
   IsDoor: 0
   CanEnter: 0
+  image: {fileID: 972456561790633588}
+  videoToPlay: {fileID: 32900000, guid: 9a328f23ea97992479514f40c205f973, type: 3}
 --- !u!95 &2551489439692984317
 Animator:
   serializedVersion: 5
@@ -196,3 +355,109 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd87764537703944ca69dc79cdc6951b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!328 &8523526895417963443
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6013862213860267870}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 9a328f23ea97992479514f40c205f973, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 0
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
+--- !u!1 &7382598199633444961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1624552769938881158}
+  - component: {fileID: 6281064383664505931}
+  - component: {fileID: 972456561790633588}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1624552769938881158
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7382598199633444961}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7135040938723974171}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6281064383664505931
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7382598199633444961}
+  m_CullTransparentMesh: 1
+--- !u!114 &972456561790633588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7382598199633444961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 8400000, guid: 58e1e1793e5bd614f85f258c0254948d, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1

@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     public string uID;
     GameObject player;
     NavMeshAgent agent;
+    [SerializeField] private DialogueUI dialogueUI;
+    public DialogueUI DialogueUI => dialogueUI;
 
     [SerializeField] LayerMask groundLayer, playerLayer;
 
@@ -50,7 +52,15 @@ public class Enemy : MonoBehaviour
 
 	void Update()
     {
-        if (SceneManager.GetActiveScene().name != "Combat Arena")
+        if (SceneManager.GetActiveScene().name != "Combat Arena" && dialogueUI.IsOpen)
+        {
+            agent.SetDestination(transform.position);
+            animator.SetBool("isChasing", false);
+            animator.SetBool("isPatroling", false);
+            return;
+        }
+
+        if (SceneManager.GetActiveScene().name != "Combat Arena" && !(dialogueUI.IsOpen))
         {
             Vector3 newPosition = transform.position;
 		    newPosition.z = player.transform.position.z;
@@ -96,7 +106,7 @@ public class Enemy : MonoBehaviour
 
             animator.SetBool("isChasing", true); // CHASE ANIM
 
-            Debug.Log("Chase");
+            //Debug.Log("Chase");
 			agent.SetDestination(player.transform.position);
 			agent.speed = 3.5f;
 
@@ -108,7 +118,7 @@ public class Enemy : MonoBehaviour
     // function does not seem to be executing ? 
     void Attack()
     {
-		Debug.Log("Attack");
+		//Debug.Log("Attack");
    
 	}
 

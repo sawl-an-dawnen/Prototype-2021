@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Pick Up
   m_EditorClassIdentifier: 
   dialogue:
-  - coin + 20
+  - Coin + 20
   responses: []
   needCondition: 0

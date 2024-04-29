@@ -25,6 +25,14 @@ public class playSplash : MonoBehaviour
         StartCoroutine(playVideo());
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
+
     IEnumerator playVideo()
     {
         //Add VideoPlayer to the GameObject
