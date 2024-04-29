@@ -414,7 +414,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.05
+    m_Value: 0.03
 --- !u!114 &4874259566053425244
 MonoBehaviour:
   m_ObjectHideFlags: 3
