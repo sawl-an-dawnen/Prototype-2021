@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class PotPuzzle : MonoBehaviour
 {
+	private AudioSource audioSource;
 	public Slider redSlider;
 	public Slider greenSlider;
 	public Slider blueSlider;
@@ -25,6 +26,7 @@ public class PotPuzzle : MonoBehaviour
 
 	void Start()
 	{
+		audioSource = GetComponent<AudioSource>();
 		panel.SetActive(false);
 	}
 
@@ -56,6 +58,7 @@ public class PotPuzzle : MonoBehaviour
 		Material ghostMaterial = ghostRenderer.sharedMaterial;
 
 		ghostMaterial.SetColor("_Color_Me", color);
+		audioSource.Play();
 		gm.SetPlayerColor(color);
 		gm.SaveCheckpoint();
 	}
