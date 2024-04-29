@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Big1
   m_EditorClassIdentifier: 
   dialogue:
-  - .....
+  - .....Have I seen this before?..
+  - But there's something different...
   responses: []
   needCondition: 0

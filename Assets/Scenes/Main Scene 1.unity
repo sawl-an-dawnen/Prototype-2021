@@ -9207,9 +9207,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 823623511}
-  - component: {fileID: 823623515}
-  - component: {fileID: 823623514}
-  - component: {fileID: 823623513}
   - component: {fileID: 823623512}
   m_Layer: 0
   m_Name: stained_frame_mini_condition
@@ -9243,77 +9240,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 823623510}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 832447572ff2fe1489c6224152d5a97c, type: 3}
+  m_Script: {fileID: 11500000, guid: 997ec2963581b904698601b2983a3b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueUI: {fileID: 909992398}
-  smallFirst: {fileID: 11400000, guid: 915befaf74e18b04dbdb955a6735b3b7, type: 2}
-  smallSecond: {fileID: 11400000, guid: 17d397a8556dd4d458d135b8cfdbdef8, type: 2}
-  BigFirst: {fileID: 0}
-  BigSecond: {fileID: 0}
   miniPainting: {fileID: 1651789225}
---- !u!114 &823623513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 823623510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7f088d7e62925a48b1162855f1cef1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueObject: {fileID: 11400000, guid: 260d0f3fb84afa24193fe24b14c065a7, type: 2}
-  events:
-  - name: Interact
-    onPickedResponse:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 823623512}
-          m_TargetAssemblyTypeName: dragonPaintingUnlock, Assembly-CSharp
-          m_MethodName: checkBigDragon
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &823623514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 823623510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e1986f9236a1b84c9b8742749b71a30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WillSpawn: 1
-  uID: 
-  dialogueObject: {fileID: 11400000, guid: 260d0f3fb84afa24193fe24b14c065a7, type: 2}
-  visualCue: {fileID: 1091439667}
-  diaSound: {fileID: 0}
-  savedDiagIdx: -1
-  finalDiags: []
---- !u!65 &823623515
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 823623510}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.8271732, y: 5.525883, z: 4.6590214}
-  m_Center: {x: -0.4543991, y: 2.262942, z: 1.8295107}
 --- !u!1 &844803927
 GameObject:
   m_ObjectHideFlags: 0
@@ -13079,6 +13009,87 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2010187761378032344, guid: 42b5be4e0747b604ebb8217ca32923de, type: 3}
   m_PrefabInstance: {fileID: 1651789223}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1651789228
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651789225}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.029286793, y: 0.047132324, z: 0.1009249}
+  m_Center: {x: -0.00020164013, y: -0.000000643057, z: -0.048428062}
+--- !u!114 &1651789229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651789225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e1986f9236a1b84c9b8742749b71a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WillSpawn: 1
+  uID: 
+  dialogueObject: {fileID: 11400000, guid: 260d0f3fb84afa24193fe24b14c065a7, type: 2}
+  visualCue: {fileID: 1091439667}
+  diaSound: {fileID: 0}
+  savedDiagIdx: -1
+  finalDiags: []
+--- !u!114 &1651789230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651789225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f088d7e62925a48b1162855f1cef1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueObject: {fileID: 11400000, guid: 260d0f3fb84afa24193fe24b14c065a7, type: 2}
+  events:
+  - name: Interact
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1651789231}
+          m_TargetAssemblyTypeName: dragonPaintingUnlock, Assembly-CSharp
+          m_MethodName: checkBigDragon
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1651789231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651789225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 832447572ff2fe1489c6224152d5a97c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueUI: {fileID: 909992398}
+  smallFirst: {fileID: 11400000, guid: 915befaf74e18b04dbdb955a6735b3b7, type: 2}
+  smallSecond: {fileID: 11400000, guid: 17d397a8556dd4d458d135b8cfdbdef8, type: 2}
+  BigFirst: {fileID: 0}
+  BigSecond: {fileID: 0}
+  miniPainting: {fileID: 1651789225}
+  miniPaintingConditional: {fileID: 823623510}
 --- !u!1 &1695650870
 GameObject:
   m_ObjectHideFlags: 0

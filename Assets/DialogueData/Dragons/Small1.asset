@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Small1
   m_EditorClassIdentifier: 
   dialogue:
-  - ..where am I?...
+  - I should keep moving...
   responses: []
   needCondition: 0

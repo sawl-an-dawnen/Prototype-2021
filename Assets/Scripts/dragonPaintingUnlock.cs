@@ -14,9 +14,11 @@ public class dragonPaintingUnlock : MonoBehaviour
 
 
 
+
     //public bool hasSpokenToMain = false;
     //public bool hasGrabbedMini = false;
     public GameObject miniPainting;
+    public GameObject miniPaintingConditional;
 
     // Update is called once per frame
     void Update()
@@ -43,13 +45,16 @@ public class dragonPaintingUnlock : MonoBehaviour
     {
         if (GameManager.Instance.hasSpokeBigDragon) //if we have already talked to big
         {
-            miniPainting.SetActive(false);
+            //miniPainting.SetActive(false);
+            //miniPaintingConditional.SetActive(false);
             dialogueUI.ShowDialogue(smallSecond);
+            GameManager.Instance.setSmallDragonStatus();
+            Destroy(miniPainting);
+            Destroy(miniPaintingConditional);
         }
 
         else 
         {
-            GameManager.Instance.setSmallDragonStatus();
             dialogueUI.ShowDialogue(smallFirst);
         } 
             

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Small2
   m_EditorClassIdentifier: 
   dialogue:
-  - return me so that I can be whole again...
+  - ...I should probably return it...
   responses: []
   needCondition: 0
