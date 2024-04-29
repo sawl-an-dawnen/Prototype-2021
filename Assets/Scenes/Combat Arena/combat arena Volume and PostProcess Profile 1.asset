@@ -245,7 +245,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.109
+    m_Value: 0.052
 --- !u!114 &-8023278643434804621
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -478,7 +478,7 @@ MonoBehaviour:
     m_Value: 0
   focusDistance:
     m_OverrideState: 1
-    m_Value: 2.74
+    m_Value: 3.28
   aperture:
     m_OverrideState: 1
     m_Value: 3.6

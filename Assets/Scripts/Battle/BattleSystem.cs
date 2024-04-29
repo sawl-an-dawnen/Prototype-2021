@@ -831,6 +831,11 @@ public class BattleSystem : MonoBehaviour
         
         if (state == BattleState.WON)
         {
+            // enable the primary camera after winning
+            primaryCamera.enabled = true;
+            mcCamera.enabled = false;
+            enemyCamera.enabled = false;
+
             yield return DeathDialogues();
             winSound.Play();
             ghostAnimator.SetBool("isWin", true); //win anim
