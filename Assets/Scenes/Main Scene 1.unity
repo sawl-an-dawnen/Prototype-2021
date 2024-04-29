@@ -928,6 +928,89 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1001 &212442486
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 823623511}
+    m_Modifications:
+    - target: {fileID: 7473072417526752616, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+      propertyPath: m_Name
+      value: ActiceCue
+      objectReference: {fileID: 0}
+    - target: {fileID: 7473072417526752616, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683487254858230622, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683487254858230622, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683487254858230622, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683487254858230622, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683487254858230622, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.297
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683487254858230622, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683487254858230622, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.241
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683487254858230622, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683487254858230622, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683487254858230622, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683487254858230622, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683487254858230622, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683487254858230622, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683487254858230622, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+--- !u!4 &212442487 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8683487254858230622, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+  m_PrefabInstance: {fileID: 212442486}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &212442488 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7473072417526752616, guid: c5338d9a8f3fffe45bc1a96f3cc70b3d, type: 3}
+  m_PrefabInstance: {fileID: 212442486}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &215531054
 GameObject:
   m_ObjectHideFlags: 0
@@ -7307,7 +7390,7 @@ MonoBehaviour:
   WillSpawn: 1
   uID: 
   dialogueObject: {fileID: 11400000, guid: 260d0f3fb84afa24193fe24b14c065a7, type: 2}
-  visualCue: {fileID: 1091439667}
+  visualCue: {fileID: 212442488}
   diaSound: {fileID: 0}
   savedDiagIdx: -1
   finalDiags: []
@@ -9481,7 +9564,7 @@ Transform:
   m_LocalScale: {x: 0.014285715, y: 0.014285715, z: 0.014285715}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1091439668}
+  - {fileID: 212442487}
   m_Father: {fileID: 376988321}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
