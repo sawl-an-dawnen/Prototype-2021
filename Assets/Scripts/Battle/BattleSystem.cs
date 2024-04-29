@@ -249,7 +249,7 @@ public class BattleSystem : MonoBehaviour
         {
             enemyhealth = (int)(75*enemyDifficulty);
         }
-        else if (enemyReference.name.ToLower().Contains("witch"))
+        else if (enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit"))
         {
             enemyhealth = (int)(100 * enemyDifficulty);
         }
@@ -693,6 +693,7 @@ public class BattleSystem : MonoBehaviour
 
         return lowerCaseEnemyName switch
         {
+            string enemyName when enemyName.Contains("variwit") => Time.renderedFrameCount % 50 + 28, //slam, fire, lightning only
             string enemyName when enemyName.Contains("varim") => Time.renderedFrameCount % 50,
             string enemyName when enemyName.Contains("varihat") => Time.renderedFrameCount % 50,
             string enemyName when enemyName.Contains("varieye") => Time.renderedFrameCount % 50 + 25, 
@@ -747,7 +748,7 @@ public class BattleSystem : MonoBehaviour
                     battleDialog.text = playerDodged ? "You dodged the wild mushroom!" : dialogText.Replace("<harm>", "threw a poisonous spin at");
                     yield return wait1sec;
                 }
-                else if (enemyReference.name.ToLower().Contains("witch")) // no throw anim implemented/added for witch
+                else if (enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit")) // no throw anim implemented/added for witch
                 {
                     battleDialog.text = playerDodged ? "You dodged the witch's wrath!" : dialogText.Replace("<harm>", "threw a surprise attack at");
                 }
@@ -777,7 +778,7 @@ public class BattleSystem : MonoBehaviour
                 {
                     battleDialog.text = playerDodged ? "You dodged the mushroom's squish!" : dialogText.Replace("<harm>", "unleashes a huge squish at");
                 }
-                else if (enemyReference.name.ToLower().Contains("witch"))
+                else if (enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the witch's wrath!" : dialogText.Replace("<harm>", "unleashes a wicked orb at");
                 }
@@ -873,7 +874,7 @@ public class BattleSystem : MonoBehaviour
                 battleDialog.text += "\nCoin + 10";
                 GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 10);
             }
-            else if (lowerCaseEnemyName.Contains("witch"))
+            else if (lowerCaseEnemyName.Contains("witch") || lowerCaseEnemyName.Contains("variwit"))
             {
                 battleDialog.text += "\nCoin + 20";
                 GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 20);
@@ -947,7 +948,7 @@ public class BattleSystem : MonoBehaviour
             battleDialog.text = "Inedible...";
             yield return new WaitForSeconds(1.5f);
         }
-        else if (enemyReference.name.ToLower().Contains("witch"))
+        else if (enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit"))
         {
             battleDialog.color = Color.red;
             battleDialog.text = "May we meet again, J-";
@@ -1028,7 +1029,7 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(0.4f);
             ghostAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("witch")) // witch slam 
+        else if (enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit")) // witch slam 
         {
             //check timing
             yield return new WaitForSeconds(1.5f);
@@ -1079,7 +1080,7 @@ public class BattleSystem : MonoBehaviour
             yield return wait2sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("witch"))
+        else if (enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit"))
         {
             // check timing later <<<
             enemyAnimator.SetBool("isDamaged", true); //witch damaged anim
@@ -1253,6 +1254,14 @@ public class BattleSystem : MonoBehaviour
             // check timing later <<<
             yield return new WaitForSeconds(0.2f);
             enemyAnimator.SetBool("isDamaged", true); //mushroom damaged anim
+            yield return wait1sec;
+            enemyAnimator.SetBool("isDamaged", false);
+        }
+        else if (enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit"))
+        {
+            // check timing later <<<
+            yield return new WaitForSeconds(0.2f);
+            enemyAnimator.SetBool("isDamaged", true); //witch damaged anim
             yield return wait1sec;
             enemyAnimator.SetBool("isDamaged", false);
         }

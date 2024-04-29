@@ -65,6 +65,9 @@ public class EnemySpawner : MonoBehaviour
 				case "variM":
 					enemyName = "Sinister Mushroom";
 					break;
+				case "variWit":
+					enemyName = "Lingering Evil";
+					break;
 				default:
 					enemyName = enemyToSpawn.name;
 					break;
