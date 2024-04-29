@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - Where is my other half?
-  - 'Wait, did you find it? '
   responses:
-  - responseText: 
-    dialogueObject: {fileID: 0}
+  - responseText: Interact
+    dialogueObject: {fileID: 11400000, guid: 71eb339e675177a4e9eb521ecc8c0f13, type: 2}
   needCondition: 0

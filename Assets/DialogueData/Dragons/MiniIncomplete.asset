@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MiniIncomplete
   m_EditorClassIdentifier: 
   dialogue:
-  - Return me to my resting place..
+  - 
   responses: []
   needCondition: 0
