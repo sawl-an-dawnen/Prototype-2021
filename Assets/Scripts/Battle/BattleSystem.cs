@@ -233,7 +233,7 @@ public class BattleSystem : MonoBehaviour
         {
             enemyhealth = (int)(45*enemyDifficulty);
         }
-        else if (enemyReference.name.ToLower().Contains("eye"))
+        else if (enemyReference.name.ToLower().Contains("eye") || enemyReference.name.ToLower().Contains("varieye"))
         {
             enemyhealth = (int)(75*enemyDifficulty);
         }
@@ -693,6 +693,7 @@ public class BattleSystem : MonoBehaviour
 
         return lowerCaseEnemyName switch
         {
+            string enemyName when enemyName.Contains("varieye") => Time.renderedFrameCount % 50 + 25, 
             string enemyName when enemyName.Contains("variskel") => Time.renderedFrameCount % 50 + 25, // slam or fire
             string enemyName when enemyName.Contains("witch") => Time.renderedFrameCount % 50 + 28, //slam, fire, lightning 
             string enemyName when enemyName.Contains("mushr") => Time.renderedFrameCount % 50,
@@ -855,7 +856,7 @@ public class BattleSystem : MonoBehaviour
 				battleDialog.text += "\nCoin + 20";
 				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 20);
 			}
-            else if (lowerCaseEnemyName.Contains("monster"))
+            else if (lowerCaseEnemyName.Contains("monster") || lowerCaseEnemyName.Contains("varieye"))
             {
 				battleDialog.text += "\nCoin + 10";
 				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 10);
@@ -915,7 +916,7 @@ public class BattleSystem : MonoBehaviour
             battleDialog.text = "I will pick a bone with you next time!";
             yield return new WaitForSeconds(2.5f);
         }
-        else if (enemyReference.name.ToLower().Contains("eye"))
+        else if (enemyReference.name.ToLower().Contains("eye") || enemyReference.name.ToLower().Contains("varieye"))
         {
             battleDialog.color = Color.red;
             battleDialog.text = "I did not... see that coming...";
@@ -993,7 +994,7 @@ public class BattleSystem : MonoBehaviour
     {
         enemyAnimator.SetBool(anim, true);
         
-        if (enemyReference.name.ToLower().Contains("eye")) // eye slam
+        if (enemyReference.name.ToLower().Contains("eye") || enemyReference.name.ToLower().Contains("varieye")) // eye slam
         {
             yield return new WaitForSeconds(1.9f);
             ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
@@ -1048,7 +1049,7 @@ public class BattleSystem : MonoBehaviour
     {
         ghostAnimator.SetBool(anim, true);
         slamSound.PlayDelayed(1f);
-        if (enemyReference.name.ToLower().Contains("eye"))
+        if (enemyReference.name.ToLower().Contains("eye") || enemyReference.name.ToLower().Contains("varieye"))
         {
             // check timing later <<<
             enemyAnimator.SetBool("isDamaged", true); //eye damaged anim
@@ -1221,7 +1222,7 @@ public class BattleSystem : MonoBehaviour
 
     private IEnumerator enemydamagedThrow()
     {
-        if (enemyReference.name.ToLower().Contains("eye"))
+        if (enemyReference.name.ToLower().Contains("eye") || enemyReference.name.ToLower().Contains("varieye"))
         {
             // check timing later <<<
             yield return new WaitForSeconds(0.2f);

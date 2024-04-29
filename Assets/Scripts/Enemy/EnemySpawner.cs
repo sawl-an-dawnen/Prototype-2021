@@ -56,6 +56,9 @@ public class EnemySpawner : MonoBehaviour
 				case "variSkel":
 					enemyName = "Metallic Skeleton";
 					break;
+				case "variEye":
+					enemyName = "Hollow Soul";
+					break;
 				default:
 					enemyName = enemyToSpawn.name;
 					break;
