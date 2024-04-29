@@ -3496,6 +3496,7 @@ MonoBehaviour:
   - {fileID: 7950771442120256487, guid: f381d8c28d6b7384c8f667343f3bf7e9, type: 3}
   - {fileID: 4788247745073655787, guid: c690a3ac7a9522f48890cceaeef2a656, type: 3}
   - {fileID: 1889077584790921147, guid: ecf9c7559d549cf458e90af895f7f977, type: 3}
+  - {fileID: 477157573640264512, guid: c87ac255bb8becb4fbd24535efeed0fe, type: 3}
   enemyNameText: {fileID: 361218002}
 --- !u!1 &1677652188
 GameObject:
@@ -8716,8 +8717,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742286102}
-  m_LocalRotation: {x: 0.081693284, y: 0.39631358, z: -0.059101913, w: 0.9125616}
-  m_LocalPosition: {x: -10.34, y: 1.6, z: 34.2}
+  m_LocalRotation: {x: 0.02400621, y: -0.42757866, z: 0.026785892, w: 0.9032623}
+  m_LocalPosition: {x: -0.88, y: 1.42, z: 34.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []

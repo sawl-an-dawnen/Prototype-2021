@@ -225,7 +225,11 @@ public class BattleSystem : MonoBehaviour
         int enemyhealth;
 
         // Adjust the enemy health based on enemy type
-        if (enemyReference.name.ToLower().Contains("skel"))
+        if (enemyReference.name.ToLower().Contains("variskel"))
+        {
+            enemyhealth = (int)(75 * enemyDifficulty);
+        }
+        else if (enemyReference.name.ToLower().Contains("skel"))
         {
             enemyhealth = (int)(45*enemyDifficulty);
         }
@@ -689,6 +693,7 @@ public class BattleSystem : MonoBehaviour
 
         return lowerCaseEnemyName switch
         {
+            string enemyName when enemyName.Contains("variskel") => Time.renderedFrameCount % 50 + 25, // slam or fire
             string enemyName when enemyName.Contains("witch") => Time.renderedFrameCount % 50 + 28, //slam, fire, lightning 
             string enemyName when enemyName.Contains("mushr") => Time.renderedFrameCount % 50,
             string enemyName when enemyName.Contains("enemyghost") => Time.renderedFrameCount % 50,
@@ -719,7 +724,7 @@ public class BattleSystem : MonoBehaviour
         {
             case < 25:
                 sendKnife(false);
-                if (enemyReference.name.ToLower().Contains("skel"))
+                if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("variskel"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the swinging sword!" : dialogText.Replace("<harm>", "threw a swinging sword at");
                     yield return wait1sec;
@@ -752,7 +757,7 @@ public class BattleSystem : MonoBehaviour
 
             case < 50:
                 enemyAction = CombatOptions.Slam;
-                if (enemyReference.name.ToLower().Contains("skel"))
+                if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("variskel"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the skeleton's slash!" : dialogText.Replace("<harm>", "unleashes a deadly slash at");
 
@@ -845,15 +850,15 @@ public class BattleSystem : MonoBehaviour
             InventoryItem equip = GameObject.Find("InventoryManager").GetComponent<InventoryManager>().GiveRandomEquipment();
             battleDialog.text += "\nGet " + equip.itemName + " (" + equip.specialInfo + ")";
             var lowerCaseEnemyName = PlayerPrefs.GetString("ObjectToSpawn").ToLower();
-            if (lowerCaseEnemyName.Contains("skeleton"))
+            if (lowerCaseEnemyName.Contains("skeleton") || lowerCaseEnemyName.Contains("variskel"))
             {
 				battleDialog.text += "\nCoin + 20";
-				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 30);
+				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 20);
 			}
             else if (lowerCaseEnemyName.Contains("monster"))
             {
 				battleDialog.text += "\nCoin + 10";
-				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 30);
+				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 10);
 			}
             else if (lowerCaseEnemyName.Contains("enemyghost"))
             {
@@ -904,7 +909,7 @@ public class BattleSystem : MonoBehaviour
             enemyAnimator.SetBool("isDead", true); // death anim
         }
 
-        if (enemyReference.name.ToLower().Contains("skel"))
+        if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("variskel"))
         {
             battleDialog.color = Color.red;
             battleDialog.text = "I will pick a bone with you next time!";
@@ -1050,7 +1055,7 @@ public class BattleSystem : MonoBehaviour
             yield return wait2sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("skel"))
+        else if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("variskel"))
         {
             // check timing later <<<
             enemyAnimator.SetBool("isDamaged", true); //skel damaged anim
@@ -1161,7 +1166,7 @@ public class BattleSystem : MonoBehaviour
                 enemyAnimator.SetBool(anim, false);
                 ghostAnimator.SetBool("isDamaged", true); 
             }
-            else if (enemyReference.name.ToLower().Contains("skel")) // skel throw sound
+            else if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("variskel")) // skel throw sound
             {
                 knifeSound.PlayDelayed(1f);
                 yield return new WaitForSeconds(1.6f);
@@ -1224,7 +1229,7 @@ public class BattleSystem : MonoBehaviour
             yield return wait2sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("skel"))
+        else if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("variskel"))
         {
             // check timing later <<<
             yield return new WaitForSeconds(0.2f);
@@ -1268,7 +1273,7 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            if (enemyReference.name.ToLower().Contains("skel")) // sword throw skeleton
+            if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("variskel")) // sword throw skeleton
             {
                 StartCoroutine(animateThrow("isThrow"));
             }
