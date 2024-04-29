@@ -21,6 +21,8 @@ namespace Platformer.Mechanics
         public bool CanOpen;
         [SerializeField] public List<string> items;
 		public Color playerColor;
+        bool bigDragon;
+        bool smallDragon;
 
         public Checkpoint(
             int playerHealth,
@@ -34,7 +36,9 @@ namespace Platformer.Mechanics
             float coins,
             bool CanOpen,
             List<string> items,
-            Color playerColor
+            Color playerColor,
+            bool bigDragon,
+            bool smallDragon
 			)
         {
             //this.playerHealth = Math.Min(100, playerHealth + 30);        
@@ -50,6 +54,8 @@ namespace Platformer.Mechanics
             this.CanOpen = CanOpen;
             this.items = items;
             this.playerColor = playerColor;
+            this.bigDragon = bigDragon;
+            this.smallDragon = smallDragon;
 	}
 
         [Serializable]

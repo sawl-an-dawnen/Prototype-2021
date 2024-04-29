@@ -15,5 +15,7 @@ MonoBehaviour:
   dialogue:
   - Where is my other half?
   - 'Wait, did you find it? '
-  responses: []
+  responses:
+  - responseText: 
+    dialogueObject: {fileID: 0}
   needCondition: 0
