@@ -45,13 +45,28 @@ public class EnemySpawner : MonoBehaviour
 					enemyName = "Chess Guardian";
 					break;
 				case "EnemyGhost":
-					enemyName = "Ghost";
+					enemyName = "Lost Ghost";
 					break;
 				case "Mushroom en":
 					enemyName = "Poisonous Mushroom";
 					break;
 				case "witch":
 					enemyName = "Wicked Witch";
+					break;
+				case "variSkel":
+					enemyName = "Metallic Skeleton";
+					break;
+				case "variEye":
+					enemyName = "Hollow Soul";
+					break;
+				case "variHat":
+					enemyName = "Mystery Ghost";
+					break;
+				case "variM":
+					enemyName = "Sinister Mushroom";
+					break;
+				case "variWit":
+					enemyName = "Lingering Evil";
 					break;
 				default:
 					enemyName = enemyToSpawn.name;

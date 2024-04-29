@@ -15,13 +15,13 @@ MonoBehaviour:
   active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   gaussianStart:
     m_OverrideState: 1
-    m_Value: 9.59
+    m_Value: 948.7
   gaussianEnd:
     m_OverrideState: 1
-    m_Value: 13.16
+    m_Value: 1806
   gaussianMaxRadius:
     m_OverrideState: 0
     m_Value: 1
@@ -30,13 +30,13 @@ MonoBehaviour:
     m_Value: 0
   focusDistance:
     m_OverrideState: 1
-    m_Value: 2.21
+    m_Value: 0.22
   aperture:
     m_OverrideState: 1
-    m_Value: 5.4
+    m_Value: 2.6
   focalLength:
     m_OverrideState: 1
-    m_Value: 48
+    m_Value: 9.5
   bladeCount:
     m_OverrideState: 0
     m_Value: 5
@@ -414,7 +414,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.05
+    m_Value: 0.03
 --- !u!114 &4874259566053425244
 MonoBehaviour:
   m_ObjectHideFlags: 3

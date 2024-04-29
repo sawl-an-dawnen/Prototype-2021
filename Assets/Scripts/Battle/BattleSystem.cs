@@ -225,11 +225,15 @@ public class BattleSystem : MonoBehaviour
         int enemyhealth;
 
         // Adjust the enemy health based on enemy type
-        if (enemyReference.name.ToLower().Contains("skel"))
+        if (enemyReference.name.ToLower().Contains("variskel"))
+        {
+            enemyhealth = (int)(75 * enemyDifficulty);
+        }
+        else if (enemyReference.name.ToLower().Contains("skel"))
         {
             enemyhealth = (int)(45*enemyDifficulty);
         }
-        else if (enemyReference.name.ToLower().Contains("eye"))
+        else if (enemyReference.name.ToLower().Contains("eye") || enemyReference.name.ToLower().Contains("varieye"))
         {
             enemyhealth = (int)(75*enemyDifficulty);
         }
@@ -237,15 +241,15 @@ public class BattleSystem : MonoBehaviour
         {
             enemyhealth = (int)(150*enemyDifficulty);      
         }
-        else if(enemyReference.name.ToLower().Contains("enemyghost"))
+        else if(enemyReference.name.ToLower().Contains("enemyghost") || enemyReference.name.ToLower().Contains("varihat"))
         {
             enemyhealth = (int)(50*enemyDifficulty);      
         }
-        else if (enemyReference.name.ToLower().Contains("mushr"))
+        else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim"))
         {
             enemyhealth = (int)(75*enemyDifficulty);
         }
-        else if (enemyReference.name.ToLower().Contains("witch"))
+        else if (enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit"))
         {
             enemyhealth = (int)(100 * enemyDifficulty);
         }
@@ -689,7 +693,12 @@ public class BattleSystem : MonoBehaviour
 
         return lowerCaseEnemyName switch
         {
-            string enemyName when enemyName.Contains("witch") => Time.renderedFrameCount % 50 + 28, //slam, fire, lightning 
+            string enemyName when enemyName.Contains("variwit") => Time.renderedFrameCount % 50 + 28, //slam, fire, lightning only
+            string enemyName when enemyName.Contains("varim") => Time.renderedFrameCount % 50,
+            string enemyName when enemyName.Contains("varihat") => Time.renderedFrameCount % 50,
+            string enemyName when enemyName.Contains("varieye") => Time.renderedFrameCount % 50 + 25, 
+            string enemyName when enemyName.Contains("variskel") => Time.renderedFrameCount % 50 + 25, // slam or fire
+            string enemyName when enemyName.Contains("witch") => Time.renderedFrameCount % 50 + 28, //slam, fire, lightning only
             string enemyName when enemyName.Contains("mushr") => Time.renderedFrameCount % 50,
             string enemyName when enemyName.Contains("enemyghost") => Time.renderedFrameCount % 50,
             string enemyName when enemyName.Contains("skeleton") => Time.renderedFrameCount % 50, //skeleton lower 2 abilities: knife or slam
@@ -719,7 +728,7 @@ public class BattleSystem : MonoBehaviour
         {
             case < 25:
                 sendKnife(false);
-                if (enemyReference.name.ToLower().Contains("skel"))
+                if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("variskel"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the swinging sword!" : dialogText.Replace("<harm>", "threw a swinging sword at");
                     yield return wait1sec;
@@ -729,17 +738,17 @@ public class BattleSystem : MonoBehaviour
                     battleDialog.text = playerDodged ? "You dodged the deadly katanas!" : dialogText.Replace("<harm>", "threw deadly katanas at");
                     yield return wait3sec;
                 }
-                else if (enemyReference.name.ToLower().Contains("enemyghost"))
+                else if (enemyReference.name.ToLower().Contains("enemyghost") || enemyReference.name.ToLower().Contains("varihat"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the strange hat!" : dialogText.Replace("<harm>", "threw a spinning hat at");
                     yield return wait1sec;
                 }
-                else if (enemyReference.name.ToLower().Contains("mushr"))
+                else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the wild mushroom!" : dialogText.Replace("<harm>", "threw a poisonous spin at");
                     yield return wait1sec;
                 }
-                else if (enemyReference.name.ToLower().Contains("witch")) // no throw anim implemented/added for witch
+                else if (enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit")) // no throw anim implemented/added for witch
                 {
                     battleDialog.text = playerDodged ? "You dodged the witch's wrath!" : dialogText.Replace("<harm>", "threw a surprise attack at");
                 }
@@ -752,7 +761,7 @@ public class BattleSystem : MonoBehaviour
 
             case < 50:
                 enemyAction = CombatOptions.Slam;
-                if (enemyReference.name.ToLower().Contains("skel"))
+                if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("variskel"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the skeleton's slash!" : dialogText.Replace("<harm>", "unleashes a deadly slash at");
 
@@ -761,15 +770,15 @@ public class BattleSystem : MonoBehaviour
                 {
                     battleDialog.text = playerDodged ? "You dodged the knight's slam!" : dialogText.Replace("<harm>", "unleashes a furious slam at");
                 }
-                else if (enemyReference.name.ToLower().Contains("enemyghost"))
+                else if (enemyReference.name.ToLower().Contains("enemyghost") || enemyReference.name.ToLower().Contains("varihat"))
                 {
                     battleDialog.text = playerDodged ? "You dodged a quick attack!" : dialogText.Replace("<harm>", "unleashes a quick attack at");
                 }
-                else if (enemyReference.name.ToLower().Contains("mushr"))
+                else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the mushroom's squish!" : dialogText.Replace("<harm>", "unleashes a huge squish at");
                 }
-                else if (enemyReference.name.ToLower().Contains("witch"))
+                else if (enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the witch's wrath!" : dialogText.Replace("<harm>", "unleashes a wicked orb at");
                 }
@@ -845,27 +854,27 @@ public class BattleSystem : MonoBehaviour
             InventoryItem equip = GameObject.Find("InventoryManager").GetComponent<InventoryManager>().GiveRandomEquipment();
             battleDialog.text += "\nGet " + equip.itemName + " (" + equip.specialInfo + ")";
             var lowerCaseEnemyName = PlayerPrefs.GetString("ObjectToSpawn").ToLower();
-            if (lowerCaseEnemyName.Contains("skeleton"))
+            if (lowerCaseEnemyName.Contains("skeleton") || lowerCaseEnemyName.Contains("variskel"))
             {
 				battleDialog.text += "\nCoin + 20";
-				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 30);
+				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 20);
 			}
-            else if (lowerCaseEnemyName.Contains("monster"))
+            else if (lowerCaseEnemyName.Contains("monster") || lowerCaseEnemyName.Contains("varieye"))
             {
 				battleDialog.text += "\nCoin + 10";
-				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 30);
+				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 10);
 			}
-            else if (lowerCaseEnemyName.Contains("enemyghost"))
+            else if (lowerCaseEnemyName.Contains("enemyghost") || lowerCaseEnemyName.Contains("varihat"))
             {
                 battleDialog.text += "\nCoin + 20";
                 GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 20);
             }
-            else if (lowerCaseEnemyName.Contains("mushr"))
+            else if (lowerCaseEnemyName.Contains("mushr") || lowerCaseEnemyName.Contains("varim"))
             {
                 battleDialog.text += "\nCoin + 10";
                 GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 10);
             }
-            else if (lowerCaseEnemyName.Contains("witch"))
+            else if (lowerCaseEnemyName.Contains("witch") || lowerCaseEnemyName.Contains("variwit"))
             {
                 battleDialog.text += "\nCoin + 20";
                 GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 20);
@@ -904,13 +913,13 @@ public class BattleSystem : MonoBehaviour
             enemyAnimator.SetBool("isDead", true); // death anim
         }
 
-        if (enemyReference.name.ToLower().Contains("skel"))
+        if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("variskel"))
         {
             battleDialog.color = Color.red;
             battleDialog.text = "I will pick a bone with you next time!";
             yield return new WaitForSeconds(2.5f);
         }
-        else if (enemyReference.name.ToLower().Contains("eye"))
+        else if (enemyReference.name.ToLower().Contains("eye") || enemyReference.name.ToLower().Contains("varieye"))
         {
             battleDialog.color = Color.red;
             battleDialog.text = "I did not... see that coming...";
@@ -925,21 +934,21 @@ public class BattleSystem : MonoBehaviour
             battleDialog.text = "The Boss disappeared into the ground";
             yield return new WaitForSeconds(2f);
         }
-        else if (enemyReference.name.ToLower().Contains("enemyghost"))
+        else if (enemyReference.name.ToLower().Contains("enemyghost") || enemyReference.name.ToLower().Contains("varihat"))
         {
             battleDialog.color = Color.red;
             battleDialog.text = "What... are you...?";
             yield return new WaitForSeconds(2.5f);
         }
-        else if (enemyReference.name.ToLower().Contains("mushr"))
+        else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim"))
         {
             battleDialog.color = Color.red;
             battleDialog.text = "I am...";
             yield return new WaitForSeconds(1f);
-            battleDialog.text = "Inedible.....";
+            battleDialog.text = "Inedible...";
             yield return new WaitForSeconds(1.5f);
         }
-        else if (enemyReference.name.ToLower().Contains("witch"))
+        else if (enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit"))
         {
             battleDialog.color = Color.red;
             battleDialog.text = "May we meet again, J-";
@@ -988,7 +997,7 @@ public class BattleSystem : MonoBehaviour
     {
         enemyAnimator.SetBool(anim, true);
         
-        if (enemyReference.name.ToLower().Contains("eye")) // eye slam
+        if (enemyReference.name.ToLower().Contains("eye") || enemyReference.name.ToLower().Contains("varieye")) // eye slam
         {
             yield return new WaitForSeconds(1.9f);
             ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
@@ -1004,7 +1013,7 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             ghostAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("enemyghost")) // enemyghost slam
+        else if (enemyReference.name.ToLower().Contains("enemyghost") || enemyReference.name.ToLower().Contains("varihat")) // enemyghost slam
         {
             yield return new WaitForSeconds(1f);
             ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
@@ -1012,7 +1021,7 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             ghostAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("mushr")) // mushroom slam
+        else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim")) // mushroom slam
         {
             yield return new WaitForSeconds(1f);
             ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
@@ -1020,7 +1029,7 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(0.4f);
             ghostAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("witch")) // witch slam 
+        else if (enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit")) // witch slam 
         {
             //check timing
             yield return new WaitForSeconds(1.5f);
@@ -1043,35 +1052,35 @@ public class BattleSystem : MonoBehaviour
     {
         ghostAnimator.SetBool(anim, true);
         slamSound.PlayDelayed(1f);
-        if (enemyReference.name.ToLower().Contains("eye"))
+        if (enemyReference.name.ToLower().Contains("eye") || enemyReference.name.ToLower().Contains("varieye"))
         {
             // check timing later <<<
             enemyAnimator.SetBool("isDamaged", true); //eye damaged anim
             yield return wait2sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("skel"))
+        else if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("variskel"))
         {
             // check timing later <<<
             enemyAnimator.SetBool("isDamaged", true); //skel damaged anim
             yield return wait2sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("enemyghost"))
+        else if (enemyReference.name.ToLower().Contains("enemyghost") || enemyReference.name.ToLower().Contains("varihat"))
         {
             // check timing later <<<
             enemyAnimator.SetBool("isDamaged", true); //enemyghost damaged anim
             yield return wait2sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("mushr"))
+        else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim"))
         {
             // check timing later <<<
             enemyAnimator.SetBool("isDamaged", true); //mushr damaged anim
             yield return wait2sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("witch"))
+        else if (enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit"))
         {
             // check timing later <<<
             enemyAnimator.SetBool("isDamaged", true); //witch damaged anim
@@ -1148,20 +1157,20 @@ public class BattleSystem : MonoBehaviour
         {
             enemyAnimator.SetBool(anim, true);
             //check timing later
-            if (enemyReference.name.ToLower().Contains("enemyghost")) // enemy ghost hat throw sound
+            if (enemyReference.name.ToLower().Contains("enemyghost") || enemyReference.name.ToLower().Contains("varihat")) // enemy ghost hat throw sound
             {
                 knifeSound.PlayDelayed(1.2f);
                 yield return new WaitForSeconds(1.5f);
                 ghostAnimator.SetBool("isDamaged", true); 
             }
-            else if (enemyReference.name.ToLower().Contains("mushr")) // mushr throw sound
+            else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim")) // mushr throw sound
             {
                 knifeSound.PlayDelayed(0.7f);
                 yield return new WaitForSeconds(1f);
                 enemyAnimator.SetBool(anim, false);
                 ghostAnimator.SetBool("isDamaged", true); 
             }
-            else if (enemyReference.name.ToLower().Contains("skel")) // skel throw sound
+            else if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("variskel")) // skel throw sound
             {
                 knifeSound.PlayDelayed(1f);
                 yield return new WaitForSeconds(1.6f);
@@ -1216,7 +1225,7 @@ public class BattleSystem : MonoBehaviour
 
     private IEnumerator enemydamagedThrow()
     {
-        if (enemyReference.name.ToLower().Contains("eye"))
+        if (enemyReference.name.ToLower().Contains("eye") || enemyReference.name.ToLower().Contains("varieye"))
         {
             // check timing later <<<
             yield return new WaitForSeconds(0.2f);
@@ -1224,7 +1233,7 @@ public class BattleSystem : MonoBehaviour
             yield return wait2sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("skel"))
+        else if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("variskel"))
         {
             // check timing later <<<
             yield return new WaitForSeconds(0.2f);
@@ -1232,7 +1241,7 @@ public class BattleSystem : MonoBehaviour
             yield return wait1sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("enemyghost"))
+        else if (enemyReference.name.ToLower().Contains("enemyghost") || enemyReference.name.ToLower().Contains("varihat"))
         {
             // check timing later <<<
             yield return new WaitForSeconds(0.2f);
@@ -1240,11 +1249,19 @@ public class BattleSystem : MonoBehaviour
             yield return wait1sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("mushr"))
+        else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim"))
         {
             // check timing later <<<
             yield return new WaitForSeconds(0.2f);
             enemyAnimator.SetBool("isDamaged", true); //mushroom damaged anim
+            yield return wait1sec;
+            enemyAnimator.SetBool("isDamaged", false);
+        }
+        else if (enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit"))
+        {
+            // check timing later <<<
+            yield return new WaitForSeconds(0.2f);
+            enemyAnimator.SetBool("isDamaged", true); //witch damaged anim
             yield return wait1sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
@@ -1268,15 +1285,15 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            if (enemyReference.name.ToLower().Contains("skel")) // sword throw skeleton
+            if (enemyReference.name.ToLower().Contains("skel") || enemyReference.name.ToLower().Contains("variskel")) // sword throw skeleton
             {
                 StartCoroutine(animateThrow("isThrow"));
             }
-            else if (enemyReference.name.ToLower().Contains("enemyghost")) // enemy ghost hat throw
+            else if (enemyReference.name.ToLower().Contains("enemyghost") || enemyReference.name.ToLower().Contains("varihat")) // enemy ghost hat throw
             {
                 StartCoroutine(animateThrow("isThrow"));
             }
-            else if (enemyReference.name.ToLower().Contains("mushr")) // mushroom throw
+            else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim")) // mushroom throw
             {
                 StartCoroutine(animateThrow("isThrow"));
             }
