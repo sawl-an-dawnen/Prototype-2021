@@ -245,7 +245,7 @@ public class BattleSystem : MonoBehaviour
         {
             enemyhealth = (int)(50*enemyDifficulty);      
         }
-        else if (enemyReference.name.ToLower().Contains("mushr"))
+        else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim"))
         {
             enemyhealth = (int)(75*enemyDifficulty);
         }
@@ -693,6 +693,7 @@ public class BattleSystem : MonoBehaviour
 
         return lowerCaseEnemyName switch
         {
+            string enemyName when enemyName.Contains("varim") => Time.renderedFrameCount % 50,
             string enemyName when enemyName.Contains("varihat") => Time.renderedFrameCount % 50,
             string enemyName when enemyName.Contains("varieye") => Time.renderedFrameCount % 50 + 25, 
             string enemyName when enemyName.Contains("variskel") => Time.renderedFrameCount % 50 + 25, // slam or fire
@@ -741,7 +742,7 @@ public class BattleSystem : MonoBehaviour
                     battleDialog.text = playerDodged ? "You dodged the strange hat!" : dialogText.Replace("<harm>", "threw a spinning hat at");
                     yield return wait1sec;
                 }
-                else if (enemyReference.name.ToLower().Contains("mushr"))
+                else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the wild mushroom!" : dialogText.Replace("<harm>", "threw a poisonous spin at");
                     yield return wait1sec;
@@ -772,7 +773,7 @@ public class BattleSystem : MonoBehaviour
                 {
                     battleDialog.text = playerDodged ? "You dodged a quick attack!" : dialogText.Replace("<harm>", "unleashes a quick attack at");
                 }
-                else if (enemyReference.name.ToLower().Contains("mushr"))
+                else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim"))
                 {
                     battleDialog.text = playerDodged ? "You dodged the mushroom's squish!" : dialogText.Replace("<harm>", "unleashes a huge squish at");
                 }
@@ -867,7 +868,7 @@ public class BattleSystem : MonoBehaviour
                 battleDialog.text += "\nCoin + 20";
                 GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 20);
             }
-            else if (lowerCaseEnemyName.Contains("mushr"))
+            else if (lowerCaseEnemyName.Contains("mushr") || lowerCaseEnemyName.Contains("varim"))
             {
                 battleDialog.text += "\nCoin + 10";
                 GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 10);
@@ -938,12 +939,12 @@ public class BattleSystem : MonoBehaviour
             battleDialog.text = "What... are you...?";
             yield return new WaitForSeconds(2.5f);
         }
-        else if (enemyReference.name.ToLower().Contains("mushr"))
+        else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim"))
         {
             battleDialog.color = Color.red;
             battleDialog.text = "I am...";
             yield return new WaitForSeconds(1f);
-            battleDialog.text = "Inedible.....";
+            battleDialog.text = "Inedible...";
             yield return new WaitForSeconds(1.5f);
         }
         else if (enemyReference.name.ToLower().Contains("witch"))
@@ -1019,7 +1020,7 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             ghostAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("mushr")) // mushroom slam
+        else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim")) // mushroom slam
         {
             yield return new WaitForSeconds(1f);
             ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
@@ -1071,7 +1072,7 @@ public class BattleSystem : MonoBehaviour
             yield return wait2sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("mushr"))
+        else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim"))
         {
             // check timing later <<<
             enemyAnimator.SetBool("isDamaged", true); //mushr damaged anim
@@ -1161,7 +1162,7 @@ public class BattleSystem : MonoBehaviour
                 yield return new WaitForSeconds(1.5f);
                 ghostAnimator.SetBool("isDamaged", true); 
             }
-            else if (enemyReference.name.ToLower().Contains("mushr")) // mushr throw sound
+            else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim")) // mushr throw sound
             {
                 knifeSound.PlayDelayed(0.7f);
                 yield return new WaitForSeconds(1f);
@@ -1247,7 +1248,7 @@ public class BattleSystem : MonoBehaviour
             yield return wait1sec;
             enemyAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("mushr"))
+        else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim"))
         {
             // check timing later <<<
             yield return new WaitForSeconds(0.2f);
@@ -1283,7 +1284,7 @@ public class BattleSystem : MonoBehaviour
             {
                 StartCoroutine(animateThrow("isThrow"));
             }
-            else if (enemyReference.name.ToLower().Contains("mushr")) // mushroom throw
+            else if (enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim")) // mushroom throw
             {
                 StartCoroutine(animateThrow("isThrow"));
             }
