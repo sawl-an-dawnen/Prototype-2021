@@ -51,7 +51,7 @@ public class SpellsManager : MonoBehaviour
 	void Update()
 	{
 		string currentSceneName = SceneManager.GetActiveScene().name;
-		if (currentSceneName == "MainMenu")
+		if (currentSceneName == "MainMenu" || currentSceneName == "Credits" || currentSceneName == "IntroStory" || currentSceneName == "TrailerViewer" || currentSceneName == "Combat Arena")
         {
 			bag.SetActive(false);
         }

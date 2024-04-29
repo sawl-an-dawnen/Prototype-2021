@@ -70,14 +70,16 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			yield return null;
 		}
+		Time.timeScale = 0;
 		image.texture = videoPlayer.texture;
 		videoPlayer.Play();
 
 		DontDestroyOnLoad(videoPlayer);
 		DontDestroyOnLoad(image);
 			
-		yield return new WaitForSeconds(2);
+		yield return new WaitForSecondsRealtime(2);
 		AsyncOperation op = SceneManager.LoadSceneAsync(newScene);
+		Time.timeScale = 1;
 		//Destroy(videoPlayer, 6);
 
 	}
