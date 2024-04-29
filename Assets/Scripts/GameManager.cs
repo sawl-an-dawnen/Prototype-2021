@@ -44,7 +44,10 @@ public class GameManager : MonoBehaviour
 	private const int CANT_SPAWN = 0;
 	public string[] DefaultSpells;
 
-	[Serializable]
+	public bool hasSpokeBigDragon = false;
+    public bool hasSpokeSmallDragon = false;
+
+    [Serializable]
 	public class Spell
 	{
 		public string name;
@@ -176,14 +179,31 @@ public class GameManager : MonoBehaviour
 		return playerColor;
 	}
 
+	public bool getBigDragonStatus()
+	{
+		return hasSpokeBigDragon;
+	}
+    public void setBigDragonStatus()
+    {
+        hasSpokeBigDragon = true;
+    }
+    public bool getSmallDragonStatus()
+    {
+		return hasSpokeSmallDragon;
+    }
+    public void setSmallDragonStatus()
+    {
+        hasSpokeSmallDragon = true;
+    }
 
-	//public void AddCoins(float coin)
-	//{
-	//	//coins += coin;
-	//	SetCoins(GetCoins() + coin);
-	//}
 
-	public void foundWeakness(string spellName){
+    //public void AddCoins(float coin)
+    //{
+    //	//coins += coin;
+    //	SetCoins(GetCoins() + coin);
+    //}
+
+    public void foundWeakness(string spellName){
 		spells.Find(x=> x.name == spellName).weaknessIsFound = true;
 	}
 
@@ -264,7 +284,9 @@ public class GameManager : MonoBehaviour
 			coins,
 			CanOpen,
 			items,
-			playerColor
+			playerColor,
+			hasSpokeBigDragon,
+			hasSpokeSmallDragon
 		);
 		SaveFileManager.WriteToSaveFile(SaveFilePath, Checkpoint);
 	}
@@ -288,6 +310,7 @@ public class GameManager : MonoBehaviour
 		CanOpen = Checkpoint.CanOpen;
 		items = Checkpoint.items;
 		playerColor = Checkpoint.playerColor;
+		
 		//SpellsManager spellsManager = GameObject.Find("SpellsManager").GetComponent<SpellsManager>();
 		//spellsManager.ContinuePanel();
 	}
@@ -296,7 +319,7 @@ public class GameManager : MonoBehaviour
 	{
 		const string scene = "IntroStory";
 		items.Clear();
-		Checkpoint = new(100, 5, 3, new(), new(), new(), CreateDefaultAvailableSpells(), scene, 0, false, new(), new Color(1f, 1f, 1f, 0f));
+		Checkpoint = new(100, 5, 3, new(), new(), new(), CreateDefaultAvailableSpells(), scene, 0, false, new(), new Color(1f, 1f, 1f, 0f), false, false);
 		SpellsManager spellsManager = GameObject.Find("SpellsManager").GetComponent<SpellsManager>();
 		spellsManager.ClearEquip();
 
