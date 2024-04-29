@@ -828,9 +828,10 @@ public class BattleSystem : MonoBehaviour
     {
         player.GetComponentInChildren<Rigidbody>().constraints = playerRBConstraints;//restore ability to move/rotate
         DialogueCounter = 0;    //Set the dialogue counter back to initial value
-        yield return DeathDialogues();
+        
         if (state == BattleState.WON)
         {
+            yield return DeathDialogues();
             winSound.Play();
             ghostAnimator.SetBool("isWin", true); //win anim
             battleDialog.color = Color.white;
@@ -1146,19 +1147,29 @@ public class BattleSystem : MonoBehaviour
             {
                 knifeSound.PlayDelayed(1.2f);
                 yield return new WaitForSeconds(1.5f);
+                ghostAnimator.SetBool("isDamaged", true); 
             }
             else if (enemyReference.name.ToLower().Contains("mushr")) // mushr throw sound
             {
                 knifeSound.PlayDelayed(0.7f);
                 yield return new WaitForSeconds(1f);
                 enemyAnimator.SetBool(anim, false);
+                ghostAnimator.SetBool("isDamaged", true); 
+            }
+            else if (enemyReference.name.ToLower().Contains("skel")) // skel throw sound
+            {
+                knifeSound.PlayDelayed(1f);
+                yield return new WaitForSeconds(1.6f);
+                ghostAnimator.SetBool("isDamaged", true);
+                yield return new WaitForSeconds(0.4f);
+                enemyAnimator.SetBool(anim, false);
             }
             else
             {
                 yield return new WaitForSeconds(1.5f);
                 knifeSound.PlayDelayed(1.1f);
+                ghostAnimator.SetBool("isDamaged", true); 
             }
-            ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
             yield return new WaitForSeconds(1.8f);
             ghostAnimator.SetBool("isDamaged", false);
         }
