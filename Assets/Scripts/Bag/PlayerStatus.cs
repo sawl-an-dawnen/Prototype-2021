@@ -45,6 +45,7 @@ public class PlayerStatus : MonoBehaviour
 
     public void TurnOffPreviewStatus()
     {
+        namePreText.text = "";
         selectedItemStatus.SetActive(false);
         selectedItemImage.SetActive(false);
     }
