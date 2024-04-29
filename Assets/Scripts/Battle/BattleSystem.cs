@@ -433,7 +433,7 @@ public class BattleSystem : MonoBehaviour
         int enemyNewHP;
 		int playerAttackPower = GameManager.Instance.GetPlayerAttack();
         int playerAttack = Mathf.CeilToInt(action.action.damage * (1 + playerAttackPower / 100.0f));
-        Debug.Log("got" + playerAttack);
+        //Debug.Log("got" + playerAttack);
 
 		if (action.action.name == "Slam" && enemyReference.name.ToLower().Contains("skel"))
         {
@@ -644,7 +644,7 @@ public class BattleSystem : MonoBehaviour
 
         return lowerCaseEnemyName switch
         {
-            string enemyName when enemyName.Contains("witch") => Time.renderedFrameCount % 50 + 50,
+            string enemyName when enemyName.Contains("witch") => Time.renderedFrameCount % 50 + 28, //slam, fire, lightning 
             string enemyName when enemyName.Contains("mushr") => Time.renderedFrameCount % 50,
             string enemyName when enemyName.Contains("enemyghost") => Time.renderedFrameCount % 50,
             string enemyName when enemyName.Contains("skeleton") => Time.renderedFrameCount % 50, //skeleton lower 2 abilities: knife or slam
@@ -691,7 +691,7 @@ public class BattleSystem : MonoBehaviour
                 {
                     battleDialog.text = playerDodged ? "You dodged the wild mushroom!" : dialogText.Replace("<harm>", "threw a poisonous spin at");
                 }
-                else if (enemyReference.name.ToLower().Contains("witch"))
+                else if (enemyReference.name.ToLower().Contains("witch")) // no throw anim implemented/added for witch
                 {
                     battleDialog.text = playerDodged ? "You dodged the witch's wrath!" : dialogText.Replace("<harm>", "threw a surprise attack at");
                 }
@@ -964,13 +964,14 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(0.4f);
             ghostAnimator.SetBool("isDamaged", false);
         }
-        else if (enemyReference.name.ToLower().Contains("witch")) // witch slam <<<<<<<<<< TO DO
+        else if (enemyReference.name.ToLower().Contains("witch")) // witch slam 
         {
-            //yield return new WaitForSeconds(1f);
-            //ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
-            //slamSound.Play();
-            //yield return new WaitForSeconds(0.4f);
-            //ghostAnimator.SetBool("isDamaged", false);
+            //check timing
+            yield return new WaitForSeconds(1.5f);
+            ghostAnimator.SetBool("isDamaged", true); //ghost damaged anim
+            slamSound.Play();
+            yield return new WaitForSeconds(2.5f);
+            ghostAnimator.SetBool("isDamaged", false);
         }
         else
         { //skel slam
@@ -1017,11 +1018,17 @@ public class BattleSystem : MonoBehaviour
         else if (enemyReference.name.ToLower().Contains("witch"))
         {
             // check timing later <<<
-            //enemyAnimator.SetBool("isDamaged", true); //witch damaged anim
-            //yield return wait2sec;
-            //enemyAnimator.SetBool("isDamaged", false);
+            enemyAnimator.SetBool("isDamaged", true); //witch damaged anim
+            yield return wait2sec;
+            enemyAnimator.SetBool("isDamaged", false);
         }
-        // add horse
+        else if (enemyReference.name.ToLower().Contains("horse"))
+        {
+            // check timing later <<<
+            enemyAnimator.SetBool("isDamaged", true); //witch damaged anim
+            yield return wait2sec;
+            enemyAnimator.SetBool("isDamaged", false);
+        }
         else
         {
             yield return wait2sec;
@@ -1174,14 +1181,6 @@ public class BattleSystem : MonoBehaviour
             enemyAnimator.SetBool("isDamaged", true); //mushroom damaged anim
             yield return wait1sec;
             enemyAnimator.SetBool("isDamaged", false);
-        }
-        else if (enemyReference.name.ToLower().Contains("witch"))
-        {
-            // check timing later <<<
-            //yield return new WaitForSeconds(0.2f);
-            //enemyAnimator.SetBool("isDamaged", true); //mushroom damaged anim
-            //yield return wait1sec;
-            //enemyAnimator.SetBool("isDamaged", false);
         }
         else
         {
