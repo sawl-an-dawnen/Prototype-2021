@@ -245,6 +245,10 @@ public class BattleSystem : MonoBehaviour
         {
             enemyhealth = (int)(75*enemyDifficulty);
         }
+        else if (enemyReference.name.ToLower().Contains("witch"))
+        {
+            enemyhealth = (int)(100 * enemyDifficulty);
+        }
         else
         {
             enemyhealth = (int)(100*enemyDifficulty);
@@ -471,7 +475,7 @@ public class BattleSystem : MonoBehaviour
         {
             enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 4), false);
             battleDialog.color = Color.red;
-            battleDialog.text = "<size=60%> was that supposed to hurt?";
+            battleDialog.text = "<size=60%> Was that supposed to hurt?";
             yield return new WaitForSeconds(2.5f);
         }
         else if (action.action.name == "Knife" && enemyReference.name.ToLower().Contains("eye"))
@@ -604,7 +608,7 @@ public class BattleSystem : MonoBehaviour
                     battleDialog.text = "Enemy Ghost's figure started to flicker";
                     yield return new WaitForSeconds(1.5f);
                     battleDialog.color = Color.red;
-                    battleDialog.text = "<size=60%> I thought i saw my afterlife for a second there, oh wait...";
+                    battleDialog.text = "<size=60%> I thought I saw my afterlife for a second there, oh wait...";
                     yield return new WaitForSeconds(2.5f);
                     break;
                 case 1:
@@ -645,13 +649,13 @@ public class BattleSystem : MonoBehaviour
                 case 1:
                     DialogueCounter++;
                     battleDialog.color = Color.red;
-                    battleDialog.text = "<size=60%> Why are you trying to roast me? you can't even eat!!";
+                    battleDialog.text = "<size=60%> Why are you trying to roast me? You can't even eat!!";
                     yield return new WaitForSeconds(2.5f);
                     break;         
                 case 2:
                     DialogueCounter++;
                     battleDialog.color = Color.red;
-                    battleDialog.text = "<size=60%> you trying to master the art of cooking shrooms??";
+                    battleDialog.text = "<size=60%> You trying to master the art of cooking shrooms??";
                     yield return new WaitForSeconds(2.5f);
                     break;    
                 case 3:
