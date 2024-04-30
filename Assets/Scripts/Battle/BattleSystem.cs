@@ -923,8 +923,15 @@ public class BattleSystem : MonoBehaviour
             var sceneChanger = GetComponent<SceneChangeInvokable>();
             if (lowerCaseEnemyName.Contains("horse"))
             {
-                // if defeat the boss, go to ending scene
-                sceneChanger.sceneName = "EndingStory";
+                if (GameManager.Instance.dragonPuzzleSolved)
+                {
+                    sceneChanger.sceneName = "GoodEndingStory";
+                }
+                else
+                {
+                    // if defeat the boss, go to ending scene
+                    sceneChanger.sceneName = "EndingStory";
+                }
             }
             else
             {

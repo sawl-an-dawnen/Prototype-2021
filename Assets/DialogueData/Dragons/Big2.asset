@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Big2
   m_EditorClassIdentifier: 
   dialogue:
-  - I've returned the other piece here...
+  - Thank you for your assistance. I will ensure you have a bright future...
   responses: []
   needCondition: 0
