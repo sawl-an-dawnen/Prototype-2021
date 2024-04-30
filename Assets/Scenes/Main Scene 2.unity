@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &25809406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1534,7 +1534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &206856027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7127,7 +7127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &315405073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9324,7 +9324,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 785907792}
           m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-          m_MethodName: CheckNewspaper
+          m_MethodName: CheckCworbar
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -16389,7 +16389,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1664782993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16497,7 +16497,7 @@ PrefabInstance:
       objectReference: {fileID: 909992398}
     - target: {fileID: 8364252148403275887, guid: 8a44f14e9ec656d42994054b91691f7d, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a44f14e9ec656d42994054b91691f7d, type: 3}
@@ -16870,7 +16870,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1798265777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18892,6 +18892,14 @@ PrefabInstance:
       propertyPath: dialogueUI
       value: 
       objectReference: {fileID: 909992398}
+    - target: {fileID: 6901699003824813988, guid: c87ac255bb8becb4fbd24535efeed0fe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.38510698
+      objectReference: {fileID: 0}
+    - target: {fileID: 6901699003824813988, guid: c87ac255bb8becb4fbd24535efeed0fe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.37079647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c87ac255bb8becb4fbd24535efeed0fe, type: 3}
 --- !u!4 &2070909657 stripped
@@ -19859,14 +19867,14 @@ Transform:
   - {fileID: 1084068793879145521}
   - {fileID: 6092837374379732345}
   - {fileID: 8703517533568752007}
+  - {fileID: 5782263015211606721}
   - {fileID: 2045186665}
   - {fileID: 2084973429}
   - {fileID: 1751308689}
-  - {fileID: 5782263015211606721}
   - {fileID: 6838947220176320429}
   - {fileID: 2324810169214857638}
-  - {fileID: 1858609845}
   - {fileID: 8033943133539624723}
+  - {fileID: 1858609845}
   - {fileID: 2586875241014760570}
   - {fileID: 3581127580178490265}
   - {fileID: 8014311154251552220}
@@ -19883,9 +19891,9 @@ Transform:
   - {fileID: 4218862054409731227}
   - {fileID: 5740660189365823288}
   - {fileID: 5856139611528445845}
+  - {fileID: 4229503091584671303}
   - {fileID: 278612795}
   - {fileID: 936294536}
-  - {fileID: 4229503091584671303}
   - {fileID: 244201905412944290}
   - {fileID: 3413649347942537342}
   - {fileID: 874380918412807208}
@@ -22647,7 +22655,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 543450652720965492}
-  m_RootOrder: 41
+  m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4251909378175995585
 MeshFilter:
@@ -23943,7 +23951,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 543450652720965492}
-  m_RootOrder: 18
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5787571657359581222
 MeshFilter:
@@ -26964,7 +26972,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 543450652720965492}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8037605343048290081
 MeshFilter:
