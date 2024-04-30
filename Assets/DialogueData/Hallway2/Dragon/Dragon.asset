@@ -13,10 +13,6 @@ MonoBehaviour:
   m_Name: Dragon
   m_EditorClassIdentifier: 
   dialogue:
-  - Why does this dragon look so familiar?
-  - Wait a minute...
-  - Oh, I remember now.
-  - "There's a painting of this dragon in the hallway!\r"
-  - But there's something different about it, isn't there?
+  - Is this what the dragon looked like in its prime?
   responses: []
   needCondition: 0

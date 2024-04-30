@@ -101,7 +101,8 @@ public class Clock : MonoBehaviour
             resultText2.text = "Get " + spellToGet + " Spell!";
             isWinningConditionMet = true;
             GameManager.Instance.AddSpell(spellToGet);
-        }
+			GameManager.Instance.clockPuzzleSolved = true;
+		}
         else
         {
             resultText1.text = "Not yet at the right time. Keep adjusting.";

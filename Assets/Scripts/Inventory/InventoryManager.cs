@@ -9,6 +9,7 @@ public class InventoryManager : MonoBehaviour
     public InventoryItem news1;
     public InventoryItem news2;
     public InventoryItem news3;
+    public InventoryItem crowbar;
     public InventoryItem helmet;
     public InventoryItem boots;
     public InventoryItem axe;
@@ -20,7 +21,9 @@ public class InventoryManager : MonoBehaviour
     private bool hasNews1;
     private bool hasNews2;
     private bool hasNews3;
+    private bool hasCrowbar;
     private bool condition;
+    private bool condition2;
 
     private GameManager gameManager;
     private PopUpManager pm;
@@ -162,6 +165,39 @@ public class InventoryManager : MonoBehaviour
         else
         {
             dialogueUI.ShowDialogue(dialogueNo); 
+        }
+
+    }
+    public void CheckCworbar()
+    {
+        List<string> items = gameManager.GetItmes();
+
+        hasCrowbar = false;
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i] == "Crowbar")
+            {
+                hasCrowbar = true;
+            }
+        }
+        if (hasCrowbar)
+        {
+            condition2 = true;
+        }
+        else
+        {
+            condition2 = false;
+        }
+
+        if (condition2)
+        {
+            DoorToOpen.CanEnter = true;
+            gameManager.OpenDoor();
+            Destroy(toDestroy);
+        }
+        else
+        {
+            dialogueUI.ShowDialogue(dialogueNo);
         }
 
     }

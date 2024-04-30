@@ -46,14 +46,36 @@ public class ClockPuzzleTrigger : MonoBehaviour
 
     private void ActivatePuzzle()
     {
-        // Show the clock puzzle panel
-        clockCanvas.SetActive(true);
-        puzzleActivated = true;
+		// Show the clock puzzle panel
+		bool puzzleAlreadySolved = false;
+		if (gameObject.name == "wall clock outer")
+		{
+			puzzleAlreadySolved = GameManager.Instance.clockPuzzleSolved;
+		}
+		else if (gameObject.name == "Door_2")
+		{
+			puzzleAlreadySolved = GameManager.Instance.counterPuzzleSolved;
+		}
+		else if (gameObject.name == "Pic_frame bamboo")
+		{
+			puzzleAlreadySolved = GameManager.Instance.slidingPuzzleSolved;
+		}
+		if (!puzzleAlreadySolved)
+		{
+			// Show the clock puzzle panel
+			clockCanvas.SetActive(true);
+			puzzleActivated = true;
 
-        // Optionally, you can pause the game or restrict player movement while the puzzle is active
-        // Time.timeScale = 0f; // Pauses the game (optional)
+			// Optionally, you can pause the game or restrict player movement while the puzzle is active
+			// Time.timeScale = 0f; // Pauses the game (optional)
 
-        // Add any additional actions or animations here when the puzzle is activated
+			// Add any additional actions or animations here when the puzzle is activated
+		}
+		else
+		{
+			// Puzzle is already solved, you can provide feedback or handle it as needed
+			Debug.Log("This puzzle is already solved.");
+		}
     }
 
     // You can call this function when the player successfully solves the puzzle

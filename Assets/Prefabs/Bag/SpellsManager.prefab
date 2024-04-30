@@ -1977,6 +1977,7 @@ MonoBehaviour:
   boots: {fileID: 11400000, guid: 767e05e4a8f51314b891920f9c48f75f, type: 2}
   axe: {fileID: 11400000, guid: 84ac411d0e622294792da63419a2b473, type: 2}
   sword: {fileID: 11400000, guid: 17d5ff9b7fb46a541a7a71ecd3ec4e3f, type: 2}
+  crowbar: {fileID: 11400000, guid: 0d46d2802c4b09e469abc05259c032bd, type: 2}
   SimpleHelmet: {fileID: 11400000, guid: cb8efea2ed3bb454cb92be36f15869d0, type: 2}
   AdvancedHelmet: {fileID: 11400000, guid: fa46322705604fc41b224cee6f576764, type: 2}
   EmeraldCrown: {fileID: 11400000, guid: 4097b0dbbef544343b5380500207c0e7, type: 2}

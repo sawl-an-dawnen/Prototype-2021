@@ -168,7 +168,6 @@ public class BattleSystem : MonoBehaviour
 			{
 				playerTurnTimer = 0;
 				timerText.text = "00:00";
-				timerText.color = Color.red;
 				SubmitAndEndPlayerTurn();
 			}
 		}
@@ -429,6 +428,7 @@ public class BattleSystem : MonoBehaviour
             if (--remaningStunTurns == 0)
                 Destroy(stunObj);
             PlayerTurn();
+            isTimerStarted = false;
         }
     }
 
@@ -923,8 +923,15 @@ public class BattleSystem : MonoBehaviour
             var sceneChanger = GetComponent<SceneChangeInvokable>();
             if (lowerCaseEnemyName.Contains("horse"))
             {
-                // if defeat the boss, go to ending scene
-                sceneChanger.sceneName = "EndingStory";
+                if (GameManager.Instance.dragonPuzzleSolved)
+                {
+                    sceneChanger.sceneName = "GoodEndingStory";
+                }
+                else
+                {
+                    // if defeat the boss, go to ending scene
+                    sceneChanger.sceneName = "EndingStory";
+                }
             }
             else
             {
@@ -1396,7 +1403,7 @@ public class BattleSystem : MonoBehaviour
         }
         catch (Exception) { }
 
-        remaningStunTurns += 2;
+        remaningStunTurns += 1;
 
         return null;
     }

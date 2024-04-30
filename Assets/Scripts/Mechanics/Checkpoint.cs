@@ -23,6 +23,10 @@ namespace Platformer.Mechanics
 		public Color playerColor;
         bool bigDragon;
         bool smallDragon;
+		public bool clockPuzzleSolved;
+		public bool counterPuzzleSolved;
+		public bool slidingPuzzleSolved;
+        private bool dragonPuzzleSolved;
 
         public Checkpoint(
             int playerHealth,
@@ -38,8 +42,12 @@ namespace Platformer.Mechanics
             List<string> items,
             Color playerColor,
             bool bigDragon,
-            bool smallDragon
-			)
+            bool smallDragon,
+			bool clockPuzzleSolved,
+	        bool counterPuzzleSolved,
+	        bool slidingPuzzleSolved,
+            bool dragonPuzzleSolved
+            )
         {
             //this.playerHealth = Math.Min(100, playerHealth + 30);        
             this.playerHealth = playerHealth;
@@ -56,7 +64,11 @@ namespace Platformer.Mechanics
             this.playerColor = playerColor;
             this.bigDragon = bigDragon;
             this.smallDragon = smallDragon;
-	}
+			this.clockPuzzleSolved = clockPuzzleSolved;
+			this.counterPuzzleSolved = counterPuzzleSolved;
+			this.slidingPuzzleSolved = slidingPuzzleSolved;
+            this.dragonPuzzleSolved = dragonPuzzleSolved;
+        }
 
         [Serializable]
         public class SceneSpawnsDict : SerializedDictionary<string, int>

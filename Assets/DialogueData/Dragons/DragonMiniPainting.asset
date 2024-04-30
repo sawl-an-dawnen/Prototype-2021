@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: DragonMiniPainting
   m_EditorClassIdentifier: 
   dialogue:
-  - ...weird painting...
+  - Uh, why are there wings here? Is this true?
   responses:
-  - responseText: Interact
+  - responseText: Touch it
     dialogueObject: {fileID: 11400000, guid: 49b494c41ed497f4db0250ef2aa0ae41, type: 2}
   needCondition: 0
