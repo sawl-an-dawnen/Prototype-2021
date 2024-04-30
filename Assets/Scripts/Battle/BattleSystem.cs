@@ -156,7 +156,6 @@ public class BattleSystem : MonoBehaviour
 			int seconds = Mathf.FloorToInt(playerTurnTimer % 60);
 			if (!isTimerStarted)
 			{
-                Debug.Log("timer starts");
 				StartPlayerTurnTimer();
 				isTimerStarted = true;
 			}
@@ -350,7 +349,6 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PLAYER_TURN;
         foreach (var fun in playerTurnBeginListeners)
         {
-            Debug.Log("here");
             fun();
         }
     }
