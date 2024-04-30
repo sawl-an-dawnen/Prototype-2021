@@ -1150,7 +1150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionAnim: {fileID: 2089692514}
-  sceneName: Main Scene 1
+  sceneName: Main Scene 2
   IsDoor: 1
   CanEnter: 1
   image: {fileID: 1411900857}
