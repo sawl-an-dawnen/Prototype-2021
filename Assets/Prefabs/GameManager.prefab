@@ -167,6 +167,7 @@ MonoBehaviour:
   - 
   - 
   - 
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
   Spawns:
     m_Keys: []
     m_Values: []
@@ -199,6 +200,7 @@ MonoBehaviour:
     coins: 0
     CanOpen: 0
     items: []
+    playerColor: {r: 0, g: 0, b: 0, a: 0}
   sceneChange: {fileID: 6013862213860267869}
   SaveFilePath: 
   DefaultSpells:
@@ -207,6 +209,8 @@ MonoBehaviour:
   - Water Element
   - Electrocute
   - Dodge
+  hasSpokeBigDragon: 0
+  hasSpokeSmallDragon: 0
   spells:
   - name: Dodge
     prefabButton: {fileID: 7313625124187144831, guid: 93c78d886e4da4cef997f5d82b6092c5, type: 3}
@@ -218,13 +222,13 @@ MonoBehaviour:
     prefabButton: {fileID: 7313625124187144831, guid: 450f000e58d2241d08f966eaaa11d930, type: 3}
     cost: 01000000010000000000000001000000
     description: Deal 14 damage to an enemy.
-    strongAgainst: 
+    strongAgainst: Lost Ghost, Mystery Ghost
     weaknessIsFound: 0
   - name: Fireball
     prefabButton: {fileID: 7313625124187144831, guid: e19c2675809564a30b2c2c9fbf908b4a, type: 3}
     cost: 00000000020000000000000001000000
     description: Deal 16 damage to an enemy.
-    strongAgainst: Knight
+    strongAgainst: Chess Guardian, Poisonous Mushroom, Sinister Mushroom
     weaknessIsFound: 0
   - name: Heal
     prefabButton: {fileID: 7313625124187144831, guid: c0586a6f781804850932d5d6b0e70876, type: 3}
@@ -236,7 +240,7 @@ MonoBehaviour:
     prefabButton: {fileID: 7313625124187144831, guid: 0c3ab464326ec4633b9552892ceeb4f8, type: 3}
     cost: 00000000000000000100000002000000
     description: Deal 14 damage to an enemy.
-    strongAgainst: Skeleton
+    strongAgainst: Skeleton, Metallic Skeleton
     weaknessIsFound: 0
   - name: Stun
     prefabButton: {fileID: 7313625124187144831, guid: 9d62408400cb24a8dbaaba553797282a, type: 3}
@@ -248,13 +252,13 @@ MonoBehaviour:
     prefabButton: {fileID: 7313625124187144831, guid: e1eb69a7264a44ad8bb484cebc52a106, type: 3}
     cost: 00000000000000000100000001000000
     description: Deal 9 damage to an enemy.
-    strongAgainst: Eye Monster
+    strongAgainst: Soul Stare
     weaknessIsFound: 0
   - name: Fire Element
     prefabButton: {fileID: 7313625124187144831, guid: 3dbf97a75ea7e42769aeb95281e1e417, type: 3}
     cost: 00000000010000000000000000000000
     description: Unleash a flicker of flames.
-    strongAgainst: 
+    strongAgainst: Poisonous Mushroom, Sinister Mushroom
     weaknessIsFound: 0
   - name: Earth Element
     prefabButton: {fileID: 7313625124187144831, guid: 2755ecf8b88b0483fbebc1cd27df8f5c, type: 3}
@@ -273,7 +277,7 @@ MonoBehaviour:
     cost: 01000000010000000100000000000000
     description: Combine feeble fire, meager water, and brittle earth, amplifying
       their influence
-    strongAgainst: 
+    strongAgainst: Wicked Witch, Lingering Evil
     weaknessIsFound: 0
 --- !u!114 &6013862213860267869
 MonoBehaviour:
