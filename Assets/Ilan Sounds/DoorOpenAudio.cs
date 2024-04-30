@@ -4,40 +4,23 @@ using UnityEngine;
 
 public class DoorOpenAudio : MonoBehaviour
 {
+    public float audioDelay;
     private AudioSource audioSource;
-    private Animator animator;
-    //private BoxCollider bc;
+    
+
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        animator = GetComponentInParent<Animator>();
-        //bc = GetComponent<BoxCollider>();
-        
-    }
+        audioSource.PlayDelayed(audioDelay);
 
+    }
+    
     // Update is called once per frame
     void Update()
     {
         
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            animator.enabled = true;
-            audioSource.Play();
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            animator.enabled = false;
-            audioSource.Stop();
-        }
-
-    }
+    
 }
