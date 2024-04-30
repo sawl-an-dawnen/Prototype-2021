@@ -140,7 +140,8 @@ public class counterPuzzle : MonoBehaviour
             audioSource.Play();
 
             GameManager.Instance.AddSpell(spellToGet);
-        }
+			GameManager.Instance.counterPuzzleSolved = true;
+		}
 	}
 
 }
