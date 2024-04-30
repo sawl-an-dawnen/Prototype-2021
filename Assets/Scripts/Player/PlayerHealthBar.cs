@@ -32,11 +32,6 @@ public class PlayerHealthBar : MonoBehaviour
 		string currentSceneName = SceneManager.GetActiveScene().name;
 		//Debug.Log("Taking damage: " + damage);
 
-		if (damage < 0 && currentSceneName != "Combat Arena")
-        {
-
-        }
-
 		if (damage > 0 && currentSceneName == "Combat Arena")
 		{
 			GameObject damageInstance = Instantiate(floatingDamage, transform.position + new Vector3(0f, 500f, 0f), Quaternion.identity, transform);
@@ -54,6 +49,10 @@ public class PlayerHealthBar : MonoBehaviour
 
 		int oldHealth = currentHealth;
 		currentHealth = Mathf.Min(Mathf.Max(0, currentHealth - damage), 500);
+		if (currentHealth >= 100)
+        {
+			currentHealth = 100;
+		}
 
 		if (isPlayer)
 		{
