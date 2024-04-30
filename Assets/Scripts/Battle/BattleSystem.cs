@@ -636,7 +636,7 @@ public class BattleSystem : MonoBehaviour
             battleDialog.text = "<size=60%> That went right through!";
             yield return new WaitForSeconds(1.5f);
         }
-        else if(enemyReference.name.ToLower().Contains("mushr") && (action.action.name == "FireElement" || action.action.name == "Fireball"))
+        else if((enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim")) && (action.action.name == "FireElement" || action.action.name == "Fireball"))
         {
             enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * playerAttack), false);
             switch(DialogueCounter)
@@ -670,12 +670,50 @@ public class BattleSystem : MonoBehaviour
                     break;           
             }
         }
-        else if(enemyReference.name.ToLower().Contains("mushr") && (action.action.name == "WaterElement"))
+        else if((enemyReference.name.ToLower().Contains("mushr") || enemyReference.name.ToLower().Contains("varim")) && (action.action.name == "WaterElement"))
         {
             enemyNewHP = enemyHP.TakeDamage((int)(-1 * playerPowerBoost * playerAttack / 8), false);
-            battleDialog.color = Color.white;
+            battleDialog.color = Color.red;
             battleDialog.text = "<size=60%> Thanks for the free drink!";
             yield return new WaitForSeconds(1.5f);
+        }
+        else if((enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit")) && (action.action.name == "FireElement" || action.action.name == "Fireball" || action.action.name == "Electrocute"))
+        {
+            enemyNewHP = enemyHP.TakeDamage((int)(playerPowerBoost * playerAttack / 4), false);
+            battleDialog.color = Color.red;
+            battleDialog.text = "<size=60%> I am the master of these spells!!";
+            yield return new WaitForSeconds(1.5f);
+        }
+        else if((enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit")) && (action.action.name == "ElementalInfluence"))
+        {
+            enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * playerAttack), false);
+            switch(DialogueCounter)
+            {
+                case 0:
+                    DialogueCounter++;
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> Where did you learn the forbidden knowledge!!";
+                    yield return new WaitForSeconds(1.5f);
+                    break;
+                case 1:
+                    DialogueCounter++;
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> How could a puny ghost master such power??";
+                    yield return new WaitForSeconds(1.5f);
+                    break;         
+                case 2:
+                    DialogueCounter++;
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> Where!... Where!!... WHERE!!!";
+                    yield return new WaitForSeconds(1.5f);
+                    break;    
+                case 3:
+                    DialogueCounter++;
+                    battleDialog.color = Color.red;
+                    battleDialog.text = "<size=60%> Donde está la biblioteca?!";
+                    yield return new WaitForSeconds(1.5f);
+                    break;           
+            }
         }
 		else if (action.action.name == "ElementalInfluence")
         {
@@ -856,28 +894,28 @@ public class BattleSystem : MonoBehaviour
             var lowerCaseEnemyName = PlayerPrefs.GetString("ObjectToSpawn").ToLower();
             if (lowerCaseEnemyName.Contains("skeleton") || lowerCaseEnemyName.Contains("variskel"))
             {
-				battleDialog.text += "\nCoin + 20";
-				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 20);
-			}
-            else if (lowerCaseEnemyName.Contains("monster") || lowerCaseEnemyName.Contains("varieye"))
-            {
 				battleDialog.text += "\nCoin + 10";
 				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 10);
 			}
-            else if (lowerCaseEnemyName.Contains("enemyghost") || lowerCaseEnemyName.Contains("varihat"))
+            else if (lowerCaseEnemyName.Contains("monster") || lowerCaseEnemyName.Contains("varieye"))
             {
-                battleDialog.text += "\nCoin + 20";
-                GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 20);
-            }
-            else if (lowerCaseEnemyName.Contains("mushr") || lowerCaseEnemyName.Contains("varim"))
+				battleDialog.text += "\nCoin + 20";
+				GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 20);
+			}
+            else if (lowerCaseEnemyName.Contains("enemyghost") || lowerCaseEnemyName.Contains("varihat"))
             {
                 battleDialog.text += "\nCoin + 10";
                 GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 10);
             }
+            else if (lowerCaseEnemyName.Contains("mushr") || lowerCaseEnemyName.Contains("varim"))
+            {
+                battleDialog.text += "\nCoin + 25";
+                GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 25);
+            }
             else if (lowerCaseEnemyName.Contains("witch") || lowerCaseEnemyName.Contains("variwit"))
             {
-                battleDialog.text += "\nCoin + 20";
-                GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 20);
+                battleDialog.text += "\nCoin + 30";
+                GameManager.Instance.SetCoins(GameManager.Instance.GetCoins() + 30);
             }
             // This can be replaced with a confirmation UI when we're ready
             yield return new WaitForSecondsRealtime(2f);
