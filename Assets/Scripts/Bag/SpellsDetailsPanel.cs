@@ -42,7 +42,7 @@ public class SpellsDetailsPanel : MonoBehaviour
 		if(spell.weaknessIsFound){
 			spellDescriptionText.text = spell.description + "\n" + "Strong Against:\n" + spell.strongAgainst;
 		}
-		else if (spell.name == "Dodge" || spell.name == "Heal" || spell.name =="Stun" || spell.name == "EarthElement" || spell.name == "WaterElement"){
+		else if (spell.name == "Dodge" || spell.name == "Heal" || spell.name =="Stun" || spell.name == "Earth Element" || spell.name == "Water Element"){
 			spellDescriptionText.text = spell.description;
 		}
 		else{
