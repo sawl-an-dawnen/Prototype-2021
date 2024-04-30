@@ -612,19 +612,19 @@ public class BattleSystem : MonoBehaviour
                     battleDialog.text = "Enemy Ghost's figure started to flicker";
                     yield return new WaitForSeconds(1.5f);
                     battleDialog.color = Color.red;
-                    battleDialog.text = "<size=60%> I thought I saw my afterlife for a second there, oh wait...";
+                    battleDialog.text = "<size=60%> I thought I saw the afterlife for a second there, oh wait...";
                     yield return new WaitForSeconds(2.5f);
                     break;
                 case 1:
                     DialogueCounter++;
                     battleDialog.color = Color.red;
-                    battleDialog.text = "<size=60%> I think i just saw an old man waving to me from the other side of the river";
+                    battleDialog.text = "<size=60%> I think I just saw an old man waving to me from the other side of the river";
                     yield return new WaitForSeconds(2.5f);
                     break;
                 case 2:
                     DialogueCounter++;
                     battleDialog.color = Color.red;
-                    battleDialog.text = "<size=60%> I thought ghost's being weak to electric moves was a propaganda by pokemon!!";
+                    battleDialog.text = "<size=60%> I thought ghost's being weak to electric moves was propaganda by Pokemon!!";
                     yield return new WaitForSeconds(2.5f);
                     break;
             }
@@ -644,10 +644,10 @@ public class BattleSystem : MonoBehaviour
                 case 0:
                     DialogueCounter++;
                     battleDialog.color = Color.red;
-                    battleDialog.text = "Enemy's body started to smoke";
+                    battleDialog.text = "The enemy's body started to smoke";
                     yield return new WaitForSeconds(1.5f);
                     battleDialog.color = Color.red;
-                    battleDialog.text = "<size=60%> Something smells good... oh wait, thats me!!";
+                    battleDialog.text = "<size=60%> Something smells good... oh wait, that's me!!";
                     yield return new WaitForSeconds(2.5f);
                     break;
                 case 1:
@@ -659,7 +659,7 @@ public class BattleSystem : MonoBehaviour
                 case 2:
                     DialogueCounter++;
                     battleDialog.color = Color.red;
-                    battleDialog.text = "<size=60%> You trying to master the art of cooking shrooms??";
+                    battleDialog.text = "<size=60%> Are you trying to master the art of cooking shrooms??";
                     yield return new WaitForSeconds(2.5f);
                     break;    
                 case 3:
