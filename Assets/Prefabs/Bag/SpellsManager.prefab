@@ -174,7 +174,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 322.2749, y: -65.59105}
+  m_AnchoredPosition: {x: 250, y: -65.59105}
   m_SizeDelta: {x: 318.0463, y: 107.5559}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1636885348769010657
@@ -3853,8 +3853,8 @@ MonoBehaviour:
   defenseText: {fileID: 8127656832437723404}
   namePreText: {fileID: 3006831358395133653}
   attackPreText: {fileID: 6607787702623255633}
-  defensePreText: {fileID: 2489941810276518448}
-  descriptionPreText: {fileID: 7976111791611855450}
+  defensePreText: {fileID: 2071669967788167898}
+  descriptionPreText: {fileID: 5270654218944847979}
   previewImage: {fileID: 3192652494685970973}
   selectedItemStatus: {fileID: 63351666269703764}
   selectedItemImage: {fileID: 6734836380620502174}
@@ -6478,7 +6478,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -65.59105}
+  m_AnchoredPosition: {x: 72.2749, y: -65.59105}
   m_SizeDelta: {x: 107.1459, y: 107.7076}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4173252517497629546
