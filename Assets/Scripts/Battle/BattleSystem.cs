@@ -686,8 +686,8 @@ public class BattleSystem : MonoBehaviour
         }
         else if((enemyReference.name.ToLower().Contains("witch") || enemyReference.name.ToLower().Contains("variwit")) && (action.action.name == "ElementalInfluence"))
         {
-            enemyNewHP = enemyHP.TakeDamage((int)(3.0f*playerPowerBoost/4 * playerAttack), false);
-            switch(DialogueCounter)
+            enemyNewHP = enemyHP.TakeDamage(Mathf.CeilToInt(1.5f * EleInfluenceDamange * (1 + playerAttackPower / 100.0f)), false);
+            switch (DialogueCounter)
             {
                 case 0:
                     DialogueCounter++;
