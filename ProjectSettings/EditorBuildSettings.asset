@@ -59,4 +59,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Roof top.unity
     guid: e047e69f7875b934b9abba9170a39d1b
+  - enabled: 1
+    path: Assets/Scenes/GoodEndingStory.unity
+    guid: 1adfb41fe7f9fb549b9d9e080e794440
   m_configObjects: {}

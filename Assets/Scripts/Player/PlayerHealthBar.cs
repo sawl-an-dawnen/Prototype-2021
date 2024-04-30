@@ -32,6 +32,11 @@ public class PlayerHealthBar : MonoBehaviour
 		string currentSceneName = SceneManager.GetActiveScene().name;
 		//Debug.Log("Taking damage: " + damage);
 
+		if (damage < 0 && currentSceneName != "Combat Arena")
+        {
+
+        }
+
 		if (damage > 0 && currentSceneName == "Combat Arena")
 		{
 			GameObject damageInstance = Instantiate(floatingDamage, transform.position + new Vector3(0f, 500f, 0f), Quaternion.identity, transform);
