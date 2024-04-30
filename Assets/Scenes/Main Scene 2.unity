@@ -8406,6 +8406,11 @@ MonoBehaviour:
   fontStyle: 0
   alignment: 0
   textDropShadow: 0
+--- !u!1 &485499350 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3109763986245254411, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
+  m_PrefabInstance: {fileID: 1383747574}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &493077618
 GameObject:
   m_ObjectHideFlags: 0
@@ -13653,7 +13658,7 @@ PrefabInstance:
     - target: {fileID: 3109763986245254408, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
       propertyPath: panel
       value: 
-      objectReference: {fileID: 864172523}
+      objectReference: {fileID: 485499350}
     - target: {fileID: 3109763986245254408, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
       propertyPath: rewardItem
       value: 
@@ -13667,7 +13672,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 27f93a012c8f454408de3e78d6b0d369, type: 3}
     - target: {fileID: 3109763986536556800, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109763986536556800, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109763986536556800, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3109763986536556800, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
@@ -13675,12 +13688,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1983231550}
     - target: {fileID: 3109763986536556800, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 7301353509644173747}
+    - target: {fileID: 3109763986536556800, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109763986536556800, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Resume
       objectReference: {fileID: 0}
     - target: {fileID: 3109763986536556800, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CloseCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109763986536556800, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SlidingPuzzle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109763986536556800, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: ClockPuzzleTrigger, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109763986536556800, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3109763987125096988, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
       propertyPath: m_Sprite
@@ -16135,6 +16168,10 @@ PrefabInstance:
       propertyPath: dialogueUI
       value: 
       objectReference: {fileID: 909992398}
+    - target: {fileID: 8364252148403275887, guid: 8a44f14e9ec656d42994054b91691f7d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a44f14e9ec656d42994054b91691f7d, type: 3}
 --- !u!4 &1672754394 stripped
@@ -17931,7 +17968,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3109763986245254408, guid: 8d03ea79ee113b5458233cb6a048cf0f, type: 3}
   m_PrefabInstance: {fileID: 1383747574}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 485499350}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5520d7c3bff8b6478b85f764515e5e5, type: 3}
@@ -21218,6 +21255,7 @@ GameObject:
   - component: {fileID: 6971527558242310151}
   - component: {fileID: 7301353509644173746}
   - component: {fileID: 7301353509644173745}
+  - component: {fileID: 7301353509644173747}
   m_Layer: 0
   m_Name: Pic_frame bamboo
   m_TagString: Untagged
@@ -25792,6 +25830,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.06745436, y: 0.057608545, z: 0.017051907}
   m_Center: {x: 0.01244359, y: -0.028911354, z: 0.0007295309}
+--- !u!114 &7301353509644173747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2810498702217403936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46eaefb6a3c315241b88ff25ccd0cafd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clockCanvas: {fileID: 485499350}
+  activeCue: {fileID: 1865725312}
+  puzzleActivated: 0
 --- !u!33 &7327851334862149631
 MeshFilter:
   m_ObjectHideFlags: 0
