@@ -156,6 +156,7 @@ public class BattleSystem : MonoBehaviour
 			int seconds = Mathf.FloorToInt(playerTurnTimer % 60);
 			if (!isTimerStarted)
 			{
+                Debug.Log("timer starts");
 				StartPlayerTurnTimer();
 				isTimerStarted = true;
 			}
@@ -168,7 +169,6 @@ public class BattleSystem : MonoBehaviour
 			{
 				playerTurnTimer = 0;
 				timerText.text = "00:00";
-				timerText.color = Color.red;
 				SubmitAndEndPlayerTurn();
 			}
 		}
@@ -350,6 +350,7 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PLAYER_TURN;
         foreach (var fun in playerTurnBeginListeners)
         {
+            Debug.Log("here");
             fun();
         }
     }
@@ -429,6 +430,7 @@ public class BattleSystem : MonoBehaviour
             if (--remaningStunTurns == 0)
                 Destroy(stunObj);
             PlayerTurn();
+            isTimerStarted = false;
         }
     }
 
@@ -1403,7 +1405,7 @@ public class BattleSystem : MonoBehaviour
         }
         catch (Exception) { }
 
-        remaningStunTurns += 2;
+        remaningStunTurns += 1;
 
         return null;
     }
