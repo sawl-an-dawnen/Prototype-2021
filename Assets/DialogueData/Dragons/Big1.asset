@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: Big1
   m_EditorClassIdentifier: 
   dialogue:
-  - The past was my glory, reigning supreme in the skies.
-  - However, age has caught up, and my wings can no longer carry me aloft.
-  - If you can grant me the joy of flight once more, I shall devote myself to aiding
-    you in the future.
+  - I'm injured so I can't fly anymore. If you can grant me the joy of flight once
+    more, I shall devote myself to aiding you in the future.
   responses: []
   needCondition: 0
