@@ -13,6 +13,7 @@ public class ItemMapper : MonoBehaviour
     public InventoryItem boots;
     public InventoryItem axe;
     public InventoryItem sword;
+    public InventoryItem crowbar;
 
     [Header("Head")]
     public InventoryItem SimpleHelmet;
@@ -83,6 +84,8 @@ public class ItemMapper : MonoBehaviour
                 return news2;
             case "News3":
                 return news3;
+            case "Crowbar":
+                return crowbar;
             case "Helmet":
                 return helmet;
             case "Boots":
