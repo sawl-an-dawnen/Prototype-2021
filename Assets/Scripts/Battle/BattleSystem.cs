@@ -168,7 +168,6 @@ public class BattleSystem : MonoBehaviour
 			{
 				playerTurnTimer = 0;
 				timerText.text = "00:00";
-				timerText.color = Color.red;
 				SubmitAndEndPlayerTurn();
 			}
 		}
@@ -429,6 +428,7 @@ public class BattleSystem : MonoBehaviour
             if (--remaningStunTurns == 0)
                 Destroy(stunObj);
             PlayerTurn();
+            isTimerStarted = false;
         }
     }
 
@@ -1403,7 +1403,7 @@ public class BattleSystem : MonoBehaviour
         }
         catch (Exception) { }
 
-        remaningStunTurns += 2;
+        remaningStunTurns += 1;
 
         return null;
     }
