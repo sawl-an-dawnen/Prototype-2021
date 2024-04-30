@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Small2
   m_EditorClassIdentifier: 
   dialogue:
-  - ...I should probably return it...
+  - I think this is what the dragon needs!
   responses: []
   needCondition: 0

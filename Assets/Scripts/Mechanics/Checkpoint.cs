@@ -26,8 +26,9 @@ namespace Platformer.Mechanics
 		public bool clockPuzzleSolved;
 		public bool counterPuzzleSolved;
 		public bool slidingPuzzleSolved;
+        private bool dragonPuzzleSolved;
 
-		public Checkpoint(
+        public Checkpoint(
             int playerHealth,
             int playerAttack,
             int playerDefense,
@@ -44,8 +45,9 @@ namespace Platformer.Mechanics
             bool smallDragon,
 			bool clockPuzzleSolved,
 	        bool counterPuzzleSolved,
-	        bool slidingPuzzleSolved
-			)
+	        bool slidingPuzzleSolved,
+            bool dragonPuzzleSolved
+            )
         {
             //this.playerHealth = Math.Min(100, playerHealth + 30);        
             this.playerHealth = playerHealth;
@@ -65,7 +67,8 @@ namespace Platformer.Mechanics
 			this.clockPuzzleSolved = clockPuzzleSolved;
 			this.counterPuzzleSolved = counterPuzzleSolved;
 			this.slidingPuzzleSolved = slidingPuzzleSolved;
-		}
+            this.dragonPuzzleSolved = dragonPuzzleSolved;
+        }
 
         [Serializable]
         public class SceneSpawnsDict : SerializedDictionary<string, int>

@@ -32,6 +32,9 @@ public class dragonPaintingUnlock : MonoBehaviour
         if (GameManager.Instance.hasSpokeSmallDragon) //have we talked to small (1st floor)?
         {
             dialogueUI.ShowDialogue(BigSecond);
+            GameManager.Instance.dragonPuzzleSolved = true;
+            GameManager.Instance.SaveCheckpoint();
+            Debug.Log("Solve dragon or not: " + GameManager.Instance.dragonPuzzleSolved);
         }
 
         else
