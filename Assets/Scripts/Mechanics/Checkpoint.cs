@@ -10,6 +10,8 @@ namespace Platformer.Mechanics
     public class Checkpoint
     {
         public int playerHealth;
+        public int playerAttack;
+        public int playerDefense;
         public SpawnsDict spawns = new();
         public PlayDoorSoundDict playDoorSound = new();
         public PlayerPosDict playerPos = new();
@@ -18,9 +20,18 @@ namespace Platformer.Mechanics
         public float coins;
         public bool CanOpen;
         [SerializeField] public List<string> items;
+		public Color playerColor;
+        bool bigDragon;
+        bool smallDragon;
+		public bool clockPuzzleSolved;
+		public bool counterPuzzleSolved;
+		public bool slidingPuzzleSolved;
+        private bool dragonPuzzleSolved;
 
         public Checkpoint(
             int playerHealth,
+            int playerAttack,
+            int playerDefense,
             SpawnsDict Spawns,
             PlayDoorSoundDict PlayDoorSound,
             PlayerPosDict PlayerPos,
@@ -28,11 +39,20 @@ namespace Platformer.Mechanics
             string SceneName,
             float coins,
             bool CanOpen,
-            List<string> items
+            List<string> items,
+            Color playerColor,
+            bool bigDragon,
+            bool smallDragon,
+			bool clockPuzzleSolved,
+	        bool counterPuzzleSolved,
+	        bool slidingPuzzleSolved,
+            bool dragonPuzzleSolved
             )
         {
             //this.playerHealth = Math.Min(100, playerHealth + 30);        
             this.playerHealth = playerHealth;
+            this.playerAttack = playerAttack;
+            this.playerDefense = playerDefense;
             spawns = Spawns.GetCopy();
             playDoorSound = PlayDoorSound.GetCopy();
             playerPos = PlayerPos.GetCopy();
@@ -41,6 +61,13 @@ namespace Platformer.Mechanics
             this.coins = coins;
             this.CanOpen = CanOpen;
             this.items = items;
+            this.playerColor = playerColor;
+            this.bigDragon = bigDragon;
+            this.smallDragon = smallDragon;
+			this.clockPuzzleSolved = clockPuzzleSolved;
+			this.counterPuzzleSolved = counterPuzzleSolved;
+			this.slidingPuzzleSolved = slidingPuzzleSolved;
+            this.dragonPuzzleSolved = dragonPuzzleSolved;
         }
 
         [Serializable]

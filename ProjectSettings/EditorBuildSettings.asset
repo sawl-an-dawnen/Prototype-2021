@@ -15,13 +15,13 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Scene 1.unity
     guid: dadb75c1c1c6d4b03b8fbfd358d319b9
   - enabled: 0
-    path: Assets/Scenes/PrototypeRoomScene.unity
+    path: 
     guid: f8e6c1e0d25fbd140bfc6e6791e3d482
   - enabled: 0
-    path: Assets/Scenes/CombatScene.unity
+    path: 
     guid: c1bf4176a41614e108780cd9d19e8c1b
   - enabled: 0
-    path: Assets/Scenes/SimpleCombat.unity
+    path: 
     guid: 89fccebaeb30e664c98ed85918bf6e87
   - enabled: 1
     path: Assets/Scenes/Room 1 Scene.unity
@@ -50,4 +50,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 2c3edc9c0465a854bae34bc1a413fad4
+  - enabled: 1
+    path: Assets/Scenes/Main Scene 2.unity
+    guid: f73c5819591ef4c4d83bae3bdbe6603d
+  - enabled: 1
+    path: Assets/Scenes/SlidingPuzzle.unity
+    guid: 668dcf8dcac0173478602bccabfce607
+  - enabled: 1
+    path: Assets/Scenes/Roof top.unity
+    guid: e047e69f7875b934b9abba9170a39d1b
+  - enabled: 1
+    path: Assets/Scenes/GoodEndingStory.unity
+    guid: 1adfb41fe7f9fb549b9d9e080e794440
+  - enabled: 1
+    path: Assets/Scenes/Room 4.unity
+    guid: 19ebc3745f1036e4c8a7aa3eb004dba6
   m_configObjects: {}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NotComplete
   m_EditorClassIdentifier: 
   dialogue:
-  - "I don\u2019t think I\u2019m ready yet."
-  - There seems to be some missing clues to find out here.
+  - I can't open the door.
+  - Maybe I need some tools?
   responses: []
   needCondition: 0

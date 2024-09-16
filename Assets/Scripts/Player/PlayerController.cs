@@ -30,9 +30,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (DialogueManager.GetInstance().dialogueIsPlaying)
+        while (DialogueManager.GetInstance().dialogueIsPlaying)
         {
-            return;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
         }
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
     }

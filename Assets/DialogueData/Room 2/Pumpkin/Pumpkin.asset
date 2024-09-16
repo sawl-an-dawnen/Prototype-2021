@@ -15,8 +15,8 @@ MonoBehaviour:
   dialogue:
   - '"All hail the pumpkin king!" is carved on top of the pumpkin head.'
   responses:
-  - responseText: Worship pumpkin.
+  - responseText: Worship the pumpkin.
     dialogueObject: {fileID: 11400000, guid: 028efc16ed0ab5d4fbe36329f76eb5c5, type: 2}
-  - responseText: Reaching into the pumpkin.
+  - responseText: Reach into the pumpkin.
     dialogueObject: {fileID: 11400000, guid: 1430e20cd31eac241bcc58c96a638b4b, type: 2}
   needCondition: 0

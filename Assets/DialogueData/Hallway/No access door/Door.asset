@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Door
   m_EditorClassIdentifier: 
   dialogue:
-  - You may not access this door. Leave.
+  - You may not open this door. Leave.
   responses: []
   needCondition: 0
